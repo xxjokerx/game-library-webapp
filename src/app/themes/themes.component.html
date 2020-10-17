@@ -1,0 +1,26 @@
+<div>
+  <div>
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="onFetchUser()">User data
+    </button>
+    <p *ngIf="userLoaded"></p>
+  </div>
+  <div>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      (click)="onFetchAdmin()">Admin data
+    </button>
+    <p *ngIf="adminLoaded"></p>
+  </div>
+  <div>
+    <button
+      class="btn btn-secondary"
+      type="button"
+      (click)="onFetchThemes()">List all themes
+    </button>
+    <p *ngIf="themesLoaded"></p>
+  </div>
+</div>
