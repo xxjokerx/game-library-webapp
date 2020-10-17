@@ -22,7 +22,8 @@
         <a
           class="nav-link"
           style="cursor:pointer;"
-          *ngIf="isAuthenticated">Déconnexion</a>
+          *ngIf="isAuthenticated"
+          (click)="onLogout()">Déconnexion</a>
       </li>
     </ul>
   </div>

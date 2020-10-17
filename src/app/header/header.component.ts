@@ -21,4 +21,8 @@ export class HeaderComponent implements OnInit {
         console.log(error);
       });
   }
+
+  onLogout(): void {
+    this.keycloak.logout();
+  }
 }

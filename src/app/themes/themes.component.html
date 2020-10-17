@@ -1,5 +1,5 @@
-<div>
-  <div>
+<div class="row">
+  <div class="col-md">
     <button
       class="btn btn-primary"
       type="button"
@@ -7,7 +7,7 @@
     </button>
     <p *ngIf="userLoaded"></p>
   </div>
-  <div>
+  <div class="col-md">
     <button
       class="btn btn-secondary"
       type="button"
@@ -15,12 +15,18 @@
     </button>
     <p *ngIf="adminLoaded"></p>
   </div>
-  <div>
+  <div class="col-md">
     <button
       class="btn btn-secondary"
       type="button"
       (click)="onFetchThemes()">List all themes
     </button>
-    <p *ngIf="themesLoaded"></p>
+    <ul class="list-group" *ngIf="themesLoaded">
+      <li class="list-group-item"
+          *ngFor="let theme of themes">
+        {{theme.name}} (id:{{theme.id}})
+      </li>
+    </ul>
+
   </div>
 </div>

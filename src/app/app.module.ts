@@ -9,6 +9,7 @@ import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {HttpClientModule} from '@angular/common/http';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -18,7 +19,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
         realm: environment.realm,
         clientId: environment.clientId
       },
-      bearerExcludedUrls: ['/assets', '/', '/themes'],
+      bearerExcludedUrls: ['/assets'],
       initOptions: {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri:
@@ -36,6 +37,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NgbModule,
     KeycloakAngularModule,
     AppRoutingModule

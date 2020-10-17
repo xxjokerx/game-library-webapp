@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ThemesService} from './themes.service';
+import {ThemesDataService} from './themes-data.service';
+import {Theme} from './theme.model';
 
 @Component({
   selector: 'app-themes',
@@ -9,11 +12,16 @@ export class ThemesComponent implements OnInit {
   userLoaded: boolean;
   adminLoaded: boolean;
   themesLoaded: boolean;
+  themes: Theme[];
 
-  constructor() {
+  constructor(private themesService: ThemesService,
+              private themesDataService: ThemesDataService) {
   }
 
   ngOnInit(): void {
+    this.userLoaded = false;
+    this.adminLoaded = false;
+    this.themesLoaded = false;
   }
 
   onFetchUser(): void {
@@ -23,5 +31,11 @@ export class ThemesComponent implements OnInit {
   }
 
   onFetchThemes(): void {
+    this.themesDataService.fetchThemes().subscribe(data => {
+      console.log(data);
+      this.themesLoaded = true;
+      this.themes = this.themesService.themes.content;
+    });
+
   }
 }
