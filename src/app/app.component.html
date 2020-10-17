@@ -1,15 +1,11 @@
 <app-header></app-header>
-<button
-  class="btn btn-primary"
-  type="button"
-  (click)="onNavigateToTheme()">Go to themes component
-</button>
-
 <div class="row">
   <div class="col-md-2">
     <app-dashboard></app-dashboard>
   </div>
   <div class="col-md-10">
-    <router-outlet></router-outlet>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

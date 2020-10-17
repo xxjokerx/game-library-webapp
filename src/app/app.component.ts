@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,4 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AppComponent {
   title = 'game-library-webapp';
 
-  constructor(private router: Router,
-              private route: ActivatedRoute) {
-  }
-
-  onNavigateToTheme(): void {
-    this.router.navigate(['themes'], {relativeTo: this.route});
-  }
 }

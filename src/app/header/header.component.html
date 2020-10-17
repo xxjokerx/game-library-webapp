@@ -1,1 +1,30 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Index</a>
+
+  <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          class="nav-link"
+          routerLink="/themes">Thèmes</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          class="nav-link"
+          routerLink="/"
+          *ngIf="!isAuthenticated">Authentification</a>
+      </li>
+    </ul>
+
+
+    <ul class="navbar-nav mr-10">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          style="cursor:pointer;"
+          *ngIf="isAuthenticated">Déconnexion</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>

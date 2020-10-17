@@ -14,7 +14,6 @@ export class ThemesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ThemesComponent init');
   }
 
   onFetchUser(): void {
