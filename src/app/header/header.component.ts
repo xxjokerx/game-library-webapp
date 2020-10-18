@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakService} from 'keycloak-angular';
+import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,8 @@ import {KeycloakService} from 'keycloak-angular';
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean;
 
-  constructor(private keycloak: KeycloakService) {
+  constructor(private keycloak: KeycloakService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,6 +26,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.keycloak.logout();
+    this.keycloak.logout(environment.clientBaseUrl);
   }
 }
