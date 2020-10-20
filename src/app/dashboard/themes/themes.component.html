@@ -3,17 +3,15 @@
     <button
       class="btn btn-primary"
       type="button"
-      (click)="onFetchUser()">User data
+      (click)="onAddTheme()">Add a theme
     </button>
-    <p *ngIf="userLoaded"></p>
   </div>
   <div class="col-md">
     <button
-      class="btn btn-secondary"
+      class="btn btn-danger"
       type="button"
-      (click)="onFetchAdmin()">Admin data
+      (click)="onDeleteTheme()">Delete a theme
     </button>
-    <p *ngIf="adminLoaded"></p>
   </div>
   <div class="col-md">
     <button

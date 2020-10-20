@@ -3,27 +3,28 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ThemesComponent} from './themes/themes.component';
+import {ThemesComponent} from './dashboard/themes/themes.component';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
+import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.component';
+import {ThemeListComponent} from './dashboard/themes/theme-list/theme-list.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
     keycloak.init({
       config: {
-        url: environment.authUrl,
-        realm: environment.realm,
-        clientId: environment.clientId
+        url: environment.keycloak.authUrl,
+        realm: environment.keycloak.realm,
+        clientId: environment.keycloak.clientId
       },
       bearerExcludedUrls: ['/assets'],
       initOptions: {
         onLoad: 'check-sso',
-        silentCheckSsoRedirectUri:
-          window.location.origin + '/assets/silent-check-sso.html',
+        silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
       },
     });
 }
@@ -33,7 +34,9 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     AppComponent,
     ThemesComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    ThemeEditComponent,
+    ThemeListComponent
   ],
   imports: [
     BrowserModule,

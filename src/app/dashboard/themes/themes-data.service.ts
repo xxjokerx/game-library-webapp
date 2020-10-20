@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ThemesService} from './themes.service';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
 import {PagedThemes} from './paged-themes.model';
 

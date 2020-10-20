@@ -26,6 +26,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(): void {
-    this.keycloak.logout(environment.clientBaseUrl);
+    this.keycloak.logout(environment.keycloak.clientBaseUrl);
   }
 }
