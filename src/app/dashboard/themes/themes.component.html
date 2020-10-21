@@ -1,19 +1,11 @@
 <div class="row">
-  <div class="col-md">
-    <button
-      class="btn btn-primary"
-      type="button"
-      (click)="onAddTheme()">Add a theme
-    </button>
+  <div class="col-md-4">
+    <app-theme-list></app-theme-list>
   </div>
-  <div class="col-md">
-    <button
-      class="btn btn-danger"
-      type="button"
-      (click)="onDeleteTheme()">Delete a theme
-    </button>
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
   </div>
-  <div class="col-md">
+  <div class="col-md-2">
     <button
       class="btn btn-secondary"
       type="button"

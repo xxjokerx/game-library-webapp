@@ -25,6 +25,10 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  onLogin(): void {
+    this.keycloak.login({redirectUri: window.location.origin + this.router.url});
+  }
+
   onLogout(): void {
     this.keycloak.logout(environment.keycloak.clientBaseUrl);
   }

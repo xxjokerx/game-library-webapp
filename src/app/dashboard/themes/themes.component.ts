@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ThemesService} from './themes.service';
 import {ThemesDataService} from './themes-data.service';
-import {Theme} from './theme.model';
+import {Theme} from '../../model/theme.model';
 
 @Component({
   selector: 'app-themes',
@@ -23,9 +23,8 @@ export class ThemesComponent implements OnInit {
   onFetchThemes(): void {
     this.themesDataService.fetchThemes().subscribe(() => {
       this.themesLoaded = true;
-      this.themes = this.themesService.themes.content;
+      this.themes = this.themesService.pagedThemes.content;
     });
-
   }
 
   onAddTheme(): void {

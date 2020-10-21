@@ -1,4 +1,4 @@
 export class Theme {
   name: string;
-  id?: string;
+  id?: number;
 }

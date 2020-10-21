@@ -1,1 +1,11 @@
-<p>theme-list works!</p>
+<div>
+  <label for="input">Filtrer les thèmes</label>
+  <input class="form-control" id="input" [(ngModel)]="keyword">
+</div>
+<p>{{ keyword }}</p>
+<a *ngFor="let theme of themes"
+   style="cursor: pointer;"
+   class="list-group-item list-group-item-action"
+   [routerLink]="['/admin/themes', theme.id]">
+  {{theme.name}} (id:{{theme.id}})</a>
+
