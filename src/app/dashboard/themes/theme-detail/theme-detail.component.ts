@@ -11,19 +11,24 @@ import {Subscription} from 'rxjs';
 })
 export class ThemeDetailComponent implements OnInit, OnDestroy {
   theme: Theme;
+  private paramId: number;
 
+  private routeSubscription: Subscription;
   private subscription: Subscription;
 
-  constructor(private themeService: ThemesService,
+  constructor(private themesService: ThemesService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.params.subscribe((params: Params) => {
+    this.routeSubscription = this.route.params.subscribe((params: Params) => {
       const id = 'id';
-      const paramId: number = +params[id];
-      this.theme = this.themeService.getThemeById(+paramId);
+      this.paramId = +params[id];
+      this.theme = this.themesService.getThemeById(+this.paramId);
+    });
+    this.subscription = this.themesService.themesChanged.subscribe((themes: Theme[]) => {
+      this.theme = themes.find(theme => theme.id === this.paramId);
     });
   }
 

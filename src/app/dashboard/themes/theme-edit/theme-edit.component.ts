@@ -67,7 +67,10 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
     );
 
     if (this.editMode) {
-      this.themesDataService.editTheme(this.id, newTheme).subscribe();
+      this.themesDataService.editTheme(this.id, newTheme).subscribe(theme => {
+        console.log('updated themes : ' + theme.name);
+        this.themesService.updateThemes(theme);
+      });
     } else {
       this.themesDataService.addTheme(newTheme).subscribe();
     }

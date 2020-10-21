@@ -5,6 +5,7 @@
 <p>{{ keyword }}</p>
 <a *ngFor="let theme of themes"
    style="cursor: pointer;"
+   routerLinkActive="active"
    class="list-group-item list-group-item-action"
    [routerLink]="['/admin/themes', theme.id]">
   {{theme.name}} (id:{{theme.id}})</a>

@@ -24,8 +24,7 @@ const routes: Routes = [
         ]
       },
     ]
-  },
-  {path: 'themes', component: ThemesComponent}
+  }
 ];
 
 @NgModule({

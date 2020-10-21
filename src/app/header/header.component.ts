@@ -10,6 +10,7 @@ import {environment} from '../../environments/environment';
 })
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean;
+  isAdministrator: boolean;
 
   constructor(private keycloak: KeycloakService,
               private router: Router) {

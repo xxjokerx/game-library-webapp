@@ -22,7 +22,7 @@ export class ThemesDataService {
       .get<PagedThemes>(this.apiUrl + '/admin/themes/page', {responseType: 'json'})
       .pipe(
         tap(pagedThemes => {
-          this.themesService.setThemes(pagedThemes);
+          this.themesService.setPagedThemes(pagedThemes);
         })
       );
   }
