@@ -1,1 +1,32 @@
-<p>theme-edit works!</p>
+<form
+  [formGroup]="themeForm"
+  (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="form-group">
+        <label for="name">{{ label }}</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!themeForm.valid">Save
+      </button>
+      |
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="onCancel()">Cancel
+      </button>
+    </div>
+  </div>
+</form>

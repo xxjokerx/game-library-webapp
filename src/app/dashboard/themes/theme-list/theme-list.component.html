@@ -8,4 +8,11 @@
    class="list-group-item list-group-item-action"
    [routerLink]="['/admin/themes', theme.id]">
   {{theme.name}} (id:{{theme.id}})</a>
-
+<div class="spacer"></div>
+<hr/>
+<div class="spacer"></div>
+<button
+  class="btn btn-secondary"
+  type="button"
+  routerLink="/admin/themes/new">Nouveau thème
+</button>

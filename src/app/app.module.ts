@@ -13,7 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.component';
 import {ThemeListComponent} from './dashboard/themes/theme-list/theme-list.component';
 import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -44,6 +44,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     KeycloakAngularModule,

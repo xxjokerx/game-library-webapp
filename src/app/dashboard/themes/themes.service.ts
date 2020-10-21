@@ -6,6 +6,7 @@ import {Theme} from '../../model/theme.model';
 export class ThemesService {
   pagedThemes: PagedThemes;
 
+
   setThemes(themes: PagedThemes): void {
     this.pagedThemes = themes;
   }
@@ -17,4 +18,5 @@ export class ThemesService {
   getThemeById(givenId: number): Theme {
     return this.getThemes().find(theme => theme.id === givenId);
   }
+
 }
