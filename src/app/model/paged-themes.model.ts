@@ -9,4 +9,11 @@ export class PagedThemes {
   first: boolean;
   sort: string;
   numberOfElements: number;
+  pageable: {
+    offset: 0,
+    pageSize: 20,
+    pageNumber: 0,
+    unpaged: false,
+    paged: true
+  };
 }

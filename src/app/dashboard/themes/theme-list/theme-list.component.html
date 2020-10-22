@@ -10,6 +10,12 @@
    [routerLink]="['/admin/themes', theme.id]">
   {{theme.name}} (id:{{theme.id}})</a>
 <div class="y-spacer"></div>
+<ngb-pagination
+  [collectionSize]="totalElements"
+  [pageSize]="1"
+  [(page)]="page"
+  (pageChange)="onPageChange()"></ngb-pagination>
+<div class="y-spacer"></div>
 <hr/>
 <div class="y-spacer"></div>
 <button

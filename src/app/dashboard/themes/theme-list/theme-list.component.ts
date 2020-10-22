@@ -11,9 +11,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./theme-list.component.css']
 })
 export class ThemeListComponent implements OnInit, OnDestroy {
+
+
   themes: Theme[];
   keyword: any;
-  private subscription: Subscription;
+  private themeChangedSubscription: Subscription;
+  page: number;
+  totalElements: number;
+
+  toRemove = 0;
 
   constructor(private themesService: ThemesService,
               private themesDataService: ThemesDataService,
@@ -22,7 +28,7 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchThemes();
-    this.subscription = this.themesService.themesChanged.subscribe((themes: Theme[]) => {
+    this.themeChangedSubscription = this.themesService.themesChanged.subscribe((themes: Theme[]) => {
       this.themes = themes;
     });
   }
@@ -34,13 +40,22 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-
+    this.themeChangedSubscription.unsubscribe();
   }
 
   private fetchThemes(page?: number): void {
-    this.themesDataService.fetchThemes().subscribe(() => {
+    if (!page) {
+      page = 0;
+    }
+    this.themesDataService.fetchThemes(page).subscribe(() => {
       this.themes = this.themesService.getThemes();
+      this.page = this.themesService.pagedThemes.pageable.pageNumber + 1;
+      this.totalElements = this.themesService.pagedThemes.totalElements;
     });
+  }
+
+  onPageChange(): void {
+    // todo fetch the right page
+    this.fetchThemes(this.page);
   }
 }

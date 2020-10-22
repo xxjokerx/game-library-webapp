@@ -17,9 +17,14 @@ export class ThemesDataService {
   }
 
 
-  fetchThemes(): any {
+  fetchThemes(page?: number): any {
+    if (!page) {
+      page = 0;
+    }
+    const args = '?page=' + page + '&size=1&sort=id';
+
     return this.http
-      .get<PagedThemes>(this.apiUrl + '/admin/themes/page', {responseType: 'json'})
+      .get<PagedThemes>(this.apiUrl + '/admin/themes/page' + args, {responseType: 'json'})
       .pipe(
         tap(pagedThemes => {
           this.themesService.setPagedThemes(pagedThemes);
