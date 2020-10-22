@@ -9,11 +9,17 @@
    class="list-group-item list-group-item-action"
    [routerLink]="['/admin/themes', theme.id]">
   {{theme.name}} (id:{{theme.id}})</a>
-<div class="spacer"></div>
+<div class="y-spacer"></div>
 <hr/>
-<div class="spacer"></div>
+<div class="y-spacer"></div>
 <button
   class="btn btn-secondary"
   type="button"
   routerLink="/admin/themes/new">Nouveau thème
+</button>
+<span class="x-spacer"></span>
+<button
+  class="btn btn-secondary"
+  type="button"
+  (click)="onRefreshList()">Rafraichir la liste
 </button>

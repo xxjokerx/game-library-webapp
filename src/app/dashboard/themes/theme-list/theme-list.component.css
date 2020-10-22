@@ -1,3 +1,7 @@
-.spacer {
+.y-spacer {
   margin-top: 12px;
+}
+
+.x-spacer {
+  margin-left: 8px;
 }

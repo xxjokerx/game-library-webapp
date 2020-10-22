@@ -3,6 +3,7 @@ import {Theme} from '../../../model/theme.model';
 import {ThemesService} from '../themes.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {ThemesDataService} from '../themes-data.service';
 
 @Component({
   selector: 'app-theme-detail',
@@ -17,6 +18,7 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private themesService: ThemesService,
+              private themeDataService: ThemesDataService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -38,5 +40,10 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
 
   onEdit(): void {
     this.router.navigate(['/admin/themes/', this.theme.id, 'edit']);
+  }
+
+  onDelete(): void {
+    this.themeDataService.removeTheme(this.theme.id);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

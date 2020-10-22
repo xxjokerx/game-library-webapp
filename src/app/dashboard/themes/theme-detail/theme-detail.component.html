@@ -1,6 +1,16 @@
-<h4>{{ theme.name }}</h4>
-<button
-  class="btn btn-secondary"
-  type="button"
-  (click)="onEdit()">Éditer ce thème
-</button>
+<div class="row">
+  <h4>{{ theme.name }}</h4>
+</div>
+<div class="row">
+  <button
+    class="btn btn-secondary"
+    type="button"
+    (click)="onEdit()">Éditer ce thème
+  </button>
+  <span class="x-spacer"></span>
+  <button
+    class="btn btn-danger"
+    type="button"
+    (click)="onDelete()">Supprimer ce thème
+  </button>
+</div>

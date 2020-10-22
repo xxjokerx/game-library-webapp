@@ -30,4 +30,9 @@ export class ThemesService {
     this.themes.push(theme);
     this.themesChanged.next(this.themes.slice());
   }
+
+  removeThemeById(id: number): void {
+    this.themes = this.themes.filter(streamedTheme => id !== streamedTheme.id);
+    this.themesChanged.next(this.themes);
+  }
 }

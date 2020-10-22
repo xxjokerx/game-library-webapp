@@ -3,6 +3,7 @@ import {ThemesService} from '../themes.service';
 import {ThemesDataService} from '../themes-data.service';
 import {Theme} from '../../../model/theme.model';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-theme-list',
@@ -10,27 +11,36 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./theme-list.component.css']
 })
 export class ThemeListComponent implements OnInit, OnDestroy {
-  themesLoaded: boolean;
   themes: Theme[];
   keyword: any;
   private subscription: Subscription;
 
   constructor(private themesService: ThemesService,
-              private themesDataService: ThemesDataService) {
+              private themesDataService: ThemesDataService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
-    this.themesDataService.fetchThemes().subscribe(() => {
-      this.themesLoaded = true;
-      this.themes = this.themesService.getThemes();
-    });
+    this.fetchThemes();
     this.subscription = this.themesService.themesChanged.subscribe((themes: Theme[]) => {
       this.themes = themes;
     });
   }
 
+
+  onRefreshList(): void {
+    this.fetchThemes();
+    this.router.navigate(['/admin/themes']);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
 
+  }
+
+  private fetchThemes(page?: number): void {
+    this.themesDataService.fetchThemes().subscribe(() => {
+      this.themes = this.themesService.getThemes();
+    });
   }
 }

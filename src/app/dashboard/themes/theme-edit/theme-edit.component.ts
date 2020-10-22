@@ -37,7 +37,6 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
         this.initFrom();
       }
     );
-
   }
 
   ngOnDestroy(): void {
@@ -67,12 +66,17 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
     );
 
     if (this.editMode) {
-      this.themesDataService.editTheme(this.id, newTheme).subscribe(theme => {
-        console.log('updated themes : ' + theme.name);
-        this.themesService.updateThemes(theme);
-      });
+      this.themesDataService
+        .editTheme(this.id, newTheme)
+        .subscribe(theme => {
+          this.themesService.updateThemes(theme);
+        });
     } else {
-      this.themesDataService.addTheme(newTheme).subscribe();
+      this.themesDataService
+        .addTheme(newTheme)
+        .subscribe(theme => {
+          this.themesService.updateThemes(theme);
+        });
     }
     this.onCancel();
   }

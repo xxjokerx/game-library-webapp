@@ -36,4 +36,11 @@ export class ThemesDataService {
     return this.http
       .post<Theme>(this.apiUrl + '/admin/themes', newTheme, {responseType: 'json'});
   }
+
+  removeTheme(id: number): void {
+    this.http.delete<Theme>(this.apiUrl + '/admin/themes/' + id)
+      .subscribe(() => {
+        this.themesService.removeThemeById(id);
+      });
+  }
 }
