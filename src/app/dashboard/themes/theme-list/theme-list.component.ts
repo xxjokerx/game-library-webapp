@@ -4,6 +4,7 @@ import {ThemesDataService} from '../themes-data.service';
 import {Theme} from '../../../model/theme.model';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
+import {ConfigurationService} from '../../configuration/configuration.service';
 
 @Component({
   selector: 'app-theme-list',
@@ -18,11 +19,11 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   private themeChangedSubscription: Subscription;
   page: number;
   totalElements: number;
-
-  toRemove = 0;
+  numberOfElementsPerPage: number;
 
   constructor(private themesService: ThemesService,
               private themesDataService: ThemesDataService,
+              private configurationService: ConfigurationService,
               private router: Router) {
   }
 
@@ -51,11 +52,12 @@ export class ThemeListComponent implements OnInit, OnDestroy {
       this.themes = this.themesService.getThemes();
       this.page = this.themesService.pagedThemes.pageable.pageNumber + 1;
       this.totalElements = this.themesService.pagedThemes.totalElements;
+      this.numberOfElementsPerPage = this.configurationService.getNumberOfElements();
     });
   }
 
   onPageChange(): void {
-    // todo fetch the right page
     this.fetchThemes(this.page);
+    this.router.navigate(['/admin/themes']);
   }
 }

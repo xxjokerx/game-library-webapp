@@ -14,6 +14,7 @@ import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.compo
 import {ThemeListComponent} from './dashboard/themes/theme-list/theme-list.component';
 import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ConfigurationComponent} from './dashboard/configuration/configuration.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -39,7 +40,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     DashboardComponent,
     ThemeEditComponent,
     ThemeListComponent,
-    ThemeDetailComponent
+    ThemeDetailComponent,
+    ConfigurationComponent
   ],
   imports: [
     BrowserModule,

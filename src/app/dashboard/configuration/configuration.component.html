@@ -1,0 +1,36 @@
+<form
+  [formGroup]="configForm"
+  (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-xl-12">
+      <label for="numberOfElementsInput">Nombre d'éléments affichés par page</label>
+      <input
+        id="numberOfElementsInput"
+        class="form-control"
+        formControlName="numberOfElementsControl"
+      >
+    </div>
+  </div>
+  <div class="y-spacer"></div>
+  <div class="row">
+    <div class="col-xl-12">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!configForm.valid">Sauvegarder
+      </button>
+      <span class="x-spacer"></span>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="onRestore()">Restaurer
+      </button>
+      <span class="x-spacer"></span>
+      <button
+        type="button"
+        class="btn btn-warning"
+        (click)="onCancel()">Annuler
+      </button>
+    </div>
+  </div>
+</form>

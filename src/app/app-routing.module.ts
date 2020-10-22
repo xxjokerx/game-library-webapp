@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.component';
 import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail.component';
 import {ThemesResolverService} from './dashboard/themes/themes-resolver.service';
+import {ConfigurationComponent} from './dashboard/configuration/configuration.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
           {path: ':id', component: ThemeDetailComponent, resolve: [ThemesResolverService]}
         ]
       },
+      {
+        path: 'configuration',
+        component: ConfigurationComponent
+      }
     ]
   }
 ];

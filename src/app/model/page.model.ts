@@ -1,7 +1,5 @@
-import {Theme} from './theme.model';
-
-export class PagedThemes {
-  content: Theme[];
+export class Page<T> {
+  content: T[];
   totalPages: number;
   totalElements: number;
   last: boolean;

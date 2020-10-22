@@ -5,13 +5,15 @@ import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
 import {PagedThemes} from '../../model/paged-themes.model';
 import {Theme} from '../../model/theme.model';
+import {ConfigurationService} from '../configuration/configuration.service';
 
 @Injectable({providedIn: 'root'})
 export class ThemesDataService {
   private readonly apiUrl: string;
 
   constructor(private http: HttpClient,
-              private themesService: ThemesService) {
+              private themesService: ThemesService,
+              private configurationService: ConfigurationService) {
 
     this.apiUrl = environment.apiUrl;
   }
@@ -21,7 +23,8 @@ export class ThemesDataService {
     if (!page) {
       page = 0;
     }
-    const args = '?page=' + page + '&size=1&sort=id';
+    const size = this.configurationService.getNumberOfElements();
+    const args = '?page=' + page + '&size=' + size + '&sort=id';
 
     return this.http
       .get<PagedThemes>(this.apiUrl + '/admin/themes/page' + args, {responseType: 'json'})

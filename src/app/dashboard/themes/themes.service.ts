@@ -9,7 +9,6 @@ export class ThemesService {
   private themes: Theme[];
   themesChanged = new Subject<Theme[]>();
 
-
   setPagedThemes(pagedThemes: PagedThemes): void {
     this.pagedThemes = pagedThemes;
     this.themes = pagedThemes.content;
@@ -21,7 +20,6 @@ export class ThemesService {
   }
 
   getThemeById(givenId: number): Theme {
-    console.log(this.getThemes().find(theme => theme.id === givenId));
     return this.getThemes().find(theme => theme.id === givenId);
   }
 
