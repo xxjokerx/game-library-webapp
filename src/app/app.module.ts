@@ -15,6 +15,10 @@ import {ThemeListComponent} from './dashboard/themes/theme-list/theme-list.compo
 import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ConfigurationComponent} from './dashboard/configuration/configuration.component';
+import {CreatorsComponent} from './dashboard/creators/creators.component';
+import {CreatorListComponent} from './dashboard/creators/creator-list/creator-list.component';
+import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
+import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -41,7 +45,11 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     ThemeEditComponent,
     ThemeListComponent,
     ThemeDetailComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    CreatorsComponent,
+    CreatorListComponent,
+    CreatorEditComponent,
+    CreatorDetailComponent
   ],
   imports: [
     BrowserModule,

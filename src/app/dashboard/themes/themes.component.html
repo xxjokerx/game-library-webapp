@@ -6,17 +6,5 @@
     <router-outlet></router-outlet>
   </div>
   <div class="col-md-2">
-    <button
-      class="btn btn-secondary"
-      type="button"
-      (click)="onFetchThemes()">List all themes
-    </button>
-    <ul class="list-group" *ngIf="themesLoaded">
-      <li class="list-group-item"
-          *ngFor="let theme of themes">
-        {{theme.name}} (id:{{theme.id}})
-      </li>
-    </ul>
-
   </div>
 </div>

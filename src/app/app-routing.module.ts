@@ -7,6 +7,7 @@ import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.compo
 import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail.component';
 import {ThemesResolverService} from './dashboard/themes/themes-resolver.service';
 import {ConfigurationComponent} from './dashboard/configuration/configuration.component';
+import {CreatorsComponent} from './dashboard/creators/creators.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
           {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemesResolverService]},
           {path: ':id', component: ThemeDetailComponent, resolve: [ThemesResolverService]}
         ]
+      },
+      {
+        path: 'creators',
+        component: CreatorsComponent
       },
       {
         path: 'configuration',
