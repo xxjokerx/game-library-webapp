@@ -1,4 +1,4 @@
-export enum CreatorRole {
+export enum CreatorRoleEnum {
   AUTHOR = 'Auteur',
   DESIGNER = 'Designer',
   ILLUSTRATOR = 'Illustrateur',

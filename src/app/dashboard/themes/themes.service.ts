@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {PagedThemes} from '../../model/paged-themes.model';
 import {Theme} from '../../model/theme.model';
 import {Subject} from 'rxjs';
+import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
 export class ThemesService {
-  pagedThemes: PagedThemes;
+  pagedThemes: Page<Theme>;
   private themes: Theme[];
   themesChanged = new Subject<Theme[]>();
 
-  setPagedThemes(pagedThemes: PagedThemes): void {
+  setPagedThemes(pagedThemes: Page<Theme>): void {
     this.pagedThemes = pagedThemes;
     this.themes = pagedThemes.content;
     this.themesChanged.next(this.themes.slice());

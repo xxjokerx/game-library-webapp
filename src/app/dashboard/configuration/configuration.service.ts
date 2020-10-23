@@ -23,7 +23,6 @@ export class ConfigurationService {
     if (!localStorage.getItem('numberOfElements')) {
       return configuration.pagination.numberOfElementsPerPage;
     } else {
-      console.log(+JSON.parse(localStorage.getItem('numberOfElements')));
       return +JSON.parse(localStorage.getItem('numberOfElements'));
     }
   }

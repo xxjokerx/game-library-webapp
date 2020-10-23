@@ -1,1 +1,31 @@
-<p>creator-list works!</p>
+<div>
+  <label for="input">Filtrer les auteurs</label>
+  <input class="form-control" id="input">
+</div>
+<div class="y-spacer"></div>
+<a *ngFor="let creator of creators"
+   style="cursor: pointer;"
+   routerLinkActive="active"
+   class="list-group-item list-group-item-action"
+   [routerLink]="['/admin/creator', creator.id]">
+  {{ creator.firstName }} {{creator.lastName}} (id:{{creator.id}})</a>
+<div class="y-spacer"></div>
+<ngb-pagination
+  [collectionSize]="totalElements"
+  [pageSize]="numberOfElementsPerPage"
+  [(page)]="page"
+  (pageChange)="onPageChange()"></ngb-pagination>
+<div class="y-spacer"></div>
+<hr/>
+<div class="y-spacer"></div>
+<button
+  class="btn btn-secondary"
+  type="button"
+  routerLink="/admin/creators/new">Ajouter un auteur
+</button>
+<span class="x-spacer"></span>
+<button
+  class="btn btn-secondary"
+  type="button"
+  (click)="onRefreshList()">Rafraichir la liste
+</button>

@@ -9,13 +9,13 @@ import {ConfigurationService} from '../configuration/configuration.service';
 
 @Injectable({providedIn: 'root'})
 export class ThemesDataService {
-  private readonly apiUrl: string;
+  private readonly apiUri: string;
 
   constructor(private http: HttpClient,
               private themesService: ThemesService,
               private configurationService: ConfigurationService) {
 
-    this.apiUrl = environment.apiUrl;
+    this.apiUri = environment.apiUrl;
   }
 
 
@@ -27,7 +27,7 @@ export class ThemesDataService {
     const args = '?page=' + page + '&size=' + size + '&sort=id';
 
     return this.http
-      .get<PagedThemes>(this.apiUrl + '/admin/themes/page' + args, {responseType: 'json'})
+      .get<PagedThemes>(this.apiUri + '/admin/themes/page' + args, {responseType: 'json'})
       .pipe(
         tap(pagedThemes => {
           this.themesService.setPagedThemes(pagedThemes);
@@ -37,16 +37,16 @@ export class ThemesDataService {
 
   editTheme(id: number, editedTheme: Theme): any {
     return this.http
-      .put<Theme>(this.apiUrl + '/admin/themes/' + id, editedTheme, {responseType: 'json'});
+      .put<Theme>(this.apiUri + '/admin/themes/' + id, editedTheme, {responseType: 'json'});
   }
 
   addTheme(newTheme: Theme): any {
     return this.http
-      .post<Theme>(this.apiUrl + '/admin/themes', newTheme, {responseType: 'json'});
+      .post<Theme>(this.apiUri + '/admin/themes', newTheme, {responseType: 'json'});
   }
 
   removeTheme(id: number): void {
-    this.http.delete<Theme>(this.apiUrl + '/admin/themes/' + id)
+    this.http.delete<Theme>(this.apiUri + '/admin/themes/' + id)
       .subscribe(() => {
         this.themesService.removeThemeById(id);
       });

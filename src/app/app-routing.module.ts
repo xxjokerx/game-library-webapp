@@ -8,6 +8,8 @@ import {ThemeDetailComponent} from './dashboard/themes/theme-detail/theme-detail
 import {ThemesResolverService} from './dashboard/themes/themes-resolver.service';
 import {ConfigurationComponent} from './dashboard/configuration/configuration.component';
 import {CreatorsComponent} from './dashboard/creators/creators.component';
+import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
+import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 
 const routes: Routes = [
   {
@@ -27,7 +29,12 @@ const routes: Routes = [
       },
       {
         path: 'creators',
-        component: CreatorsComponent
+        component: CreatorsComponent,
+        children: [
+          {path: 'new', component: CreatorEditComponent},
+          {path: ':id/edit', component: CreatorEditComponent /* add resolver ?*/},
+          {path: ':id', component: CreatorDetailComponent /* add resolver ?*/}
+        ]
       },
       {
         path: 'configuration',

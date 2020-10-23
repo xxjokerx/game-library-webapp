@@ -2,7 +2,7 @@
   <label for="input">Filtrer les thèmes</label>
   <input class="form-control" id="input" [(ngModel)]="keyword">
 </div>
-<p>{{ keyword }}</p>
+<div class="y-spacer"></div>
 <a *ngFor="let theme of themes"
    style="cursor: pointer;"
    routerLinkActive="active"
