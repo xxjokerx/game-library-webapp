@@ -10,6 +10,7 @@ import {ConfigurationComponent} from './dashboard/configuration/configuration.co
 import {CreatorsComponent} from './dashboard/creators/creators.component';
 import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
+import {CreatorResolverService} from './dashboard/creators/creator-resolver.service';
 
 const routes: Routes = [
   {
@@ -32,8 +33,8 @@ const routes: Routes = [
         component: CreatorsComponent,
         children: [
           {path: 'new', component: CreatorEditComponent},
-          {path: ':id/edit', component: CreatorEditComponent /* add resolver ?*/},
-          {path: ':id', component: CreatorDetailComponent /* add resolver ?*/}
+          {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolverService]},
+          {path: ':id', component: CreatorDetailComponent, resolve: [CreatorResolverService]}
         ]
       },
       {
