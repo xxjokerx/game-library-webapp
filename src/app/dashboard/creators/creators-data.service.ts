@@ -36,4 +36,10 @@ export class CreatorsDataService {
         })
       );
   }
+
+  removeCreator(id: number): void {
+    this.http
+      .delete(this.apiUri + '/admin/creators/' + id)
+      .subscribe();
+  }
 }

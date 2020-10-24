@@ -29,11 +29,13 @@ export class CreatorDetailComponent implements OnInit {
     });
   }
 
-  onEdit() {
-
+  onEdit(): void {
+    this.router.navigate(['/admin/creators/', this.creator.id, 'edit']);
   }
 
-  onDelete() {
-
+  onDelete(): void {
+    this.creatorsDataService
+      .removeCreator(this.creator.id);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

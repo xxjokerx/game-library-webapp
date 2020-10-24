@@ -13,7 +13,6 @@ import {ThemesDataService} from '../themes-data.service';
 export class ThemeDetailComponent implements OnInit, OnDestroy {
   theme: Theme;
   private paramId: number;
-
   private routeSubscription: Subscription;
   private subscription: Subscription;
 
@@ -43,7 +42,14 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.themeDataService.removeTheme(this.theme.id);
+    this.themeDataService.removeTheme(this.theme.id).subscribe(() => {
+      this.themesService.removeThemeById(this.theme.id);
+    });
     this.router.navigate(['../'], {relativeTo: this.route});
+    // Improves things but not perfect
+    this.themesService.pagedThemes.numberOfElements = this.themesService.pagedThemes.numberOfElements - 1;
+    if (this.themesService.pagedThemes.numberOfElements === 0) {
+      this.themeDataService.fetchThemes().subscribe();
+    }
   }
 }

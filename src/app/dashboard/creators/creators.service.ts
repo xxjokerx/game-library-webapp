@@ -15,11 +15,11 @@ export class CreatorsService {
     this.pagedCreators = pagedCreators;
   }
 
-  private getCreator(): Creator[] {
-    return this.pagedCreators.content.slice();
-  }
-
   getCreatorById(id: number): Creator {
     return this.getCreator().find(creator => creator.id === id);
+  }
+
+  private getCreator(): Creator[] {
+    return this.pagedCreators.content.slice();
   }
 }

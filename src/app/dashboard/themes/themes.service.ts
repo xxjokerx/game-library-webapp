@@ -26,6 +26,7 @@ export class ThemesService {
   updateThemes(theme: Theme): void {
     this.themes = this.themes.filter(streamedTheme => theme.id !== streamedTheme.id);
     this.themes.push(theme);
+    console.log(this.pagedThemes.content);
     this.themesChanged.next(this.themes.slice());
   }
 

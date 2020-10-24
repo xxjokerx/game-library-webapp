@@ -6,6 +6,7 @@ import {tap} from 'rxjs/operators';
 import {PagedThemes} from '../../model/paged-themes.model';
 import {Theme} from '../../model/theme.model';
 import {ConfigurationService} from '../configuration/configuration.service';
+import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class ThemesDataService {
@@ -19,7 +20,7 @@ export class ThemesDataService {
   }
 
 
-  fetchThemes(page?: number): any {
+  fetchThemes(page?: number): Observable<PagedThemes> {
     if (!page) {
       page = 0;
     }
@@ -45,10 +46,7 @@ export class ThemesDataService {
       .post<Theme>(this.apiUri + '/admin/themes', newTheme, {responseType: 'json'});
   }
 
-  removeTheme(id: number): void {
-    this.http.delete<Theme>(this.apiUri + '/admin/themes/' + id)
-      .subscribe(() => {
-        this.themesService.removeThemeById(id);
-      });
+  removeTheme(id: number): any {
+    return this.http.delete<Theme>(this.apiUri + '/admin/themes/' + id);
   }
 }

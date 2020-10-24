@@ -4,7 +4,6 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class StringEnumPipe implements PipeTransform {
 
   transform(value): any {
-    console.log(value);
     switch (value) {
       case 'AUTHOR':
         return 'Auteur';

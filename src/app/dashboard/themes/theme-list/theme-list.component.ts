@@ -19,7 +19,7 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   private themeChangedSubscription: Subscription;
   page: number;
   totalElements: number;
-  numberOfElementsPerPage: number;
+  pageSize: number;
 
   constructor(private themesService: ThemesService,
               private themesDataService: ThemesDataService,
@@ -49,10 +49,9 @@ export class ThemeListComponent implements OnInit, OnDestroy {
       page = 0;
     }
     this.themesDataService.fetchThemes(page).subscribe(() => {
-      this.themes = this.themesService.getThemes();
       this.page = this.themesService.pagedThemes.pageable.pageNumber + 1;
       this.totalElements = this.themesService.pagedThemes.totalElements;
-      this.numberOfElementsPerPage = this.configurationService.getNumberOfElements();
+      this.pageSize = this.configurationService.getNumberOfElements();
     });
   }
 
