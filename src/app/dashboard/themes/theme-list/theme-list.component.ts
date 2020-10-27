@@ -5,6 +5,7 @@ import {Theme} from '../../../model/theme.model';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {ConfigurationService} from '../../configuration/configuration.service';
+import {Page} from '../../../model/page.model';
 
 @Component({
   selector: 'app-theme-list',
@@ -29,8 +30,9 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchThemes();
-    this.themeChangedSubscription = this.themesService.themesChanged.subscribe((themes: Theme[]) => {
-      this.themes = themes;
+    this.themeChangedSubscription = this.themesService.pagedThemesChanged.subscribe((pagedThemes: Page<Theme>) => {
+      this.themes = pagedThemes.content.slice();
+      this.totalElements = pagedThemes.totalElements;
     });
   }
 

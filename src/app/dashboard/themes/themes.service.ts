@@ -6,17 +6,16 @@ import {Page} from '../../model/page.model';
 @Injectable({providedIn: 'root'})
 export class ThemesService {
   pagedThemes: Page<Theme>;
-  private themes: Theme[];
-  themesChanged = new Subject<Theme[]>();
+  // private themes: Theme[];
+  pagedThemesChanged = new Subject<Page<Theme>>();
 
   setPagedThemes(pagedThemes: Page<Theme>): void {
     this.pagedThemes = pagedThemes;
-    this.themes = pagedThemes.content;
-    this.themesChanged.next(this.themes.slice());
+    this.pagedThemesChanged.next(this.pagedThemes);
   }
 
   getThemes(): Theme[] {
-    return this.themes.slice();
+    return this.pagedThemes.content.slice();
   }
 
   getThemeById(givenId: number): Theme {
@@ -24,14 +23,13 @@ export class ThemesService {
   }
 
   updateThemes(theme: Theme): void {
-    this.themes = this.themes.filter(streamedTheme => theme.id !== streamedTheme.id);
-    this.themes.push(theme);
-    console.log(this.pagedThemes.content);
-    this.themesChanged.next(this.themes.slice());
+    this.pagedThemes.content = this.pagedThemes.content.filter(streamedTheme => theme.id !== streamedTheme.id);
+    this.pagedThemes.content.push(theme);
+    this.pagedThemesChanged.next(this.pagedThemes);
   }
 
   removeThemeById(id: number): void {
-    this.themes = this.themes.filter(streamedTheme => id !== streamedTheme.id);
-    this.themesChanged.next(this.themes);
+    this.pagedThemes.content = this.pagedThemes.content.filter(streamedTheme => id !== streamedTheme.id);
+    this.pagedThemesChanged.next(this.pagedThemes);
   }
 }
