@@ -3,12 +3,16 @@
   (ngSubmit)="onSubmit()">
   <div class="row">
     <div class="col-xl-12">
-      <label for="numberOfElementsInput">Nombre d'éléments affichés par page</label>
-      <input
-        id="numberOfElementsInput"
-        class="form-control"
-        formControlName="numberOfElementsControl"
-      >
+      <label for="numberOfElementsSelect">Nombre d'éléments affichés par page</label>
+      <select
+        id="numberOfElementsSelect"
+        class="form-control w-auto"
+        formControlName="numberOfElementsControl">
+        <option
+          *ngFor="let n of numbers"
+          [value]="n">{{n}}
+        </option>
+      </select>
     </div>
   </div>
   <div class="y-spacer"></div>

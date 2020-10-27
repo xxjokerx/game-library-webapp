@@ -26,7 +26,7 @@ export class ConfigurationComponent implements OnInit {
     this.numberOfElementsPerPage = this.configurationService.getNumberOfElements();
 
     this.configForm = new FormGroup({
-      'numberOfElementsControl': new FormControl(this.numberOfElementsPerPage, [Validators.max(100), Validators.required])
+      'numberOfElementsControl': new FormControl(this.numberOfElementsPerPage, [Validators.required])
     });
   }
 

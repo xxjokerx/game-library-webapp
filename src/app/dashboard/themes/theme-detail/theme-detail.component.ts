@@ -47,10 +47,5 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
       this.themesService.removeThemeById(this.theme.id);
     });
     this.router.navigate(['../'], {relativeTo: this.route});
-    // Improves things but not perfect
-    this.themesService.pagedThemes.numberOfElements = this.themesService.pagedThemes.numberOfElements - 1;
-    if (this.themesService.pagedThemes.numberOfElements === 0) {
-      this.themeDataService.fetchThemes().subscribe();
-    }
   }
 }
