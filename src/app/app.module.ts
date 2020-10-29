@@ -20,6 +20,7 @@ import {CreatorListComponent} from './dashboard/creators/creator-list/creator-li
 import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 import {StringEnumPipe} from './dashboard/creators/string-enum.pipe';
+import {ConfirmModalComponent} from './shared/confirm-modal/confirm-modal.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -51,7 +52,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CreatorListComponent,
     CreatorEditComponent,
     CreatorDetailComponent,
-    StringEnumPipe
+    StringEnumPipe,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,

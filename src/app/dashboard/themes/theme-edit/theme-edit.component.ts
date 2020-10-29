@@ -40,23 +40,6 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  private initFrom(): void {
-    let themeName = '';
-
-    if (this.editMode) {
-      const theme: Theme = this.themesService.getThemeById(this.id);
-      themeName = theme.name;
-      this.label = 'Édition du thème \"' + themeName + '\"';
-    } else {
-      this.label = 'Création d\'un thème';
-    }
-
-    this.themeForm = new FormGroup({
-      'name': new FormControl(themeName, [Validators.required, Validators.maxLength(50)])
-    });
   }
 
   onSubmit(): void {
@@ -84,4 +67,22 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
   onCancel(): void {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
+
+
+  private initFrom(): void {
+    let themeName = '';
+
+    if (this.editMode) {
+      const theme: Theme = this.themesService.getThemeById(this.id);
+      themeName = theme.name;
+      this.label = 'Édition du thème \"' + themeName + '\"';
+    } else {
+      this.label = 'Création d\'un thème';
+    }
+
+    this.themeForm = new FormGroup({
+      'name': new FormControl(themeName, [Validators.required, Validators.maxLength(50)])
+    });
+  }
+
 }
