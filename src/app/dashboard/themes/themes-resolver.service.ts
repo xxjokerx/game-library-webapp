@@ -3,17 +3,18 @@ import {Observable} from 'rxjs';
 import {ThemesDataService} from './themes-data.service';
 import {ThemesService} from './themes.service';
 import {Injectable} from '@angular/core';
-import {PagedThemes} from '../../model/paged-themes.model';
+import {Theme} from '../../model/theme.model';
+import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
-export class ThemesResolverService implements Resolve<PagedThemes> {
+export class ThemesResolverService implements Resolve<Page<Theme>> {
 
   constructor(private themesDataService: ThemesDataService,
               private themesService: ThemesService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PagedThemes> | Promise<PagedThemes> | PagedThemes {
-    const themes: PagedThemes = this.themesService.pagedThemes;
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page<Theme>> | Promise<Page<Theme>> | Page<Theme> {
+    const themes: Page<Theme> = this.themesService.pagedThemes;
 
     if (!themes) {
       return this.themesDataService.fetchThemes();

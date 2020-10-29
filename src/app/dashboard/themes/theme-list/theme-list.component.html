@@ -1,7 +1,31 @@
-<div>
-  <label for="input">Filtrer les thèmes</label>
-  <input class="form-control" id="input" [(ngModel)]="keyword">
-</div>
+<form
+  [formGroup]="filterForm"
+  (ngSubmit)="onFilter()">
+  <div class="input-group mb-3">
+    <label for="input"></label>
+    <input
+      class="form-control"
+      id="input"
+      formControlName="keyword">
+    <div class="input-group-append">
+      <button
+        class="btn btn-success"
+        type="submit"
+        [disabled]="filterForm.invalid">Filtrer
+      </button>
+    </div>
+    <div class="input-group-append">
+      <button
+        class="btn btn-secondary"
+        type="button"
+        ngbTooltip="Cliquez à nouveau pour rafraîchir la liste"
+        triggers='click:blur'
+        (click)="onReset()">X
+      </button>
+
+    </div>
+  </div>
+</form>
 <div class="y-spacer"></div>
 <a *ngFor="let theme of themes"
    style="cursor: pointer;"

@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {ThemesService} from './themes.service';
 import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
-import {PagedThemes} from '../../model/paged-themes.model';
 import {Theme} from '../../model/theme.model';
 import {ConfigurationService} from '../configuration/configuration.service';
 import {Observable} from 'rxjs';
+import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
 export class ThemesDataService {
@@ -20,15 +20,19 @@ export class ThemesDataService {
   }
 
 
-  fetchThemes(page?: number): Observable<PagedThemes> {
+  fetchThemes(page?: number, keyword?: string): Observable<Page<Theme>> {
     if (!page) {
       page = 0;
     }
+    let keywordParam = '';
+    if (keyword) {
+      keywordParam = '&search=' + keyword.toLowerCase();
+    }
     const size = this.configurationService.getNumberOfElements();
-    const args = '?page=' + page + '&size=' + size + '&sort=id';
+    const args = '?page=' + page + '&size=' + size + '&sort=name' + keywordParam;
 
     return this.http
-      .get<PagedThemes>(this.apiUri + '/admin/themes/page' + args, {responseType: 'json'})
+      .get<Page<Theme>>(this.apiUri + '/admin/themes/page' + args, {responseType: 'json'})
       .pipe(
         tap(pagedThemes => {
           this.themesService.setPagedThemes(pagedThemes);

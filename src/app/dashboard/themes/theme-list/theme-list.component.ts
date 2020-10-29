@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Page} from '../../../model/page.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-theme-list',
@@ -14,13 +15,12 @@ import {Page} from '../../../model/page.model';
 })
 export class ThemeListComponent implements OnInit, OnDestroy {
 
-
   themes: Theme[];
-  keyword: any;
-  private themeChangedSubscription: Subscription;
+  private subscription: Subscription;
   page: number;
   totalElements: number;
   pageSize: number;
+  filterForm: FormGroup;
 
   constructor(private themesService: ThemesService,
               private themesDataService: ThemesDataService,
@@ -30,35 +30,53 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchThemes();
-    this.themeChangedSubscription = this.themesService.pagedThemesChanged.subscribe((pagedThemes: Page<Theme>) => {
+    this.subscription = this.themesService.pagedThemesChanged.subscribe((pagedThemes: Page<Theme>) => {
       this.themes = pagedThemes.content.slice();
       this.totalElements = pagedThemes.totalElements;
     });
+    this.initForm();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   onRefreshList(): void {
     this.fetchThemes();
     this.router.navigate(['/admin/themes']);
   }
 
-  ngOnDestroy(): void {
-    this.themeChangedSubscription.unsubscribe();
+  onPageChange(): void {
+    this.fetchThemes(this.page);
+    this.router.navigate(['/admin/themes']);
   }
 
-  private fetchThemes(page?: number): void {
-    if (!page) {
-      page = 0;
+  onFilter(): void {
+    this.fetchThemes(0, this.filterForm.value.keyword);
+    this.initForm();
+    this.router.navigate(['/admin/themes']);
+  }
+
+  onReset(): void {
+    if (this.filterForm.value.keyword) {
+      this.initForm();
+    } else {
+      this.onRefreshList();
     }
-    this.themesDataService.fetchThemes(page).subscribe(() => {
+  }
+
+  private fetchThemes(page?: number, keyword?: string): void {
+    this.themesDataService.fetchThemes(page, keyword).subscribe(() => {
+      console.log('theme were fetched with page: ' + page + ' and keyword: ' + keyword);
       this.page = this.themesService.pagedThemes.pageable.pageNumber + 1;
       this.totalElements = this.themesService.pagedThemes.totalElements;
       this.pageSize = this.configurationService.getNumberOfElements();
     });
   }
 
-  onPageChange(): void {
-    this.fetchThemes(this.page);
-    this.router.navigate(['/admin/themes']);
+  private initForm(): void {
+    this.filterForm = new FormGroup({
+      'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
+    });
   }
 }

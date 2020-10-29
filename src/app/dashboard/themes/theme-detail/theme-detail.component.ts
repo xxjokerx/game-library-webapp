@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Theme} from '../../../model/theme.model';
 import {ThemesService} from '../themes.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {of, Subscription} from 'rxjs';
 import {ThemesDataService} from '../themes-data.service';
 import {Page} from '../../../model/page.model';
+import {concatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-theme-detail',
@@ -43,9 +44,19 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.themeDataService.removeTheme(this.theme.id).subscribe(() => {
-      this.themesService.removeThemeById(this.theme.id);
-    });
+    const myObs = of(this.theme.id);
+    myObs.pipe(
+      concatMap(id => {
+        return this.themeDataService.removeTheme(id);
+      }),
+      concatMap(() => {
+        return this.themeDataService.fetchThemes();
+      })
+    ).subscribe();
+
+    // this.themeDataService.removeTheme(this.theme.id).subscribe(() => {
+    // this.themesService.removeThemeById(this.theme.id);
+    // });
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 }
