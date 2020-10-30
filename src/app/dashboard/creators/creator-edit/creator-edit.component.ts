@@ -61,8 +61,11 @@ export class CreatorEditComponent implements OnInit {
   private populateCountryRoleAndList(): void {
     this.rolesList = Object.keys(CreatorRoleEnum);
     this.actualEnumType = CreatorRoleEnum;
-    // this.populateCountries().then(data => this.countries = data ).catch(err => console.log(err));
-    this.countryDataService.getList();
+
+    if (this.countryDataService.countries.length === 0) {
+      this.countryDataService.getList();
+    }
+    this.countries = this.countryDataService.countries;
   }
 
   private initFrom(): void {
