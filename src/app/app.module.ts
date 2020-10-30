@@ -21,6 +21,7 @@ import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-ed
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 import {StringEnumPipe} from './dashboard/creators/string-enum.pipe';
 import {ConfirmModalComponent} from './shared/confirm-modal/confirm-modal.component';
+import {EnumToValuePipe} from './shared/enum-to-value.pipe';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -30,7 +31,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
         realm: environment.keycloak.realm,
         clientId: environment.keycloak.clientId
       },
-      bearerExcludedUrls: ['/assets'],
+      bearerExcludedUrls: ['/assets', '/rest/v2/all'],
       initOptions: {
         onLoad: 'check-sso',
         silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
@@ -53,7 +54,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CreatorEditComponent,
     CreatorDetailComponent,
     StringEnumPipe,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    EnumToValuePipe
   ],
   imports: [
     BrowserModule,
@@ -74,4 +76,5 @@ function initializeKeycloak(keycloak: KeycloakService): any {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

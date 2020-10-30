@@ -3,7 +3,10 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CreatorsService} from '../creators.service';
 import {CreatorsDataService} from '../creators-data.service';
 import {Creator} from '../../../model/creator.model';
-import {Subscription} from 'rxjs';
+import {of} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmModalComponent} from '../../../shared/confirm-modal/confirm-modal.component';
+import {concatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-creator-detail',
@@ -13,16 +16,16 @@ import {Subscription} from 'rxjs';
 export class CreatorDetailComponent implements OnInit {
   creator: Creator;
   private paramId: number;
-  private routeSubscription: Subscription;
 
   constructor(private creatorsDataService: CreatorsDataService,
               private creatorsService: CreatorsService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.params.subscribe((params: Params) => {
+    this.route.params.subscribe((params: Params) => {
       const id = 'id';
       this.paramId = +params[id];
       this.creator = this.creatorsService.getCreatorById(+this.paramId);
@@ -34,8 +37,28 @@ export class CreatorDetailComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.creatorsDataService
-      .removeCreator(this.creator.id);
+    const myObs = of(this.creator.id);
+    myObs.pipe(
+      concatMap(id => {
+        return this.creatorsDataService.removeCreator(id);
+      }),
+      concatMap(() => {
+        return this.creatorsDataService.fetchCreators();
+      })
+    ).subscribe();
     this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  onOpenConfirm(): void {
+    const modalRef = this.modalService.open(ConfirmModalComponent);
+    modalRef.componentInstance.deletedObjectType = 'le créateur';
+    modalRef.componentInstance.deletedObjectName = this.creator.firstName + ' ' + this.creator.lastName;
+    modalRef.result
+      .then(value => {
+        if (value === 'Ok click') {
+          this.onDelete();
+        }
+      })
+      .catch(err => console.log(err));
   }
 }

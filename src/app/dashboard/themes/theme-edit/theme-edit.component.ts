@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ThemesService} from '../themes.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -11,7 +11,7 @@ import {ThemesDataService} from '../themes-data.service';
   templateUrl: './theme-edit.component.html',
   styleUrls: ['./theme-edit.component.css']
 })
-export class ThemeEditComponent implements OnInit, OnDestroy {
+export class ThemeEditComponent implements OnInit {
   private subscription: Subscription;
   private editMode: boolean;
   private id: number;
@@ -37,9 +37,6 @@ export class ThemeEditComponent implements OnInit, OnDestroy {
         this.initFrom();
       }
     );
-  }
-
-  ngOnDestroy(): void {
   }
 
   onSubmit(): void {

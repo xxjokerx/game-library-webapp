@@ -37,8 +37,8 @@ export class CreatorsDataService {
       );
   }
 
-  removeCreator(id: number): void {
-    this.http
+  removeCreator(id: number): any {
+    return this.http
       .delete(this.apiUri + '/admin/creators/' + id)
       .subscribe();
   }
