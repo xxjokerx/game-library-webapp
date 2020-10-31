@@ -1,5 +1,4 @@
-export class CountryModel {
-
+export class Country {
   translations: {
     br: string,
     pt: string,

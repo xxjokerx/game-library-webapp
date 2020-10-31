@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CountryModel} from '../model/country.model';
+import {Country} from '../model/country.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,12 @@ export class CountryDataService {
 
   getList(): void {
     this.http
-      .get<CountryModel[]>(environment.api.country + '?fields=translations')
+      .get<Country[]>(environment.api.country + '?fields=translations')
       .pipe(
-        map(value => value.forEach(e => this.countries.push(e.translations.fr)))
-      )
+        map(value => value.map(c => c.translations.fr)
+          .filter(name => name)
+          .map(name => this.countries.push(name))
+        ))
       .subscribe();
   }
 }
