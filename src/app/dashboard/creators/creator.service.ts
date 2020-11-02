@@ -7,8 +7,10 @@ import {Page} from '../../model/page.model';
 })
 export class CreatorService {
   pagedCreators: Page<Creator>;
+  hasContact: boolean;
 
   constructor() {
+    this.hasContact = false;
   }
 
   setPagedCreators(pagedCreators: Page<Creator>): void {
@@ -22,4 +24,6 @@ export class CreatorService {
   private getCreator(): Creator[] {
     return this.pagedCreators.content.slice();
   }
+
+
 }

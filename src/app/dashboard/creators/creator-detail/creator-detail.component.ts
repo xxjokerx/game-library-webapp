@@ -33,7 +33,23 @@ export class CreatorDetailComponent implements OnInit {
   }
 
   onEdit(): void {
+    this.creator.contact ? this.creatorsService.hasContact = true : this.creatorsService.hasContact = false;
     this.router.navigate(['/admin/creators/', this.creator.id, 'edit']);
+  }
+
+  onOpenConfirm(isCreatorDeletion: boolean): void {
+    let chosenEnum = ModelEnum.CREATOR;
+    if (!isCreatorDeletion) {
+      chosenEnum = ModelEnum.CONTACT;
+    }
+
+    this.deletionHandlerService.callModal(chosenEnum, this.creator)
+      .then(value => {
+        if (value === 'Ok click') {
+          this.onDelete(isCreatorDeletion);
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   onDelete(isCreatorDeletion: boolean): void {
@@ -61,21 +77,5 @@ export class CreatorDetailComponent implements OnInit {
       ).subscribe();
     }
     this.router.navigate(['../'], {relativeTo: this.route});
-  }
-
-  onOpenConfirm(isCreatorDeletion: boolean): void {
-    let chosenEnum = ModelEnum.CREATOR;
-    if (!isCreatorDeletion) {
-      chosenEnum = ModelEnum.CONTACT;
-    }
-
-    this.deletionHandlerService.callModal(chosenEnum, this.creator)
-      .then(value => {
-        if (value === 'Ok click') {
-          this.onDelete(isCreatorDeletion);
-          console.log('deleting...');
-        }
-      })
-      .catch(err => console.log(err));
   }
 }

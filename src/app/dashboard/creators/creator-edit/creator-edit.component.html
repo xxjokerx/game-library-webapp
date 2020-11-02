@@ -2,6 +2,7 @@
   [formGroup]="creatorForm"
   (ngSubmit)="onSubmit()">
   <h5>{{ label }}</h5>
+  <div>has contact = {{ hasContact }}</div>
   <div class="form-row">
 
     <div class="form-group col-md-5">
@@ -37,7 +38,7 @@
 
   </div>
 
-  <div class="form-row">
+  <div class="form-row" *ngIf="editContact">
 
     <div class="form-group col-md-2">
       <label for="streetNumber">Numéro</label>
@@ -59,7 +60,7 @@
 
   </div>
 
-  <div class="form-row">
+  <div class="form-row" *ngIf="editContact">
 
     <div class="form-group col-md-5">
       <label for="city">Ville</label>
@@ -94,7 +95,7 @@
 
   </div>
 
-  <div class="form-row">
+  <div class="form-row" *ngIf="editContact">
 
     <div class="form-group col-md-3">
       <label for="phoneNumber">Téléphone</label>
@@ -148,6 +149,13 @@
         type="button"
         class="btn btn-warning"
         (click)="onCancel()">Annuler
+      </button>
+      <span class="x-spacer"></span>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        *ngIf="!hasContact"
+        (click)="onAddContactForm()">Ajouter les coordonnées
       </button>
     </div>
   </div>
