@@ -22,6 +22,7 @@ import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creato
 import {StringEnumPipe} from './dashboard/creators/string-enum.pipe';
 import {ConfirmModalComponent} from './shared/confirm-modal/confirm-modal.component';
 import {EnumToValuePipe} from './shared/enum-to-value.pipe';
+import {ContactFormComponent} from './shared/contact-form/contact-form.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -55,7 +56,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CreatorDetailComponent,
     StringEnumPipe,
     ConfirmModalComponent,
-    EnumToValuePipe
+    EnumToValuePipe,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,

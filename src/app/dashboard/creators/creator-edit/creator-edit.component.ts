@@ -25,6 +25,7 @@ export class CreatorEditComponent implements OnInit {
   rolesList: Array<string>;
   actualEnumType;
   countries: string[];
+  isRequested: boolean;
 
   constructor(private creatorsService: CreatorService,
               private creatorsDataService: CreatorsDataService,
@@ -35,6 +36,7 @@ export class CreatorEditComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isRequested = false;
     this.editContact = false;
     this.populateCountriesAndRoles();
     this.subscription = this.route.params.subscribe(
@@ -54,15 +56,12 @@ export class CreatorEditComponent implements OnInit {
   }
 
   onAddContactForm(): void {
-    this.addContactForm();
+    this.isRequested = true;
     this.hasContact = true;
   }
 
   onSubmit(): void {
-    const newCreator = new Creator();
-    newCreator.firstName = this.creatorForm.value.firstname;
-    newCreator.lastName = this.creatorForm.value.lastname;
-    newCreator.role = this.creatorForm.value.role;
+    console.log(this.creatorForm.value);
   }
 
   onCancel(): void {
@@ -72,11 +71,6 @@ export class CreatorEditComponent implements OnInit {
   private populateCountriesAndRoles(): void {
     this.rolesList = Object.keys(CreatorRoleEnum);
     this.actualEnumType = CreatorRoleEnum;
-
-    if (this.countryDataService.countries.length === 0) {
-      this.countryDataService.getList();
-    }
-    this.countries = this.countryDataService.countries;
   }
 
   private initFrom(): void {
@@ -99,6 +93,7 @@ export class CreatorEditComponent implements OnInit {
       role = creator.role;
 
       if (creator.contact) {
+        this.isRequested = true;
         postalCode = creator.contact.postalCode;
         street = creator.contact.street;
         city = creator.contact.city;
@@ -118,41 +113,26 @@ export class CreatorEditComponent implements OnInit {
       this.label = 'Création d\'un auteur';
     }
 
+    this.creatorForm = new FormGroup({
+      'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
+      'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
+      'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
+      'postalCode': new FormControl(postalCode, [Validators.maxLength(50)]),
+      'street': new FormControl(street, [Validators.maxLength(255)]),
+      'city': new FormControl(city, [Validators.maxLength(50)]),
+      'country': new FormControl(country, [Validators.maxLength(50)]),
+      'streetNumber': new FormControl(streetNumber, [Validators.maxLength(10)]),
+      'phoneNumber': new FormControl(phoneNumber, [Validators.maxLength(50)]),
+      'website': new FormControl(website, [Validators.maxLength(75)]),
+      'mailAddress': new FormControl(mailAddress, [Validators.maxLength(320)])
+    });
+
     if (this.hasContact) {
       this.editContact = true;
-      this.creatorForm = new FormGroup({
-        'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
-        'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
-        'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
-        'postalCode': new FormControl(postalCode, [Validators.maxLength(50)]),
-        'street': new FormControl(street, [Validators.maxLength(255)]),
-        'city': new FormControl(city, [Validators.maxLength(50)]),
-        'country': new FormControl(country, [Validators.required, Validators.maxLength(50)]),
-        'streetNumber': new FormControl(streetNumber, [Validators.maxLength(10)]),
-        'phoneNumber': new FormControl(phoneNumber, [Validators.maxLength(50)]),
-        'website': new FormControl(website, [Validators.maxLength(75)]),
-        'mailAddress': new FormControl(mailAddress, [Validators.maxLength(320)])
-      });
+      const propName = 'country';
+      this.creatorForm.controls[propName].setValidators([Validators.required, Validators.maxLength(50)]);
     } else {
       this.editContact = false;
-      this.creatorForm = new FormGroup({
-        'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
-        'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
-        'role': new FormControl(role, [Validators.required, Validators.maxLength(50)])
-      });
     }
-  }
-
-  private addContactForm(): void {
-    this.editContact = true;
-    this.creatorForm.addControl('postalCode', new FormControl('', [Validators.maxLength(50)]));
-    this.creatorForm.addControl('street', new FormControl('', [Validators.maxLength(255)]));
-    this.creatorForm.addControl('city', new FormControl('', [Validators.maxLength(50)]));
-    this.creatorForm.addControl('street', new FormControl('', [Validators.maxLength(255)]));
-    this.creatorForm.addControl('country', new FormControl('France', [Validators.required, Validators.maxLength(50)]));
-    this.creatorForm.addControl('streetNumber', new FormControl('', [Validators.maxLength(10)]));
-    this.creatorForm.addControl('phoneNumber', new FormControl('', [Validators.maxLength(50)]));
-    this.creatorForm.addControl('website', new FormControl('', [Validators.maxLength(75)]));
-    this.creatorForm.addControl('mailAddress', new FormControl('', [Validators.maxLength(320)]));
   }
 }
