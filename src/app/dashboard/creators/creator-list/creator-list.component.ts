@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Creator} from '../../../model/creator.model';
-import {CreatorsService} from '../creators.service';
+import {CreatorService} from '../creator.service';
 import {CreatorsDataService} from '../creators-data.service';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Page} from '../../../model/page.model';
@@ -17,7 +17,7 @@ export class CreatorListComponent implements OnInit {
   numberOfElementsPerPage: number;
   page: number;
 
-  constructor(private creatorsService: CreatorsService,
+  constructor(private creatorsService: CreatorService,
               private creatorsDataService: CreatorsDataService,
               private configurationService: ConfigurationService,
               private router: Router) {

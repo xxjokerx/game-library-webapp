@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {CreatorsService} from '../creators.service';
+import {CreatorService} from '../creator.service';
 import {CreatorsDataService} from '../creators-data.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Creator} from '../../../model/creator.model';
-import {CreatorRoleEnum} from '../../../model/creator-role.enum';
+import {CreatorRoleEnum} from '../../../model/enum/creator-role.enum';
 import {CountryDataService} from '../../../shared/country-data.service';
 
 @Component({
@@ -15,6 +15,7 @@ import {CountryDataService} from '../../../shared/country-data.service';
 })
 export class CreatorEditComponent implements OnInit {
   private editMode: boolean;
+  private shortMode: boolean;
   private subscription: Subscription;
   private id: number;
   creatorForm: FormGroup;
@@ -23,7 +24,7 @@ export class CreatorEditComponent implements OnInit {
   actualEnumType;
   countries: string[];
 
-  constructor(private creatorsService: CreatorsService,
+  constructor(private creatorsService: CreatorService,
               private creatorsDataService: CreatorsDataService,
               private countryDataService: CountryDataService,
               private route: ActivatedRoute,

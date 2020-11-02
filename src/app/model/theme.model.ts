@@ -1,4 +1,6 @@
-export class Theme {
+import {ModelInterface} from './interface/model.interface';
+
+export class Theme implements ModelInterface {
   name: string;
   id?: number;
 

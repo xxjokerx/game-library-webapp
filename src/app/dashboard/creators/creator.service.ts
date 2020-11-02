@@ -5,7 +5,7 @@ import {Page} from '../../model/page.model';
 @Injectable({
   providedIn: 'root'
 })
-export class CreatorsService {
+export class CreatorService {
   pagedCreators: Page<Creator>;
 
   constructor() {

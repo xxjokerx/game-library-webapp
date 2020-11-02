@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CreatorsService} from './creators.service';
+import {CreatorService} from './creator.service';
 import {HttpClient} from '@angular/common/http';
 import {Page} from '../../model/page.model';
 import {Creator} from '../../model/creator.model';
@@ -13,7 +13,7 @@ import {tap} from 'rxjs/operators';
 export class CreatorsDataService {
   apiUri: string;
 
-  constructor(private creatorsService: CreatorsService,
+  constructor(private creatorsService: CreatorService,
               private http: HttpClient,
               private configurationService: ConfigurationService) {
 
@@ -39,7 +39,12 @@ export class CreatorsDataService {
 
   removeCreator(id: number): any {
     return this.http
-      .delete(this.apiUri + '/admin/creators/' + id)
-      .subscribe();
+      .delete(this.apiUri + '/admin/creators/' + id);
+  }
+
+  removeContact(creatorId: number, contactId): any {
+    console.log('removed contact of creator: ' + creatorId + ' with id: ' + contactId);
+    return this.http
+      .delete(this.apiUri + '/admin/creators/' + creatorId + '/contact/' + contactId);
   }
 }
