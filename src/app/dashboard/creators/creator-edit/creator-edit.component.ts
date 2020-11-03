@@ -19,6 +19,7 @@ export class CreatorEditComponent implements OnInit {
   private subscription: Subscription;
   private id: number;
   creatorForm: FormGroup;
+  contactForm: FormGroup;
   rolesList: Array<string>;
   actualEnumType: typeof CreatorRoleEnum;
   label: string;
@@ -50,17 +51,13 @@ export class CreatorEditComponent implements OnInit {
 
   onAddContactForm(): void {
     this.hasContact = true;
-    this.setCountryRequired();
+    this.creatorForm.addControl('contact', this.contactForm);
   }
 
   onSubmit(): void {
     console.log(this.creatorForm.value);
     const creatorDto = this.creatorForm.value;
     console.log(creatorDto);
-    if (!this.hasContact) {
-      creatorDto.contact = undefined;
-      console.log(creatorDto);
-    }
   }
 
   onCancel(): void {
@@ -107,33 +104,30 @@ export class CreatorEditComponent implements OnInit {
       this.label = 'Création d\'un auteur';
     }
 
-    this.creatorForm = new FormGroup({
-      'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
-      'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
-      'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
+    this.contactForm = new FormGroup({
       'postalCode': new FormControl(postalCode, [Validators.maxLength(50)]),
       'street': new FormControl(street, [Validators.maxLength(255)]),
       'city': new FormControl(city, [Validators.maxLength(50)]),
-      'country': new FormControl(country, [Validators.maxLength(50)]),
+      'country': new FormControl(country, [Validators.required, Validators.maxLength(50)]),
       'streetNumber': new FormControl(streetNumber, [Validators.maxLength(10)]),
       'phoneNumber': new FormControl(phoneNumber, [Validators.maxLength(50)]),
       'website': new FormControl(website, [Validators.maxLength(75)]),
       'mailAddress': new FormControl(mailAddress, [Validators.maxLength(320)])
     });
 
+    this.creatorForm = new FormGroup({
+      'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
+      'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
+      'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
+    });
+
     if (this.hasContact) {
-      this.setCountryRequired();
+      this.creatorForm.addControl('contact', this.contactForm);
     }
   }
 
   private populateRoles(): void {
     this.rolesList = Object.keys(CreatorRoleEnum);
     this.actualEnumType = CreatorRoleEnum;
-  }
-
-  private setCountryRequired(): void {
-    const propName = 'country';
-    this.creatorForm.controls[propName].setValidators([Validators.required, Validators.maxLength(50)]);
-    // this.creatorForm.updateValueAndValidity();
   }
 }
