@@ -54,6 +54,11 @@ export class CreatorEditComponent implements OnInit {
     this.creatorForm.addControl('contact', this.contactForm);
   }
 
+  onRemoveContactForm(): void {
+    this.hasContact = false;
+    this.creatorForm.removeControl('contact');
+  }
+
   onSubmit(): void {
     console.log(this.creatorForm.value);
     const creatorDto = this.creatorForm.value;
