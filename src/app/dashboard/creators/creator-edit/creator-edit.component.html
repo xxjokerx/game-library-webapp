@@ -2,7 +2,6 @@
   [formGroup]="creatorForm"
   (ngSubmit)="onSubmit()">
   <h5>{{ label }}</h5>
-  <div>has contact = {{ hasContact }}</div>
   <div class="form-row">
 
     <div class="form-group col-md-5">
@@ -39,7 +38,7 @@
   </div>
 
   <app-contact-form
-    *ngIf="isRequested"
+    *ngIf="hasContact"
     [contactForm]="creatorForm">
   </app-contact-form>
 
@@ -60,7 +59,7 @@
       <button
         type="button"
         class="btn btn-secondary"
-        *ngIf="!isRequested"
+        *ngIf="!hasContact"
         (click)="onAddContactForm()">Ajouter les coordonnées
       </button>
     </div>
