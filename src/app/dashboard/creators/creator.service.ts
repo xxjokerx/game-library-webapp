@@ -24,4 +24,8 @@ export class CreatorService {
   }
 
 
+  updateCreators(creator: Creator): void {
+    this.pagedCreators.content = this.pagedCreators.content.filter(streamedCreator => creator.id !== streamedCreator.id);
+    this.pagedCreators.content.push(creator);
+  }
 }

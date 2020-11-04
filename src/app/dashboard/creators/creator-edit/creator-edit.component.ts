@@ -60,9 +60,18 @@ export class CreatorEditComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.creatorForm.value);
-    const creatorDto = this.creatorForm.value;
-    console.log(creatorDto);
+    const creator = this.creatorForm.value;
+
+    if (this.editMode) {
+      if (this.creatorsService.getCreatorById(this.id)
+        && this.creatorsService.getCreatorById(this.id).contact) {
+        creator.contact.id = this.creatorsService.getCreatorById(this.id).contact.id;
+      }
+
+      this.creatorsDataService.editCreator(this.id, creator);
+    } else {
+      this.creatorsDataService.addCreator(creator, this.hasContact);
+    }
   }
 
   onCancel(): void {
@@ -121,8 +130,8 @@ export class CreatorEditComponent implements OnInit {
     });
 
     this.creatorForm = new FormGroup({
-      'firstname': new FormControl(firstname, [Validators.maxLength(50)]),
-      'lastname': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
+      'firstName': new FormControl(firstname, [Validators.maxLength(50)]),
+      'lastName': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
       'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
     });
 

@@ -43,8 +43,22 @@ export class CreatorsDataService {
   }
 
   removeContact(creatorId: number, contactId): any {
-    console.log('removed contact of creator: ' + creatorId + ' with id: ' + contactId);
     return this.http
       .delete(this.apiUri + '/admin/creators/' + creatorId + '/contact/' + contactId);
+  }
+
+  editCreator(id: number, editedCreator: Creator): void {
+    this.http
+      .put<Creator>(this.apiUri + '/admin/creators/' + id, editedCreator, {responseType: 'json'})
+      .pipe(
+        tap(x => console.log(x))
+      )
+      .subscribe(creator => this.creatorsService.updateCreators(creator));
+  }
+
+  addCreator(newCreator: Creator, hasContact: boolean): void {
+    this.http
+      .post<Creator>(this.apiUri + '/admin/creators?hasContact=' + hasContact, newCreator, {responseType: 'json'})
+      .subscribe(creator => this.creatorsService.updateCreators(creator));
   }
 }

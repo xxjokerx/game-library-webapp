@@ -33,7 +33,6 @@ export class CreatorDetailComponent implements OnInit {
   }
 
   onEdit(): void {
-    this.creator.contact ? this.creatorsService.hasContact = true : this.creatorsService.hasContact = false;
     this.router.navigate(['/admin/creators/', this.creator.id, 'edit']);
   }
 

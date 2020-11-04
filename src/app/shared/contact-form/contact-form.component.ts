@@ -17,7 +17,6 @@ export class ContactFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contactForm.valueChanges.subscribe(value => console.log(value));
     if (this.countryDataService.countries.length === 0) {
       this.countryDataService.getList();
     }
