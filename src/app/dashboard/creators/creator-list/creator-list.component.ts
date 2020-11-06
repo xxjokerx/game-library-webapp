@@ -5,6 +5,7 @@ import {CreatorsDataService} from '../creators-data.service';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Page} from '../../../model/page.model';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-creator-list',
@@ -13,6 +14,7 @@ import {Router} from '@angular/router';
 })
 export class CreatorListComponent implements OnInit {
   creators: Creator[];
+  private subscription: Subscription;
   totalElements: number;
   numberOfElementsPerPage: number;
   page: number;
@@ -25,6 +27,10 @@ export class CreatorListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCreators();
+    this.subscription = this.creatorsService.pagedCreatorsChanged.subscribe((pagedCreators: Page<Creator>) => {
+      this.creators = pagedCreators.content.slice();
+      this.totalElements = pagedCreators.totalElements;
+    });
   }
 
   onRefreshList(): void {

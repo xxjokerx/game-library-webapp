@@ -50,15 +50,16 @@ export class CreatorsDataService {
   editCreator(id: number, editedCreator: Creator): void {
     this.http
       .put<Creator>(this.apiUri + '/admin/creators/' + id, editedCreator, {responseType: 'json'})
-      .pipe(
-        tap(x => console.log(x))
-      )
       .subscribe(creator => this.creatorsService.updateCreators(creator));
   }
 
   addCreator(newCreator: Creator, hasContact: boolean): void {
+    let contactParam = '';
+    if (hasContact) {
+      contactParam = '?has-contact=true';
+    }
     this.http
-      .post<Creator>(this.apiUri + '/admin/creators?hasContact=' + hasContact, newCreator, {responseType: 'json'})
+      .post<Creator>(this.apiUri + '/admin/creators' + contactParam, newCreator, {responseType: 'json'})
       .subscribe(creator => this.creatorsService.updateCreators(creator));
   }
 }

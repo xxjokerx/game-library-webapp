@@ -3,10 +3,11 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CreatorService} from '../creator.service';
 import {CreatorsDataService} from '../creators-data.service';
 import {Creator} from '../../../model/creator.model';
-import {of} from 'rxjs';
+import {of, Subscription} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
 import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
+import {Page} from '../../../model/page.model';
 
 @Component({
   selector: 'app-creator-detail',
@@ -16,6 +17,7 @@ import {ModelEnum} from '../../../model/enum/model.enum';
 export class CreatorDetailComponent implements OnInit {
   creator: Creator;
   private paramId: number;
+  private subscription: Subscription;
 
   constructor(private creatorsDataService: CreatorsDataService,
               private creatorsService: CreatorService,
@@ -29,6 +31,9 @@ export class CreatorDetailComponent implements OnInit {
       const id = 'id';
       this.paramId = +params[id];
       this.creator = this.creatorsService.getCreatorById(+this.paramId);
+    });
+    this.subscription = this.creatorsService.pagedCreatorsChanged.subscribe((pagedCreators: Page<Creator>) => {
+      this.creator = pagedCreators.content.find(creator => creator.id === this.paramId);
     });
   }
 

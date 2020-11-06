@@ -63,15 +63,17 @@ export class CreatorEditComponent implements OnInit {
     const creator = this.creatorForm.value;
 
     if (this.editMode) {
-      if (this.creatorsService.getCreatorById(this.id)
-        && this.creatorsService.getCreatorById(this.id).contact) {
-        creator.contact.id = this.creatorsService.getCreatorById(this.id).contact.id;
+      const storedCreator = this.creatorsService.getCreatorById(this.id);
+      if (storedCreator
+        && storedCreator.contact) {
+        creator.contact.id = storedCreator.contact.id;
       }
 
       this.creatorsDataService.editCreator(this.id, creator);
     } else {
       this.creatorsDataService.addCreator(creator, this.hasContact);
     }
+    this.onCancel();
   }
 
   onCancel(): void {
