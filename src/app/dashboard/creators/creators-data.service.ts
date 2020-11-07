@@ -20,13 +20,16 @@ export class CreatorsDataService {
     this.apiUri = environment.apiUrl;
   }
 
-  fetchCreators(page?: number): any {
+  fetchCreators(page?: number, keyword?: string): any {
     if (!page) {
       page = 0;
     }
-
+    let keywordParam = '';
+    if (keyword) {
+      keywordParam = '&search=' + keyword.toLowerCase();
+    }
     const size = this.configurationService.getNumberOfElements();
-    const args = '?page=' + page + '&size=' + size + '&sort=id';
+    const args = '?page=' + page + '&size=' + size + '&sort=id' + keywordParam;
 
     return this.http
       .get<Page<Creator>>(this.apiUri + '/admin/creators/page' + args, {responseType: 'json'})

@@ -6,6 +6,7 @@ import {ConfigurationService} from '../../configuration/configuration.service';
 import {Page} from '../../../model/page.model';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-creator-list',
@@ -18,6 +19,7 @@ export class CreatorListComponent implements OnInit {
   totalElements: number;
   numberOfElementsPerPage: number;
   page: number;
+  filterForm: FormGroup;
 
   constructor(private creatorsService: CreatorService,
               private creatorsDataService: CreatorsDataService,
@@ -31,6 +33,7 @@ export class CreatorListComponent implements OnInit {
       this.creators = pagedCreators.content.slice();
       this.totalElements = pagedCreators.totalElements;
     });
+    this.initForm();
   }
 
   onRefreshList(): void {
@@ -43,15 +46,31 @@ export class CreatorListComponent implements OnInit {
     this.router.navigate(['/admin/creators']);
   }
 
-  private fetchCreators(page?: number): void {
+
+  onFilter(): void {
+    this.fetchCreators(0, this.filterForm.value.keyword);
+    this.initForm();
+    this.router.navigate(['/admin/creators']);
+  }
+
+  onReset(): void {
+
+  }
+
+  private fetchCreators(page?: number, keyword?: string): void {
     if (!page) {
       page = 0;
     }
-    this.creatorsDataService.fetchCreators(page).subscribe((pagedCreators: Page<Creator>) => {
-      this.creators = pagedCreators.content;
+    this.creatorsDataService.fetchCreators(page, keyword).subscribe((pagedCreators: Page<Creator>) => {
       this.page = pagedCreators.pageable.pageNumber + 1;
       this.totalElements = pagedCreators.totalElements;
       this.numberOfElementsPerPage = this.configurationService.getNumberOfElements();
+    });
+  }
+
+  private initForm(): void {
+    this.filterForm = new FormGroup({
+      'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
   }
 }

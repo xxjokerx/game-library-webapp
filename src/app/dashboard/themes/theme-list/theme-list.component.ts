@@ -67,7 +67,6 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   private fetchThemes(page?: number, keyword?: string): void {
     this.themesDataService.fetchThemes(page, keyword).subscribe(() => {
-      console.log('theme were fetched with page: ' + page + ' and keyword: ' + keyword);
       this.page = this.themesService.pagedThemes.pageable.pageNumber + 1;
       this.totalElements = this.themesService.pagedThemes.totalElements;
       this.pageSize = this.configurationService.getNumberOfElements();
