@@ -53,8 +53,8 @@ export class CreatorListComponent implements OnInit {
     this.router.navigate(['/admin/creators']);
   }
 
-  onReset(): void {
-
+  onDelete(): void {
+    this.initForm();
   }
 
   private fetchCreators(page?: number, keyword?: string): void {
@@ -73,4 +73,6 @@ export class CreatorListComponent implements OnInit {
       'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
   }
+
+
 }
