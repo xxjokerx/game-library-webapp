@@ -18,8 +18,7 @@
       <button
         class="btn btn-secondary"
         type="button"
-        ngbTooltip="Cliquez à nouveau pour rafraîchir la liste"
-        triggers='click:blur'
+        ngbTooltip="Cliquez pour rafraîchir la liste"
         (click)="onRefreshList()">
         <img
           src="assets/refresh-cw.svg"
@@ -31,6 +30,7 @@
       <button
         class="btn btn-secondary"
         type="button"
+        ngbTooltip="Cliquez pour effacer la recherche"
         (click)="onDelete()"
         [disabled]="filterForm.invalid">
         <img
