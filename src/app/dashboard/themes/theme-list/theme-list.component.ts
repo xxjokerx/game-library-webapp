@@ -57,12 +57,8 @@ export class ThemeListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/themes']);
   }
 
-  onReset(): void {
-    if (this.filterForm.value.keyword) {
-      this.initForm();
-    } else {
-      this.onRefreshList();
-    }
+  onDelete(): void {
+    this.initForm();
   }
 
   private fetchThemes(page?: number, keyword?: string): void {
