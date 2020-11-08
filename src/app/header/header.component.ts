@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {KeycloakService} from 'keycloak-angular';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {SidebarControlService} from '../shared/sidebar-control.service';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +12,15 @@ import {environment} from '../../environments/environment';
 export class HeaderComponent implements OnInit {
   isAuthenticated: boolean;
   isAdministrator: boolean;
+// Step 1:
+  // Create a property to track whether the menu is open.
+  // Start with the menu collapsed so that it does not
+  // appear initially when the page loads on a small screen!
+  isMenuCollapsed = true;
+  setNavOpened: any;
 
   constructor(private keycloak: KeycloakService,
+              private sidebarService: SidebarControlService,
               private router: Router) {
   }
 
@@ -32,5 +40,10 @@ export class HeaderComponent implements OnInit {
 
   onLogout(): void {
     this.keycloak.logout(environment.keycloak.clientBaseUrl);
+  }
+
+  onOpenNavbar(): void {
+    this.router.navigate(['/admin']);
+    this.sidebarService.expand();
   }
 }

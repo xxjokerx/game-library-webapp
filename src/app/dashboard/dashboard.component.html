@@ -1,25 +1,32 @@
 <div class="row h-100">
-  <div class="col-md-2 bg-secondary">
+  <div
+    class="col-md-2 bg-secondary"
+    *ngIf="innerWidth >= '768' || !isSideCollapsed">
     <div class="row">
       <a
         class="nav-link text-light"
         style="cursor:pointer;"
-        routerLink="/admin/themes">Thèmes</a>
+        routerLink="/admin/themes"
+        (click)="onCollapseNavbar()">Thèmes</a>
     </div>
     <div class="row">
       <a
         class="nav-link text-light"
         style="cursor:pointer;"
-        routerLink="/admin/creators">Auteurs de jeux</a>
+        routerLink="/admin/creators"
+        (click)="onCollapseNavbar()">Auteurs de jeux</a>
     </div>
     <div class="row">
       <a
         class="nav-link text-light"
         style="cursor:pointer;"
-        routerLink="/admin/configuration">Configuration</a>
+        routerLink="/admin/configuration"
+        (click)="onCollapseNavbar()">Configuration</a>
     </div>
+    <div class="text-light">w: {{ innerWidth }}</div>
   </div>
-  <div class="col-md-10">
+  <div class="col-md-10"
+       [ngClass]="{'col-md-10': innerWidth >= '768', 'col-md-12': innerWidth < '768'}">
     <div class="y-spacer"></div>
     <router-outlet></router-outlet>
   </div>

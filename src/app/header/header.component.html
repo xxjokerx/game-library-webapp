@@ -1,12 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Index</a>
 
-  <div class="collapse navbar-collapse" id="mainNavbar">
+  <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+  <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="mainNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active">
         <a
           class="nav-link"
-          routerLink="/admin">Administration</a>
+          style="cursor:pointer;"
+          (click)="isMenuCollapsed = true; onOpenNavbar()">Administration</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a
