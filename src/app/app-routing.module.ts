@@ -11,6 +11,10 @@ import {CreatorsComponent} from './dashboard/creators/creators.component';
 import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 import {CreatorResolverService} from './dashboard/creators/creator-resolver.service';
+import {ProductLineComponent} from './dashboard/product-line/product-line.component';
+import {ProductLineListComponent} from './dashboard/product-line/product-line-list/product-line-list.component';
+import {ProductLineEditComponent} from './dashboard/product-line/product-line-edit/product-line-edit.component';
+import {ProductLineDetailComponent} from './dashboard/product-line/product-line-detail/product-line-detail.component';
 
 const routes: Routes = [
   {
@@ -35,6 +39,21 @@ const routes: Routes = [
           {path: 'new', component: CreatorEditComponent},
           {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolverService]},
           {path: ':id', component: CreatorDetailComponent, resolve: [CreatorResolverService]}
+        ]
+      },
+      {
+        path: 'product-line',
+        component: ProductLineComponent,
+        children: [
+          {
+            path: '',
+            component: ProductLineListComponent,
+            children: [
+              {path: 'new', component: ProductLineEditComponent},
+              {path: ':id/edit', component: ProductLineEditComponent},
+              {path: ':id', component: ProductLineDetailComponent}
+            ]
+          }
         ]
       },
       {

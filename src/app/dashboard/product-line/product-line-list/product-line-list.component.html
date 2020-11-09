@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Gamme</th>
+    <th scope="col">Contrôles</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let line of lines">
+    <th scope="row">{{line.id}}</th>
+    <td>{{line.name}}</td>
+    <td>
+      <a [routerLink]="['/admin/product-line', line.id, 'edit']">
+        <img src="assets/edit.svg" alt="Edit"/>
+      </a>
+      <a [routerLink]="['/admin/product-line', line.id]">
+        <img src="assets/eye.svg" alt="Detail"/>
+      </a>
+      <a (click)="onDeleteItem()"
+         style="cursor: pointer">
+        <img src="assets/trash-2.svg" alt="delete"/>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>

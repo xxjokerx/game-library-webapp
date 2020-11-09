@@ -24,6 +24,10 @@ import {ConfirmModalComponent} from './shared/confirm-modal/confirm-modal.compon
 import {EnumToValuePipe} from './shared/enum-to-value.pipe';
 import {ContactFormComponent} from './shared/contact-form/contact-form.component';
 import {SimpleFilterFormComponent} from './dashboard/shared/simple-filter-form/simple-filter-form.component';
+import {ProductLineComponent} from './dashboard/product-line/product-line.component';
+import {ProductLineListComponent} from './dashboard/product-line/product-line-list/product-line-list.component';
+import {ProductLineEditComponent} from './dashboard/product-line/product-line-edit/product-line-edit.component';
+import {ProductLineDetailComponent} from './dashboard/product-line/product-line-detail/product-line-detail.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -59,7 +63,11 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     ConfirmModalComponent,
     EnumToValuePipe,
     ContactFormComponent,
-    SimpleFilterFormComponent
+    SimpleFilterFormComponent,
+    ProductLineComponent,
+    ProductLineListComponent,
+    ProductLineEditComponent,
+    ProductLineDetailComponent
   ],
   imports: [
     BrowserModule,
