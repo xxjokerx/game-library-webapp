@@ -72,13 +72,13 @@ export class ProductLineEditComponent implements OnInit {
     if (this.editMode) {
       const line: ProductLine = this.productLineService.getProductLineById(this.id);
       lineName = line.name;
-      this.label = 'Édition du thème \"' + lineName + '\"';
+      this.label = 'Édition de la gamme \"' + lineName + '\"';
     } else {
-      this.label = 'Création d\'un thème';
+      this.label = 'Création d\'une gamme';
     }
 
     this.lineForm = new FormGroup({
-      'name': new FormControl(lineName, [Validators.required, Validators.maxLength(50)])
+      'name': new FormControl(lineName, [Validators.required, Validators.maxLength(255)])
     });
   }
 }

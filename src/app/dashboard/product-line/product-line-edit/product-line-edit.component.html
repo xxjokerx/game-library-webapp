@@ -1,1 +1,32 @@
-<p>product-line-edit works!</p>
+<form
+  [formGroup]="lineForm"
+  (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="form-group">
+        <label for="name">{{ label }}</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-12">
+      <button
+        type="submit"
+        class="btn btn-success mr-2"
+        [disabled]="!lineForm.valid">Sauvegarder
+      </button>
+      <span class="x-spacer"></span>
+      <button
+        type="button"
+        class="btn btn-warning mr-2"
+        (click)="onCancel()">Annuler
+      </button>
+    </div>
+  </div>
+</form>

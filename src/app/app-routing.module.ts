@@ -14,6 +14,7 @@ import {CreatorResolverService} from './dashboard/creators/creator-resolver.serv
 import {ProductLinesComponent} from './dashboard/product-line/product-lines.component';
 import {ProductLineEditComponent} from './dashboard/product-line/product-line-edit/product-line-edit.component';
 import {ProductLineDetailComponent} from './dashboard/product-line/product-line-detail/product-line-detail.component';
+import {ProductLineResolverService} from './dashboard/product-line/product-line-resolver.service';
 
 const routes: Routes = [
   {
@@ -45,8 +46,8 @@ const routes: Routes = [
         component: ProductLinesComponent,
         children: [
           {path: 'new', component: ProductLineEditComponent},
-          {path: ':id/edit', component: ProductLineEditComponent},
-          {path: ':id', component: ProductLineDetailComponent}
+          {path: ':id/edit', component: ProductLineEditComponent, resolve: [ProductLineResolverService]},
+          {path: ':id', component: ProductLineDetailComponent, resolve: [ProductLineResolverService]}
         ]
       },
       {
