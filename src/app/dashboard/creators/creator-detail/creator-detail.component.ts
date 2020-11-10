@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CreatorService} from '../creator.service';
-import {CreatorsDataService} from '../creators-data.service';
+import {CreatorDataService} from '../creator-data.service';
 import {Creator} from '../../../model/creator.model';
 import {of, Subscription} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class CreatorDetailComponent implements OnInit {
   private paramId: number;
   private subscription: Subscription;
 
-  constructor(private creatorsDataService: CreatorsDataService,
+  constructor(private creatorsDataService: CreatorDataService,
               private creatorsService: CreatorService,
               private route: ActivatedRoute,
               private router: Router,

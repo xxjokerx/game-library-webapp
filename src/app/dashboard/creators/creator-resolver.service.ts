@@ -4,13 +4,13 @@ import {Page} from '../../model/page.model';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {CreatorService} from './creator.service';
-import {CreatorsDataService} from './creators-data.service';
+import {CreatorDataService} from './creator-data.service';
 
 @Injectable({providedIn: 'root'})
 export class CreatorResolverService implements Resolve<Page<Creator>> {
 
   constructor(private creatorService: CreatorService,
-              private creatorDataService: CreatorsDataService) {
+              private creatorDataService: CreatorDataService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page<Creator>> | Promise<Page<Creator>> | Page<Creator> {

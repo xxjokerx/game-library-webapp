@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {ThemesService} from '../themes.service';
+import {ThemeService} from '../theme.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Theme} from '../../../model/theme.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ThemesDataService} from '../themes-data.service';
+import {ThemeDataService} from '../theme-data.service';
 
 @Component({
   selector: 'app-theme-edit',
@@ -18,8 +18,8 @@ export class ThemeEditComponent implements OnInit {
   themeForm: FormGroup;
   label: string;
 
-  constructor(private themesService: ThemesService,
-              private themesDataService: ThemesDataService,
+  constructor(private themesService: ThemeService,
+              private themesDataService: ThemeDataService,
               private route: ActivatedRoute,
               private router: Router) {
   }

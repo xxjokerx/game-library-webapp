@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ThemesService} from '../themes.service';
-import {ThemesDataService} from '../themes-data.service';
+import {ThemeService} from '../theme.service';
+import {ThemeDataService} from '../theme-data.service';
 import {Theme} from '../../../model/theme.model';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
@@ -22,8 +22,8 @@ export class ThemeListComponent implements OnInit, OnDestroy {
   pageSize: number;
   filterForm: FormGroup;
 
-  constructor(private themesService: ThemesService,
-              private themesDataService: ThemesDataService,
+  constructor(private themesService: ThemeService,
+              private themesDataService: ThemeDataService,
               private configurationService: ConfigurationService,
               private router: Router) {
   }

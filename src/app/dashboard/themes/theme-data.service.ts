@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ThemesService} from './themes.service';
+import {ThemeService} from './theme.service';
 import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
 import {Theme} from '../../model/theme.model';
@@ -9,14 +9,14 @@ import {Observable} from 'rxjs';
 import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
-export class ThemesDataService {
+export class ThemeDataService {
   private readonly apiUri: string;
 
   constructor(private http: HttpClient,
-              private themesService: ThemesService,
+              private themesService: ThemeService,
               private configurationService: ConfigurationService) {
 
-    this.apiUri = environment.apiUrl;
+    this.apiUri = environment.apiUri;
   }
 
 

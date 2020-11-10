@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
-export class ThemesService {
+export class ThemeService {
   pagedThemes: Page<Theme>;
   pagedThemesChanged = new Subject<Page<Theme>>();
 

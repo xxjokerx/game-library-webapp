@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Creator} from '../../../model/creator.model';
 import {CreatorService} from '../creator.service';
-import {CreatorsDataService} from '../creators-data.service';
+import {CreatorDataService} from '../creator-data.service';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Page} from '../../../model/page.model';
 import {Router} from '@angular/router';
@@ -17,12 +17,12 @@ export class CreatorListComponent implements OnInit {
   creators: Creator[];
   private subscription: Subscription;
   totalElements: number;
-  numberOfElementsPerPage: number;
+  pageSize: number;
   page: number;
   filterForm: FormGroup;
 
   constructor(private creatorsService: CreatorService,
-              private creatorsDataService: CreatorsDataService,
+              private creatorsDataService: CreatorDataService,
               private configurationService: ConfigurationService,
               private router: Router) {
   }
@@ -58,13 +58,10 @@ export class CreatorListComponent implements OnInit {
   }
 
   private fetchCreators(page?: number, keyword?: string): void {
-    if (!page) {
-      page = 0;
-    }
     this.creatorsDataService.fetchCreators(page, keyword).subscribe((pagedCreators: Page<Creator>) => {
       this.page = pagedCreators.pageable.pageNumber + 1;
       this.totalElements = pagedCreators.totalElements;
-      this.numberOfElementsPerPage = this.configurationService.getNumberOfElements();
+      this.pageSize = this.configurationService.getNumberOfElements();
     });
   }
 

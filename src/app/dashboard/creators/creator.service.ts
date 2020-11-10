@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
 })
 export class CreatorService {
   pagedCreators: Page<Creator>;
-  pagedCreatorsChanged = new Subject<Page<Creator>>();
+  pagedCreatorsChanged: Subject<Page<Creator>> = new Subject<Page<Creator>>();
 
   constructor() {
   }
@@ -19,13 +19,12 @@ export class CreatorService {
   }
 
   getCreatorById(id: number): Creator {
-    return this.getCreator().find(creator => creator.id === id);
+    return this.getCreators().find(creator => creator.id === id);
   }
 
-  private getCreator(): Creator[] {
+  private getCreators(): Creator[] {
     return this.pagedCreators.content.slice();
   }
-
 
   updateCreators(creator: Creator): void {
     this.pagedCreators.content = this.pagedCreators.content.filter(streamedCreator => creator.id !== streamedCreator.id);

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CreatorService} from '../creator.service';
-import {CreatorsDataService} from '../creators-data.service';
+import {CreatorDataService} from '../creator-data.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -25,7 +25,7 @@ export class CreatorEditComponent implements OnInit {
   label: string;
 
   constructor(private creatorsService: CreatorService,
-              private creatorsDataService: CreatorsDataService,
+              private creatorsDataService: CreatorDataService,
               private countryDataService: CountryDataService,
               private route: ActivatedRoute,
               private router: Router) {

@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Theme} from '../../../model/theme.model';
-import {ThemesService} from '../themes.service';
+import {ThemeService} from '../theme.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {of, Subscription} from 'rxjs';
-import {ThemesDataService} from '../themes-data.service';
+import {ThemeDataService} from '../theme-data.service';
 import {Page} from '../../../model/page.model';
 import {concatMap} from 'rxjs/operators';
 import {ConfirmModalComponent} from '../../../shared/confirm-modal/confirm-modal.component';
@@ -19,8 +19,8 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   private paramId: number;
   private subscription: Subscription;
 
-  constructor(private themesService: ThemesService,
-              private themeDataService: ThemesDataService,
+  constructor(private themesService: ThemeService,
+              private themeDataService: ThemeDataService,
               private route: ActivatedRoute,
               private router: Router,
               private modalService: NgbModal) {

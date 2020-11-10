@@ -10,14 +10,14 @@ import {tap} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CreatorsDataService {
+export class CreatorDataService {
   apiUri: string;
 
   constructor(private creatorsService: CreatorService,
               private http: HttpClient,
               private configurationService: ConfigurationService) {
 
-    this.apiUri = environment.apiUrl;
+    this.apiUri = environment.apiUri;
   }
 
   fetchCreators(page?: number, keyword?: string): any {
@@ -29,10 +29,10 @@ export class CreatorsDataService {
       keywordParam = '&search=' + keyword.toLowerCase();
     }
     const size = this.configurationService.getNumberOfElements();
-    const args = '?page=' + page + '&size=' + size + '&sort=id' + keywordParam;
+    const params = '?page=' + page + '&size=' + size + '&sort=id' + keywordParam;
 
     return this.http
-      .get<Page<Creator>>(this.apiUri + '/admin/creators/page' + args, {responseType: 'json'})
+      .get<Page<Creator>>(this.apiUri + '/admin/creators/page' + params, {responseType: 'json'})
       .pipe(
         tap(pagedCreators => {
           this.creatorsService.setPagedCreators(pagedCreators);

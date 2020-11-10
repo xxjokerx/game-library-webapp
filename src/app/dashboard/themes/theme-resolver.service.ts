@@ -1,16 +1,16 @@
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {ThemesDataService} from './themes-data.service';
-import {ThemesService} from './themes.service';
+import {ThemeDataService} from './theme-data.service';
+import {ThemeService} from './theme.service';
 import {Injectable} from '@angular/core';
 import {Theme} from '../../model/theme.model';
 import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
-export class ThemesResolverService implements Resolve<Page<Theme>> {
+export class ThemeResolverService implements Resolve<Page<Theme>> {
 
-  constructor(private themesDataService: ThemesDataService,
-              private themesService: ThemesService) {
+  constructor(private themesDataService: ThemeDataService,
+              private themesService: ThemeService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Page<Theme>> | Promise<Page<Theme>> | Page<Theme> {
