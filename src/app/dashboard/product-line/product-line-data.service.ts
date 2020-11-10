@@ -36,4 +36,16 @@ export class ProductLineDataService {
         })
       );
   }
+
+  removeTheme(id: number): any {
+    return this.http.delete(this.apiUri + '/admin/product-lines/' + id);
+  }
+
+  editLine(id: number, newLine: ProductLine): any {
+    return this.http.put<ProductLine>(this.apiUri + '/admin/product-lines/' + id, newLine, {responseType: 'json'});
+  }
+
+  addLine(newLine: ProductLine): any {
+    return this.http.post<ProductLine>(this.apiUri + '/admin/product-lines', newLine, {responseType: 'json'});
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ProductLineService} from '../product-line.service';
@@ -13,24 +13,12 @@ import {Subscription} from 'rxjs';
   templateUrl: './product-line-list.component.html',
   styleUrls: ['./product-line-list.component.css']
 })
-export class ProductLineListComponent implements OnInit {
-
-  linesStatic = [
-    {id: 0, name: 'Chtulu'},
-    {id: 1, name: 'Warhammer'},
-    {id: 2, name: 'Carcassonne'},
-    {id: 3, name: 'Clank'},
-    {id: 4, name: 'King domino'},
-    {id: 5, name: 'Chess'},
-    {id: 6, name: 'Captain sonar'},
-    {id: 7, name: 'Agricola'},
-    {id: 8, name: 'Test'}
-  ];
+export class ProductLineListComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
   totalElements: number;
   pageSize: number;
   page: number;
-  subscription: Subscription;
+  private subscription: Subscription;
   lines: ProductLine[];
 
   constructor(private productLineService: ProductLineService,
@@ -47,6 +35,10 @@ export class ProductLineListComponent implements OnInit {
       this.totalElements = pagedLines.totalElements;
     });
     this.initForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onRefreshList(): void {

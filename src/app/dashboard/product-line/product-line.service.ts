@@ -13,7 +13,7 @@ export class ProductLineService {
     this.pagedLinesChanged.next(this.pagedLines);
   }
 
-  getCreatorById(id: number): ProductLine {
+  getProductLineById(id: number): ProductLine {
     return this.getProductLines().find(creator => creator.id === id);
   }
 

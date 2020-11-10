@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Creator} from '../../../model/creator.model';
 import {CreatorService} from '../creator.service';
 import {CreatorDataService} from '../creator-data.service';
@@ -13,7 +13,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './creator-list.component.html',
   styleUrls: ['./creator-list.component.css']
 })
-export class CreatorListComponent implements OnInit {
+export class CreatorListComponent implements OnInit, OnDestroy {
   creators: Creator[];
   private subscription: Subscription;
   totalElements: number;
@@ -34,6 +34,10 @@ export class CreatorListComponent implements OnInit {
       this.totalElements = pagedCreators.totalElements;
     });
     this.initForm();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onRefreshList(): void {
@@ -70,6 +74,4 @@ export class CreatorListComponent implements OnInit {
       'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
   }
-
-
 }

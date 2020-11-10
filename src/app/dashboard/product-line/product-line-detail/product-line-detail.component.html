@@ -1,1 +1,16 @@
-<p>product-line-detail works!</p>
+<div class="row">
+  <h4>{{ line.name }}</h4>
+</div>
+<div class="row">
+  <button
+    class="btn btn-secondary"
+    type="button"
+    (click)="onEdit()">Éditer cette gamme
+  </button>
+  <span class="x-spacer"></span>
+  <button
+    class="btn btn-danger"
+    type="button"
+    (click)="onOpenConfirm()">Supprimer cette gamme
+  </button>
+</div>

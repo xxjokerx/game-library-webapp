@@ -32,8 +32,7 @@
     </div>
     <div class="text-light">w: {{ innerWidth }}</div>
   </div>
-  <div class="col-md-8"
-       [ngClass]="{'col-md-10': innerWidth >= '768', 'col-md-12': innerWidth < '768'}">
+  <div [ngClass]="{'col-md-10': innerWidth >= '768', 'col-md-12': innerWidth < '768'}">
     <div class="y-spacer"></div>
     <router-outlet></router-outlet>
   </div>
