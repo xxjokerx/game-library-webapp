@@ -6,8 +6,8 @@ import {of, Subscription} from 'rxjs';
 import {ThemeDataService} from '../theme-data.service';
 import {Page} from '../../../model/page.model';
 import {concatMap} from 'rxjs/operators';
-import {ConfirmModalComponent} from '../../../shared/confirm-modal/confirm-modal.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {ModelEnum} from '../../../model/enum/model.enum';
 
 @Component({
   selector: 'app-theme-detail',
@@ -23,7 +23,7 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
               private themeDataService: ThemeDataService,
               private route: ActivatedRoute,
               private router: Router,
-              private modalService: NgbModal) {
+              private deletionHandlerService: DeletionHandlerService) {
   }
 
   ngOnInit(): void {
@@ -59,10 +59,7 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   }
 
   onOpenConfirm(): void {
-    const modalRef = this.modalService.open(ConfirmModalComponent);
-    modalRef.componentInstance.deletedObjectType = 'le thème';
-    modalRef.componentInstance.deletedObjectName = this.theme.name;
-    modalRef.result
+    this.deletionHandlerService.callModal(ModelEnum.THEME, this.theme, false)
       .then(value => {
         if (value === 'Ok click') {
           this.onDelete();

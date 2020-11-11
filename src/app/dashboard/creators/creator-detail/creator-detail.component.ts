@@ -47,7 +47,7 @@ export class CreatorDetailComponent implements OnInit {
       chosenEnum = ModelEnum.CONTACT;
     }
 
-    this.deletionHandlerService.callModal(chosenEnum, this.creator)
+    this.deletionHandlerService.callModal(chosenEnum, this.creator, true)
       .then(value => {
         if (value === 'Ok click') {
           this.onDelete(isCreatorDeletion);

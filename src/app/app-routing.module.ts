@@ -15,6 +15,9 @@ import {ProductLinesComponent} from './dashboard/product-line/product-lines.comp
 import {ProductLineEditComponent} from './dashboard/product-line/product-line-edit/product-line-edit.component';
 import {ProductLineDetailComponent} from './dashboard/product-line/product-line-detail/product-line-detail.component';
 import {ProductLineResolverService} from './dashboard/product-line/product-line-resolver.service';
+import {PublishersComponent} from './dashboard/publishers/publishers.component';
+import {PublisherEditComponent} from './dashboard/publishers/publisher-edit/publisher-edit.component';
+import {PublisherDetailComponent} from './dashboard/publishers/publisher-detail/publisher-detail.component';
 
 const routes: Routes = [
   {
@@ -48,6 +51,15 @@ const routes: Routes = [
           {path: 'new', component: ProductLineEditComponent},
           {path: ':id/edit', component: ProductLineEditComponent, resolve: [ProductLineResolverService]},
           {path: ':id', component: ProductLineDetailComponent, resolve: [ProductLineResolverService]}
+        ]
+      },
+      {
+        path: 'publishers',
+        component: PublishersComponent,
+        children: [
+          {path: 'new', component: PublisherEditComponent},
+          {path: ':id/edit', component: PublisherEditComponent, resolve: []},
+          {path: ':id', component: PublisherDetailComponent, resolve: []}
         ]
       },
       {

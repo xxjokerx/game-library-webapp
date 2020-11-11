@@ -10,12 +10,10 @@ export class SidebarControlService {
   }
 
   expand(): void {
-    console.log('this.isCollapseSubject.next(false);');
     this.isCollapseSubject.next(false);
   }
 
   collapse(): void {
-    console.log('this.isCollapseSubject.next(true);');
     this.isCollapseSubject.next(true);
   }
 }

@@ -28,6 +28,10 @@ import {ProductLinesComponent} from './dashboard/product-line/product-lines.comp
 import {ProductLineListComponent} from './dashboard/product-line/product-line-list/product-line-list.component';
 import {ProductLineEditComponent} from './dashboard/product-line/product-line-edit/product-line-edit.component';
 import {ProductLineDetailComponent} from './dashboard/product-line/product-line-detail/product-line-detail.component';
+import {PublishersComponent} from './dashboard/publishers/publishers.component';
+import {PublisherListComponent} from './dashboard/publishers/publisher-list/publisher-list.component';
+import {PublisherDetailComponent} from './dashboard/publishers/publisher-detail/publisher-detail.component';
+import {PublisherEditComponent} from './dashboard/publishers/publisher-edit/publisher-edit.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -67,7 +71,11 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     ProductLinesComponent,
     ProductLineListComponent,
     ProductLineEditComponent,
-    ProductLineDetailComponent
+    ProductLineDetailComponent,
+    PublishersComponent,
+    PublisherListComponent,
+    PublisherDetailComponent,
+    PublisherEditComponent
   ],
   imports: [
     BrowserModule,
