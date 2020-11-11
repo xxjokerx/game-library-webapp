@@ -22,17 +22,17 @@
 </div>
 <div class="row mb-3">
   <button
-    class="btn btn-secondary mr-2"
+    class="btn btn-secondary mr-2 mb-2"
     type="button"
     (click)="onEdit()">Éditer cet auteur
   </button>
   <button
-    class="btn btn-danger mr-2"
+    class="btn btn-danger mr-2 mb-2"
     type="button"
     (click)="onOpenConfirm(true)">Supprimer cet auteur
   </button>
   <button
-    class="btn btn-outline-danger"
+    class="btn btn-outline-danger  mb-2"
     type="button"
     *ngIf="creator.contact"
     (click)="onOpenConfirm(false)">Supprimer uniquement les coordonnées
