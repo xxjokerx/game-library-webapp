@@ -59,8 +59,8 @@ export class PublisherDetailComponent implements OnInit {
   onDelete(isPublisherDeletion: boolean): void {
     if (isPublisherDeletion) {
 
-      const myObs = of(this.publisher.id);
-      myObs.pipe(
+      const observable = of(this.publisher.id);
+      observable.pipe(
         concatMap(id => {
           return this.publisherDataService.removePublisher(id);
         }),
@@ -70,8 +70,8 @@ export class PublisherDetailComponent implements OnInit {
       ).subscribe();
     } else {
 
-      const myObs = of(this.publisher.contact.id);
-      myObs.pipe(
+      const observable = of(this.publisher.contact.id);
+      observable.pipe(
         concatMap(id => {
           return this.publisherDataService.removeContact(this.publisher.id, id);
         }),
