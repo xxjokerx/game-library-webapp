@@ -14,7 +14,11 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <span class="form-text"
+        *ngIf="!themeForm.pristine && themeForm.hasError('nameAlreadyExists', 'name')">
+  <span>Ce thème existe déjà en base de données</span>
+  </span>
+  <div class="row ">
     <div class="col-xl-12">
       <button
         type="submit"

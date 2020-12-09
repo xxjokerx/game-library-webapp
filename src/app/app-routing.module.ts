@@ -32,7 +32,11 @@ const routes: Routes = [
         component: ThemesComponent,
         children: [
           {path: 'new', component: ThemeEditComponent, resolve: {existingThemes: ExistingThemesResolverService}},
-          {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolverService]},
+          {
+            path: ':id/edit',
+            component: ThemeEditComponent,
+            resolve: [ThemeResolverService, ExistingThemesResolverService]
+          },
           {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolverService]}
         ]
       },
