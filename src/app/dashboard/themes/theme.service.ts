@@ -7,9 +7,24 @@ import {Page} from '../../model/page.model';
 export class ThemeService {
   pagedThemes: Page<Theme>;
   pagedThemesChanged = new Subject<Page<Theme>>();
+  existingThemes: Theme[];
 
   constructor() {
   }
+
+  setNames(themes: Theme[]): void {
+    this.existingThemes = themes.slice();
+    console.table(this.existingThemes);
+  }
+
+  getExistingThemes(): string[] {
+    const themeAsList: string[] = [];
+    this.existingThemes.forEach((theme: Theme) => {
+      themeAsList.push(theme.name.toLowerCase());
+    });
+    return themeAsList;
+  }
+
 
   setPagedThemes(pagedThemes: Page<Theme>): void {
     this.pagedThemes = pagedThemes;

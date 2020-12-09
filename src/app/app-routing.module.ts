@@ -18,6 +18,7 @@ import {ProductLineResolverService} from './dashboard/product-line/product-line-
 import {PublishersComponent} from './dashboard/publishers/publishers.component';
 import {PublisherEditComponent} from './dashboard/publishers/publisher-edit/publisher-edit.component';
 import {PublisherDetailComponent} from './dashboard/publishers/publisher-detail/publisher-detail.component';
+import {ExistingThemesResolverService} from './dashboard/themes/existing-themes-resolver.service';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
         path: 'themes',
         component: ThemesComponent,
         children: [
-          {path: 'new', component: ThemeEditComponent},
+          {path: 'new', component: ThemeEditComponent, resolve: {existingThemes: ExistingThemesResolverService}},
           {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolverService]},
           {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolverService]}
         ]

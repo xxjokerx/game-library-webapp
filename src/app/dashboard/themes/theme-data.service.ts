@@ -19,6 +19,15 @@ export class ThemeDataService {
     this.apiUri = environment.apiUri;
   }
 
+  fetchNames(): Observable<Theme[]> {
+    return this.http
+      .get<Theme[]>(this.apiUri + '/admin/themes', {responseType: 'json'})
+      .pipe(
+        tap(themes => {
+          this.themesService.setNames(themes);
+        })
+      );
+  }
 
   fetchThemes(page?: number, keyword?: string): Observable<Page<Theme>> {
     if (!page) {

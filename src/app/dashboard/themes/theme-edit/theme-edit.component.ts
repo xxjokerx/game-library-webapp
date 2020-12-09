@@ -17,6 +17,7 @@ export class ThemeEditComponent implements OnInit {
   private id: number;
   themeForm: FormGroup;
   label: string;
+  existingThemes = ['celica', 'toyota'];
 
   constructor(private themesService: ThemeService,
               private themesDataService: ThemeDataService,
@@ -74,12 +75,22 @@ export class ThemeEditComponent implements OnInit {
       themeName = theme.name;
       this.label = 'Édition du thème \"' + themeName + '\"';
     } else {
+      this.existingThemes = this.themesService.getExistingThemes();
       this.label = 'Création d\'un thème';
     }
 
     this.themeForm = new FormGroup({
-      'name': new FormControl(themeName, [Validators.required, Validators.maxLength(50)])
+      'name': new FormControl(themeName, [
+        Validators.required,
+        Validators.maxLength(50),
+        this.nameAlreadyExists.bind(this)])
     });
   }
 
+  nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
+    if (this.existingThemes.indexOf(control.value.toLowerCase()) !== -1 && !this.editMode) {
+      return {'nameAlreadyExists': true};
+    }
+    return null;
+  }
 }
