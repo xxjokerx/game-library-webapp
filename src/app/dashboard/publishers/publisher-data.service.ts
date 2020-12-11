@@ -6,6 +6,7 @@ import {Page} from '../../model/page.model';
 import {Publisher} from '../../model/publisher.model';
 import {tap} from 'rxjs/operators';
 import {PublisherService} from './publisher.service';
+import {ImpersonalInterface} from '../../model/interface/impersonal.interface';
 
 @Injectable({providedIn: 'root'})
 export class PublisherDataService {
@@ -16,6 +17,16 @@ export class PublisherDataService {
               private configurationService: ConfigurationService) {
 
     this.apiUri = environment.apiUri;
+  }
+
+  fetchNames(): any {
+    return this.http
+      .get<ImpersonalInterface[]>(this.apiUri + '/admin/publishers/names', {responseType: 'json'})
+      .pipe(
+        tap(names => {
+          this.publishersService.setNames(names);
+        })
+      );
   }
 
   fetchPublishers(page?: number, keyword?: string): any {

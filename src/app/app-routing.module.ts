@@ -19,6 +19,8 @@ import {PublishersComponent} from './dashboard/publishers/publishers.component';
 import {PublisherEditComponent} from './dashboard/publishers/publisher-edit/publisher-edit.component';
 import {PublisherDetailComponent} from './dashboard/publishers/publisher-detail/publisher-detail.component';
 import {ExistingThemesResolverService} from './dashboard/themes/existing-themes-resolver.service';
+import {PublishersNamesResolver} from './dashboard/publishers/publishers-names-resolver.service';
+import {PublishersResolverService} from './dashboard/publishers/publishers-resolver.service';
 
 const routes: Routes = [
   {
@@ -62,9 +64,9 @@ const routes: Routes = [
         path: 'publishers',
         component: PublishersComponent,
         children: [
-          {path: 'new', component: PublisherEditComponent},
-          {path: ':id/edit', component: PublisherEditComponent, resolve: []},
-          {path: ':id', component: PublisherDetailComponent, resolve: []}
+          {path: 'new', component: PublisherEditComponent, resolve: [PublishersNamesResolver]},
+          {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolverService]},
+          {path: ':id', component: PublisherDetailComponent, resolve: [PublishersResolverService]}
         ]
       },
       {

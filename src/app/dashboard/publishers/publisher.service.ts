@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {Page} from '../../model/page.model';
 import {Subject} from 'rxjs';
 import {Publisher} from '../../model/publisher.model';
+import {ImpersonalInterface} from '../../model/interface/impersonal.interface';
 
 @Injectable({providedIn: 'root'})
 export class PublisherService {
   pagedPublishers: Page<Publisher>;
   pagedPublishersChanged: Subject<Page<Publisher>> = new Subject<Page<Publisher>>();
+  existingNames: string[] = [];
 
   constructor() {
   }
@@ -29,5 +31,16 @@ export class PublisherService {
     this.pagedPublishers.content.push(publisher);
 
     this.pagedPublishersChanged.next(this.pagedPublishers);
+  }
+
+  setNames(nameList: ImpersonalInterface[]): void {
+    nameList.forEach(publisher => {
+      console.log(publisher.name);
+      this.existingNames.push(publisher.name.toLowerCase().trim());
+    });
+  }
+
+  getExistingNames(): string[] {
+    return this.existingNames;
   }
 }

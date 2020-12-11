@@ -120,11 +120,18 @@ export class PublisherEditComponent implements OnInit {
     });
 
     this.publisherForm = new FormGroup({
-      'name': new FormControl(name, [Validators.maxLength(255)])
+      'name': new FormControl(name, [Validators.maxLength(255), this.nameAlreadyExists.bind(this)])
     });
 
     if (this.hasContact) {
       this.publisherForm.addControl('contact', this.contactForm);
     }
+  }
+
+  nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
+    if (this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1) {
+      return {'nameAlreadyExists': true};
+    }
+    return null;
   }
 }
