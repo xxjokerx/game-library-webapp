@@ -19,9 +19,8 @@ export class ThemeService {
 
   getExistingThemes(): string[] {
     const themeAsList: string[] = [];
-    this.existingThemes.forEach((theme: Theme) => {
-      themeAsList.push(theme.name.toLowerCase().trim());
-    });
+    this.existingThemes.forEach((theme: Theme) =>
+      themeAsList.push(theme.name.toLowerCase().trim()));
     return themeAsList;
   }
 

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {Theme} from '../../model/theme.model';
 
 @Injectable({providedIn: 'root'})
-export class ExistingThemesResolverService implements Resolve<Theme[]> {
+export class ExistingThemesResolver implements Resolve<Theme[]> {
 
   constructor(private themesDataService: ThemeDataService) {
   }

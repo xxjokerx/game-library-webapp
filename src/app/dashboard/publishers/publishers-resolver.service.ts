@@ -7,7 +7,7 @@ import {Page} from '../../model/page.model';
 import {Publisher} from '../../model/publisher.model';
 
 @Injectable({providedIn: 'root'})
-export class PublishersResolverService implements Resolve<Page<Publisher>> {
+export class PublishersResolver implements Resolve<Page<Publisher>> {
 
   constructor(private dataService: PublisherDataService,
               private service: PublisherService) {

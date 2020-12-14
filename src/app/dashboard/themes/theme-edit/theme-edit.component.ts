@@ -97,6 +97,8 @@ export class ThemeEditComponent implements OnInit {
         this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1
       )
       || (
+        this.editMode
+        &&
         control.value.toLowerCase().trim() !== this.themesService.getThemeById(this.id).name.toLowerCase().trim()
         &&
         this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1

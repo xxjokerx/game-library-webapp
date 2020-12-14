@@ -7,7 +7,7 @@ import {ProductLineDataService} from './product-line-data.service';
 import {ProductLine} from '../../model/product-line.model';
 
 @Injectable({providedIn: 'root'})
-export class ProductLineResolverService implements Resolve<Page<ProductLine>> {
+export class ProductLineResolver implements Resolve<Page<ProductLine>> {
   constructor(private productLineService: ProductLineService,
               private productLineDataService: ProductLineDataService) {
   }

@@ -120,7 +120,7 @@ export class PublisherEditComponent implements OnInit {
     });
 
     this.publisherForm = new FormGroup({
-      'name': new FormControl(name, [Validators.maxLength(255), this.nameAlreadyExists.bind(this)])
+      'name': new FormControl(name, [Validators.required, Validators.maxLength(255), this.nameAlreadyExists.bind(this)])
     });
 
     if (this.hasContact) {
@@ -136,6 +136,8 @@ export class PublisherEditComponent implements OnInit {
         this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1
       )
       || (
+        this.editMode
+        &&
         control.value.toLowerCase().trim() !== this.publishersService.getPublisherById(this.id).name.toLowerCase().trim()
         &&
         this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1

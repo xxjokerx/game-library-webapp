@@ -33,10 +33,8 @@ export class PublisherService {
     this.pagedPublishersChanged.next(this.pagedPublishers);
   }
 
-  setNames(nameList: ImpersonalInterface[]): void {
-    nameList.forEach(publisher => {
-      this.existingNames.push(publisher.name.toLowerCase().trim());
-    });
+  setNames(names: ImpersonalInterface[]): void {
+    names.forEach(publisher => this.existingNames.push(publisher.name.toLowerCase().trim()));
   }
 
   getExistingNames(): string[] {
