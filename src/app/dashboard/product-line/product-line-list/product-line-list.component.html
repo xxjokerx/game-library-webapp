@@ -17,16 +17,16 @@
   [pageSize]="pageSize"
   [(page)]="page"
   (pageChange)="onPageChange()"></ngb-pagination>
-<div class="y-spacer"></div>
+
 <hr/>
-<div class="y-spacer"></div>
+
 <button
-  class="btn btn-secondary mr-2"
+  class="btn btn-secondary mr-2 mb-2"
   type="button"
   routerLink="/admin/product-lines/new">Nouveau thème
 </button>
 <button
-  class="btn btn-secondary"
+  class="btn btn-secondary mr-2 mb-2"
   type="button"
   (click)="onRefreshList()">Rafraichir la liste
 </button>

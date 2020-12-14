@@ -89,7 +89,19 @@ export class ThemeEditComponent implements OnInit {
   }
 
   nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
-    if (this.existingThemes.indexOf(control.value.toLowerCase().trim()) !== -1) {
+    /* We need spit the case edit mode or not to allow save the current edited name */
+    if (
+      (
+        !this.editMode
+        &&
+        this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+      || (
+        control.value.toLowerCase().trim() !== this.themesService.getThemeById(this.id).name.toLowerCase().trim()
+        &&
+        this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+    ) {
       return {'nameAlreadyExists': true};
     }
     return null;

@@ -129,7 +129,18 @@ export class PublisherEditComponent implements OnInit {
   }
 
   nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
-    if (this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1) {
+    /* We need spit the case edit mode or not to allow save the current edited name */
+    if ((
+        !this.editMode
+        &&
+        this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+      || (
+        control.value.toLowerCase().trim() !== this.publishersService.getPublisherById(this.id).name.toLowerCase().trim()
+        &&
+        this.publishersService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+    ) {
       return {'nameAlreadyExists': true};
     }
     return null;

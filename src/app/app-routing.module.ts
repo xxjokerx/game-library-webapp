@@ -65,7 +65,7 @@ const routes: Routes = [
         component: PublishersComponent,
         children: [
           {path: 'new', component: PublisherEditComponent, resolve: [PublishersNamesResolver]},
-          {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolverService]},
+          {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolverService, PublishersNamesResolver]},
           {path: ':id', component: PublisherDetailComponent, resolve: [PublishersResolverService]}
         ]
       },

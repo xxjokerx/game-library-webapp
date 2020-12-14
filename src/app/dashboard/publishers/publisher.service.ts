@@ -35,7 +35,6 @@ export class PublisherService {
 
   setNames(nameList: ImpersonalInterface[]): void {
     nameList.forEach(publisher => {
-      console.log(publisher.name);
       this.existingNames.push(publisher.name.toLowerCase().trim());
     });
   }

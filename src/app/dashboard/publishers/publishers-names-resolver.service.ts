@@ -14,6 +14,4 @@ export class PublishersNamesResolver implements Resolve<ImpersonalInterface[]> {
     Observable<ImpersonalInterface[]> | Promise<ImpersonalInterface[]> | ImpersonalInterface[] {
     return this.dataService.fetchNames();
   }
-
-
 }
