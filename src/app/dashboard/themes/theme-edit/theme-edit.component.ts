@@ -35,7 +35,6 @@ export class ThemeEditComponent implements OnInit {
         } else {
           this.editMode = false;
         }
-        this.existingThemes = this.themesService.getExistingThemes();
         this.initFrom();
       }
     );

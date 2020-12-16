@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Creator} from '../../model/creator.model';
 import {Page} from '../../model/page.model';
 import {Subject} from 'rxjs';
+import {Person} from '../../model/interface/person.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Subject} from 'rxjs';
 export class CreatorService {
   pagedCreators: Page<Creator>;
   pagedCreatorsChanged: Subject<Page<Creator>> = new Subject<Page<Creator>>();
+  existingNames: Person[];
 
   constructor() {
   }
@@ -16,6 +18,10 @@ export class CreatorService {
   setPagedCreators(pagedCreators: Page<Creator>): void {
     this.pagedCreators = pagedCreators;
     this.pagedCreatorsChanged.next(this.pagedCreators);
+  }
+
+  getExistingNames(): Person[] {
+    return this.existingNames;
   }
 
   getCreatorById(id: number): Creator {
@@ -31,5 +37,14 @@ export class CreatorService {
     this.pagedCreators.content.push(creator);
 
     this.pagedCreatorsChanged.next(this.pagedCreators);
+  }
+
+  setNames(names: Person[]): void {
+    names.forEach(value => {
+      value.lastName = value.lastName.toLowerCase().trim();
+      value.firstName = value.firstName.toLowerCase().trim();
+    });
+    console.table(names);
+    this.existingNames = names.slice();
   }
 }

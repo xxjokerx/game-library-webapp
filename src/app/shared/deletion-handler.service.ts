@@ -4,7 +4,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Creator} from '../model/creator.model';
 import {ModelEnum} from '../model/enum/model.enum';
 import {ModelInterface} from '../model/interface/model.interface';
-import {PersonInterface} from '../model/interface/person.interface';
+import {Person} from '../model/interface/person.interface';
 import {ImpersonalInterface} from '../model/interface/impersonal.interface';
 
 @Injectable({providedIn: 'root'})
@@ -21,7 +21,7 @@ export class DeletionHandlerService {
       case ModelEnum.CONTACT: {
         if (isAPerson) {
           objectType = 'les coordonnées associées à cette personne';
-          objectName = (associatedModel as PersonInterface).firstName + ' ' + (associatedModel as PersonInterface).lastName;
+          objectName = (associatedModel as Person).firstName + ' ' + (associatedModel as Person).lastName;
         } else {
           objectType = 'les coordonnées associées à cette entité';
           objectName = (associatedModel as ImpersonalInterface).name;
@@ -30,7 +30,7 @@ export class DeletionHandlerService {
       }
       case ModelEnum.CREATOR: {
         objectType = 'l\'auteur';
-        objectName = (associatedModel as PersonInterface).firstName + ' ' + (associatedModel as Creator).lastName;
+        objectName = (associatedModel as Person).firstName + ' ' + (associatedModel as Creator).lastName;
         break;
       }
       case ModelEnum.THEME: {

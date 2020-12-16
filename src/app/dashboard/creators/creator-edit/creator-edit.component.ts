@@ -3,7 +3,7 @@ import {CreatorService} from '../creator.service';
 import {CreatorDataService} from '../creator-data.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Creator} from '../../../model/creator.model';
 import {CreatorRoleEnum} from '../../../model/enum/creator-role.enum';
 import {CountryDataService} from '../../../shared/country-data.service';
@@ -135,7 +135,7 @@ export class CreatorEditComponent implements OnInit {
       'firstName': new FormControl(firstname, [Validators.maxLength(50)]),
       'lastName': new FormControl(lastname, [Validators.required, Validators.maxLength(50)]),
       'role': new FormControl(role, [Validators.required, Validators.maxLength(50)]),
-    });
+    }, (!this.editMode) ? {validators: this.namesExistValidator} : {validators: this.namesExistEditModeValidator});
 
     if (this.hasContact) {
       this.creatorForm.addControl('contact', this.contactForm);
@@ -146,4 +146,36 @@ export class CreatorEditComponent implements OnInit {
     this.rolesList = Object.keys(CreatorRoleEnum);
     this.actualEnumType = CreatorRoleEnum;
   }
+
+  namesExistValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+
+    const names = this.creatorsService.getExistingNames();
+    const currentFirstName: string = control.get('firstName').value.toLowerCase().trim();
+    const currentLastName: string = control.get('lastName').value.toLowerCase().trim();
+
+    for (const person of names) {
+      if (currentFirstName === person.firstName && currentLastName === person.lastName) {
+        return {namesExist: true};
+      }
+    }
+    return null;
+  };
+
+  namesExistEditModeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+
+    let names = this.creatorsService.getExistingNames();
+    const currentFirstName: string = control.get('firstName').value.toLowerCase().trim();
+    const currentLastName: string = control.get('lastName').value.toLowerCase().trim();
+    const editedFirstName = this.creatorsService.getCreatorById(this.id).firstName.toLowerCase().trim();
+    const editedLastName = this.creatorsService.getCreatorById(this.id).lastName.toLowerCase().trim();
+
+    names = names.filter(person => !(person.firstName === editedFirstName && person.lastName === editedLastName));
+
+    for (const person of names) {
+      if (currentFirstName === person.firstName && currentLastName === person.lastName) {
+        return {namesExist: true};
+      }
+    }
+    return null;
+  };
 }

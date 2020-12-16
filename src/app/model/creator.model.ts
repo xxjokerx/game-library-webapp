@@ -1,9 +1,9 @@
 import {CreatorRoleEnum} from './enum/creator-role.enum';
 import {Contact} from './contact.model';
 import {ModelInterface} from './interface/model.interface';
-import {PersonInterface} from './interface/person.interface';
+import {Person} from './interface/person.interface';
 
-export class Creator implements ModelInterface, PersonInterface {
+export class Creator implements ModelInterface, Person {
   id?: number;
   firstName: string;
   lastName: string;

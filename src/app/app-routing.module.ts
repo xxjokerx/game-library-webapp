@@ -22,6 +22,7 @@ import {ExistingThemesResolver} from './dashboard/themes/existing-themes-resolve
 import {PublishersNamesResolver} from './dashboard/publishers/publishers-names-resolver.service';
 import {PublishersResolver} from './dashboard/publishers/publishers-resolver.service';
 import {ProductLineNamesResolver} from './dashboard/product-line/product-line-names-resolver.service';
+import {CreatorNameResolver} from './dashboard/creators/creator-name-resolver.service';
 
 const routes: Routes = [
   {
@@ -47,8 +48,8 @@ const routes: Routes = [
         path: 'creators',
         component: CreatorsComponent,
         children: [
-          {path: 'new', component: CreatorEditComponent},
-          {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolver]},
+          {path: 'new', component: CreatorEditComponent, resolve: [CreatorNameResolver]},
+          {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolver, CreatorNameResolver]},
           {path: ':id', component: CreatorDetailComponent, resolve: [CreatorResolver]}
         ]
       },

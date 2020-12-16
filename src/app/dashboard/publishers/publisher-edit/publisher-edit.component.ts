@@ -20,6 +20,7 @@ export class PublisherEditComponent implements OnInit {
   publisherForm: FormGroup;
   contactForm: FormGroup;
   label: string;
+  existingNames: string[];
 
   constructor(private publishersService: PublisherService,
               private publishersDataService: PublisherDataService,

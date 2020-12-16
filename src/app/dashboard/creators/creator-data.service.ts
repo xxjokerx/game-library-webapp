@@ -6,6 +6,8 @@ import {Creator} from '../../model/creator.model';
 import {ConfigurationService} from '../configuration/configuration.service';
 import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {Person} from '../../model/interface/person.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,16 @@ export class CreatorDataService {
               private configurationService: ConfigurationService) {
 
     this.apiUri = environment.apiUri;
+  }
+
+  fetchNames(): Observable<Person[]> {
+    return this.http
+      .get<Person[]>(this.apiUri + '/admin/creators/names', {responseType: 'json'})
+      .pipe(
+        tap(names => {
+          this.creatorsService.setNames(names);
+        })
+      );
   }
 
   fetchCreators(page?: number, keyword?: string): any {
