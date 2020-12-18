@@ -32,6 +32,10 @@ import {PublishersComponent} from './dashboard/publishers/publishers.component';
 import {PublisherListComponent} from './dashboard/publishers/publisher-list/publisher-list.component';
 import {PublisherDetailComponent} from './dashboard/publishers/publisher-detail/publisher-detail.component';
 import {PublisherEditComponent} from './dashboard/publishers/publisher-edit/publisher-edit.component';
+import {CategoriesComponent} from './dashboard/categories/categories.component';
+import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
+import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
+import {CategoryListComponent} from './dashboard/categories/category-list/category-list.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -75,7 +79,11 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     PublishersComponent,
     PublisherListComponent,
     PublisherDetailComponent,
-    PublisherEditComponent
+    PublisherEditComponent,
+    CategoriesComponent,
+    CategoryDetailComponent,
+    CategoryEditComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,

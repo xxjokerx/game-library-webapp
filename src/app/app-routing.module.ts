@@ -23,6 +23,9 @@ import {PublishersNamesResolver} from './dashboard/publishers/publishers-names-r
 import {PublishersResolver} from './dashboard/publishers/publishers-resolver.service';
 import {ProductLineNamesResolver} from './dashboard/product-line/product-line-names-resolver.service';
 import {CreatorNameResolver} from './dashboard/creators/creator-name-resolver.service';
+import {CategoriesComponent} from './dashboard/categories/categories.component';
+import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
+import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 
 const routes: Routes = [
   {
@@ -36,11 +39,7 @@ const routes: Routes = [
         component: ThemesComponent,
         children: [
           {path: 'new', component: ThemeEditComponent, resolve: [ExistingThemesResolver]},
-          {
-            path: ':id/edit',
-            component: ThemeEditComponent,
-            resolve: [ThemeResolver, ExistingThemesResolver]
-          },
+          {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolver, ExistingThemesResolver]},
           {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
         ]
       },
@@ -69,6 +68,15 @@ const routes: Routes = [
           {path: 'new', component: PublisherEditComponent, resolve: [PublishersNamesResolver]},
           {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolver, PublishersNamesResolver]},
           {path: ':id', component: PublisherDetailComponent, resolve: [PublishersResolver]}
+        ]
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        children: [
+          {path: 'new', component: CategoryEditComponent},
+          {path: ':id/edit', component: CategoryEditComponent},
+          {path: ':id', component: CategoryDetailComponent}
         ]
       },
       {

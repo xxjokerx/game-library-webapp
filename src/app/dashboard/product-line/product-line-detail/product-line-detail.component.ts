@@ -50,7 +50,7 @@ export class ProductLineDetailComponent implements OnInit, OnDestroy {
     const myObs = of(this.line.id);
     myObs.pipe(
       concatMap(id => {
-        return this.productLineDataService.removeTheme(id);
+        return this.productLineDataService.removeProductLine(id);
       }),
       concatMap(() => {
         return this.productLineDataService.fetchProductLines();

@@ -46,12 +46,12 @@ export class ProductLineDataService {
       );
   }
 
-  removeTheme(id: number): any {
+  removeProductLine(id: number): any {
     return this.http.delete(this.apiUri + '/admin/product-lines/' + id);
   }
 
-  editLine(id: number, newLine: ProductLine): any {
-    return this.http.put<ProductLine>(this.apiUri + '/admin/product-lines/' + id, newLine, {responseType: 'json'});
+  editLine(id: number, line: ProductLine): any {
+    return this.http.put<ProductLine>(this.apiUri + '/admin/product-lines/' + id, line, {responseType: 'json'});
   }
 
   addLine(newLine: ProductLine): any {
