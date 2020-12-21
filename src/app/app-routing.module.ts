@@ -26,6 +26,7 @@ import {CreatorNameResolver} from './dashboard/creators/creator-name-resolver.se
 import {CategoriesComponent} from './dashboard/categories/categories.component';
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
+import {CategoryResolver} from './dashboard/categories/category-resolver.service';
 
 const routes: Routes = [
   {
@@ -73,6 +74,7 @@ const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent,
+        resolve: [CategoryResolver],
         children: [
           {path: 'new', component: CategoryEditComponent},
           {path: ':id/edit', component: CategoryEditComponent},

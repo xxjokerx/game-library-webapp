@@ -3,15 +3,16 @@ import {HttpClient} from '@angular/common/http';
 import {Category} from '../../model/category.model';
 import {environment} from '../../../environments/environment';
 import {Observable, Subject} from 'rxjs';
-import {Page} from '../../model/page.model';
 import {ConfigurationService} from '../configuration/configuration.service';
+import {tap} from 'rxjs/operators';
+import {PageCustom} from '../../model/page-custom.model';
 
 @Injectable({providedIn: 'root'})
 export class CategoryService {
   apiUri: string;
-  categoriesChanged: Subject<Category[]> = new Subject<Category[]>();
   categories: Category[];
-  page: Page<Category>;
+  pageChanged: Subject<PageCustom<Category>> = new Subject<PageCustom<Category>>();
+  page: PageCustom<Category> = {};
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -19,9 +20,19 @@ export class CategoryService {
   }
 
   /** Get all categories */
-  private fetchAll(): Observable<Category[]> {
+  fetchAll(): Observable<Category[]> {
     return this.http
-      .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'});
+      .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'})
+      .pipe(
+        tap(
+          categories => this.categories = categories.slice()
+        )
+      );
+  }
+
+  /** Search a category */
+  search(page?: number, keyword?: string): void {
+
   }
 
   /** Remove a category by id */
@@ -39,12 +50,18 @@ export class CategoryService {
     return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'});
   }
 
-  /** Call fetchAll then return a Page<Category> */
-  getPage(page?: number): Page<Category> {
-    this.fetchAll().subscribe(categories => this.categories = categories.slice());
+  /** set the page to the current value */
+  setPage(page?: number): void {
     this.page.totalElements = this.categories.length;
-    this.page.pageable.pageSize = this.config.getNumberOfElements();
-    this.page.pageable.pageNumber = page ? page : 0;
-    return this.page;
+    this.page.pageSize = this.config.getNumberOfElements();
+    this.page.pageNumber = page ? page : 0;
+    this.updateCategories();
   }
+
+  updateCategories(): void {
+    this.page.content = this.categories.slice();
+
+    this.pageChanged.next(this.page);
+  }
+
 }

@@ -5,6 +5,7 @@ import {Category} from '../../../model/category.model';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Router} from '@angular/router';
 import {CategoryService} from '../category.service';
+import {PageCustom} from '../../../model/page-custom.model';
 
 @Component({
   selector: 'app-category-list',
@@ -27,25 +28,31 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    /* the resolver load all categories then ... */
     this.initForm();
-    this.fetchCategories();
-
-
+    this.subscription = this.service.pageChanged.subscribe((page: PageCustom<Category>) => {
+      this.categories = page.content.slice();
+      this.totalElements = page.totalElements;
+      this.page = page.pageNumber;
+      this.pageSize = page.pageSize;
+    });
+    this.service.setPage();
   }
+
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
-  initForm(): void {
+
+  onPageChange(): void {
+    this.router.navigate(['/admin/categories']);
+  }
+
+
+  private initForm(): void {
     this.filterForm = new FormGroup({
       'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
-  }
-
-  fetchCategories(): void {
-    this.service.getPage();
-  }
-
-  setPagination(): void {
   }
 }
