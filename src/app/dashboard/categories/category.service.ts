@@ -11,6 +11,7 @@ import {PageCustom} from '../../model/page-custom.model';
 export class CategoryService {
   apiUri: string;
   categories: Category[];
+  private filteredCategories: Category[];
   pageChanged: Subject<PageCustom<Category>> = new Subject<PageCustom<Category>>();
   page: PageCustom<Category> = {};
 
@@ -19,6 +20,7 @@ export class CategoryService {
     this.apiUri = environment.apiUri;
   }
 
+  /* ============================================== REST API METHODS =================================================================== */
   /** Get all categories */
   fetchAll(): Observable<Category[]> {
     return this.http
@@ -28,11 +30,6 @@ export class CategoryService {
           categories => this.categories = categories.slice()
         )
       );
-  }
-
-  /** Search a category */
-  search(page?: number, keyword?: string): void {
-
   }
 
   /** Remove a category by id */
@@ -50,18 +47,25 @@ export class CategoryService {
     return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'});
   }
 
-  /** set the page to the current value */
-  setPage(page?: number): void {
+
+  /** set the page to the debut value */
+  initPage(): void {
     this.page.totalElements = this.categories.length;
     this.page.pageSize = this.config.getNumberOfElements();
-    this.page.pageNumber = page ? page : 0;
-    this.updateCategories();
+    this.page.pageNumber = 0;
+    this.updatePage(this.categories);
   }
 
-  updateCategories(): void {
-    this.page.content = this.categories.slice();
+  filter(str: string): void {
+    this.filteredCategories = this.categories.filter(
+      category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();
+    this.updatePage(this.filteredCategories);
+  }
+
+  /** Update the paged object as well as notifier the Subject a change occurred */
+  private updatePage(categories: Category[]): void {
+    this.page.content = categories.slice();
 
     this.pageChanged.next(this.page);
   }
-
 }

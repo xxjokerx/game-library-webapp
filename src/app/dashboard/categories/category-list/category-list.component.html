@@ -1,3 +1,9 @@
+<app-simple-filter-form
+  [filterForm]="filterForm"
+  (clickFilter)="onFilter()"
+  (clickRefresh)="onRefreshFilter()"
+  (clickDelete)="onDelete()"></app-simple-filter-form>
+
 <a *ngFor="let category of categories | slice: (page-1) * pageSize : page * pageSize"
    style="cursor: pointer;"
    routerLinkActive="active"
@@ -23,5 +29,5 @@
 <button
   class="btn btn-secondary mr-2 mb-2"
   type="button"
->Rafraichir la liste
+  (click)="onRefreshList()">Rafraichir la liste
 </button>

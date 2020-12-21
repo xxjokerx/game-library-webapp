@@ -36,7 +36,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
       this.page = page.pageNumber;
       this.pageSize = page.pageSize;
     });
-    this.service.setPage();
+    this.service.initPage();
   }
 
 
@@ -49,10 +49,28 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/categories']);
   }
 
+  onFilter(): void {
+    this.service.filter(this.filterForm.get('keyword').value);
+  }
+
+  onRefreshFilter(): void {
+    this.service.initPage();
+  }
+
+  onRefreshList(): void {
+    this.service.fetchAll();
+    this.router.navigate(['/admin/categories']);
+  }
+
+  onDelete(): void {
+    this.filterForm.reset();
+  }
 
   private initForm(): void {
     this.filterForm = new FormGroup({
       'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
   }
+
+
 }
