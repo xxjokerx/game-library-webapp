@@ -1,16 +1,51 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {Category} from '../../../model/category.model';
+import {ConfigurationService} from '../../configuration/configuration.service';
+import {Router} from '@angular/router';
+import {CategoryService} from '../category.service';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css']
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent implements OnInit, OnDestroy {
+  filterForm: FormGroup;
+  private subscription: Subscription;
+  categories: Category[];
 
-  constructor() {
+  /* Pagination */
+  totalElements: number;
+  pageSize: number;
+  page: number;
+
+  constructor(private service: CategoryService,
+              private configurationService: ConfigurationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.initForm();
+    this.fetchCategories();
+
+
   }
 
+  ngOnDestroy(): void {
+  }
+
+  initForm(): void {
+    this.filterForm = new FormGroup({
+      'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
+    });
+  }
+
+  fetchCategories(): void {
+    this.service.getPage();
+  }
+
+  setPagination(): void {
+  }
 }

@@ -2,22 +2,26 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Category} from '../../model/category.model';
 import {environment} from '../../../environments/environment';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+import {Page} from '../../model/page.model';
+import {ConfigurationService} from '../configuration/configuration.service';
 
 @Injectable({providedIn: 'root'})
 export class CategoryService {
   apiUri: string;
   categoriesChanged: Subject<Category[]> = new Subject<Category[]>();
   categories: Category[];
+  page: Page<Category>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private config: ConfigurationService) {
     this.apiUri = environment.apiUri;
   }
 
   /** Get all categories */
-  fetchAll(): any {
+  private fetchAll(): Observable<Category[]> {
     return this.http
-      .get<Category>(this.apiUri + '/admin/categories', {responseType: 'json'});
+      .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'});
   }
 
   /** Remove a category by id */
@@ -33,5 +37,14 @@ export class CategoryService {
   /** Save a new category */
   add(category: Category): any {
     return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'});
+  }
+
+  /** Call fetchAll then return a Page<Category> */
+  getPage(page?: number): Page<Category> {
+    this.fetchAll().subscribe(categories => this.categories = categories.slice());
+    this.page.totalElements = this.categories.length;
+    this.page.pageable.pageSize = this.config.getNumberOfElements();
+    this.page.pageable.pageNumber = page ? page : 0;
+    return this.page;
   }
 }
