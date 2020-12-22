@@ -77,8 +77,8 @@ const routes: Routes = [
         resolve: [CategoryResolver],
         children: [
           {path: 'new', component: CategoryEditComponent},
-          {path: ':id/edit', component: CategoryEditComponent},
-          {path: ':id', component: CategoryDetailComponent}
+          {path: ':id/edit', component: CategoryEditComponent, resolve: [CategoryResolver]},
+          {path: ':id', component: CategoryDetailComponent, resolve: [CategoryResolver]}
         ]
       },
       {

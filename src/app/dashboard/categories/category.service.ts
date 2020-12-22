@@ -69,4 +69,9 @@ export class CategoryService {
 
     this.pageChanged.next(this.page);
   }
+
+  /** find and return the category with the given id */
+  getCategoryById(id: number): Category {
+    return this.categories.find(category => category.id === id);
+  }
 }

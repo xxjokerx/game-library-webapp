@@ -1,1 +1,15 @@
-<p>category-detail works!</p>
+<div class="row">
+  <h4>{{ category.name }}</h4>
+</div>
+<div class="row">
+  <button
+    class="btn btn-secondary mr-2"
+    type="button"
+    (click)="onEdit()">Éditer cette catégorie
+  </button>
+  <button
+    class="btn btn-danger"
+    type="button"
+  >Supprimer cette catégorie
+  </button>
+</div>
