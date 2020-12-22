@@ -47,15 +47,16 @@ export class CategoryService {
     return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'});
   }
 
+  /* ================================================ OTHER METHODS ==================================================================== */
 
   /** set the page to the debut value */
   initPage(): void {
-    this.page.totalElements = this.categories.length;
     this.page.pageSize = this.config.getNumberOfElements();
     this.page.pageNumber = 0;
     this.updatePage(this.categories);
   }
 
+  /** filter the categories list with then given string then updated the page */
   filter(str: string): void {
     this.filteredCategories = this.categories.filter(
       category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();

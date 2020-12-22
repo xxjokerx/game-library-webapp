@@ -2,46 +2,56 @@
   <div
     class="col-md-2 bg-secondary"
     *ngIf="innerWidth >= '768' || !isSideCollapsed">
+
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/themes"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Thèmes</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/categories"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Catégories</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/creators"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Auteurs de jeux</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/product-lines"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Gammes</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/publishers"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Éditeurs</a>
     </div>
+    <hr
+      *ngIf="innerWidth >= '768'"
+      class="side-splitter">
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLink="/admin/configuration"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Configuration</a>
     </div>
     <div class="text-light">w: {{ innerWidth }}</div>

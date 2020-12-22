@@ -15,9 +15,9 @@ import {PageCustom} from '../../../model/page-custom.model';
 export class CategoryListComponent implements OnInit, OnDestroy {
   filterForm: FormGroup;
   private subscription: Subscription;
-  categories: Category[];
 
   /* Pagination */
+  categories: Category[];
   totalElements: number;
   pageSize: number;
   page: number;
@@ -32,7 +32,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     this.initForm();
     this.subscription = this.service.pageChanged.subscribe((page: PageCustom<Category>) => {
       this.categories = page.content.slice();
-      this.totalElements = page.totalElements;
+      this.totalElements = page.content.length;
       this.page = page.pageNumber;
       this.pageSize = page.pageSize;
     });
