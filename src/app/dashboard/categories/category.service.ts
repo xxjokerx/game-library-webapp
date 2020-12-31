@@ -64,10 +64,11 @@ export class CategoryService {
     this.filteredCategories = this.categories.filter(
       category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();
     this.page.content = this.filteredCategories.slice();
+    this.pageChanged.next(this.page);
   }
 
   /** Update the paged object as well as notifier the Subject a change occurred */
-  private updatePage(): void {
+  updatePage(): void {
     this.page.content = this.categories.slice();
     console.log(this.page);
     this.pageChanged.next(this.page);
@@ -78,6 +79,7 @@ export class CategoryService {
     return this.page.content.find(category => category.id === id);
   }
 
+  /** Use concatMap to successively remove category, fetch all categories then update the page */
   deleteThenFetchAll(id: number): void {
     const myObs = of(id);
     myObs.pipe(
@@ -90,6 +92,12 @@ export class CategoryService {
     ).subscribe(() => {
       this.updatePage();
     });
+  }
+
+  /** reverse the filtering, set filteredCategories to an empty list */
+  removeFilter(): void {
+    this.updatePage();
+    this.filteredCategories = [];
   }
 }
 
