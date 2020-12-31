@@ -3,5 +3,6 @@ export enum ModelEnum {
   THEME,
   CONTACT,
   PUBLISHER,
-  PRODUCT_LINE
+  PRODUCT_LINE,
+  CATEGORY
 }

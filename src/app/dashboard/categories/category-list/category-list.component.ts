@@ -28,6 +28,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     /* the resolver load all categories then ... */
     this.initForm();
     this.subscription = this.service.pageChanged.subscribe((page: PageCustom<Category>) => {
@@ -35,6 +36,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
       this.totalElements = page.content.length;
       this.page = page.pageNumber;
       this.pageSize = page.pageSize;
+      console.log('categories changed, updated');
     });
     this.service.initPage();
   }
@@ -46,7 +48,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
 
   onPageChange(): void {
-    this.router.navigate(['/admin/categories']);
+    // this.router.navigate(['/admin/categories']);
   }
 
   onFilter(): void {

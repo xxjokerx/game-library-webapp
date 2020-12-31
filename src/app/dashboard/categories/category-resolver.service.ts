@@ -11,8 +11,7 @@ export class CategoryResolver implements Resolve<Category[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<Category[]> | Promise<Category[]> | Category[] {
-    const loadedCategory: Category[] = this.service.categories;
 
-    return loadedCategory ? loadedCategory : this.service.fetchAll();
+    return this.service.fetchAll();
   }
 }

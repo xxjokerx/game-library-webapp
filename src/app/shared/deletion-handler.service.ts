@@ -48,6 +48,11 @@ export class DeletionHandlerService {
         objectName = (associatedModel as ImpersonalInterface).name;
         break;
       }
+      case ModelEnum.CATEGORY: {
+        objectType = 'la catégorie';
+        objectName = (associatedModel as ImpersonalInterface).name;
+        break;
+      }
     }
 
     const modalRef = this.modalService.open(ConfirmModalComponent);

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Category} from '../../model/category.model';
 import {environment} from '../../../environments/environment';
-import {Observable, Subject} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {ConfigurationService} from '../configuration/configuration.service';
-import {tap} from 'rxjs/operators';
+import {concatMap, tap} from 'rxjs/operators';
 import {PageCustom} from '../../model/page-custom.model';
 
 @Injectable({providedIn: 'root'})
@@ -27,14 +27,17 @@ export class CategoryService {
       .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'})
       .pipe(
         tap(
-          categories => this.categories = categories.slice()
+          categories => {
+            console.log(categories);
+            this.categories = categories.slice();
+          }
         )
       );
   }
 
   /** Remove a category by id */
   remove(id: number): any {
-    return this.http.delete(this.apiUri + '/admin/categories/' + id);
+    return this.http.delete<Category>(this.apiUri + '/admin/categories/' + id);
   }
 
   /** Edit an existing category */
@@ -53,25 +56,40 @@ export class CategoryService {
   initPage(): void {
     this.page.pageSize = this.config.getNumberOfElements();
     this.page.pageNumber = 0;
-    this.updatePage(this.categories);
+    this.updatePage();
   }
 
   /** filter the categories list with then given string then updated the page */
   filter(str: string): void {
     this.filteredCategories = this.categories.filter(
       category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();
-    this.updatePage(this.filteredCategories);
+    this.page.content = this.filteredCategories.slice();
   }
 
   /** Update the paged object as well as notifier the Subject a change occurred */
-  private updatePage(categories: Category[]): void {
-    this.page.content = categories.slice();
-
+  private updatePage(): void {
+    this.page.content = this.categories.slice();
+    console.log(this.page);
     this.pageChanged.next(this.page);
   }
 
   /** find and return the category with the given id */
   getCategoryById(id: number): Category {
-    return this.categories.find(category => category.id === id);
+    return this.page.content.find(category => category.id === id);
+  }
+
+  deleteThenFetchAll(id: number): void {
+    const myObs = of(id);
+    myObs.pipe(
+      concatMap(categoryId => {
+        return this.remove(categoryId);
+      }),
+      concatMap(() => {
+        return this.fetchAll();
+      })
+    ).subscribe(() => {
+      this.updatePage();
+    });
   }
 }
+

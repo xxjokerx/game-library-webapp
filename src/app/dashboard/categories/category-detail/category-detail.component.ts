@@ -5,6 +5,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
 import {CategoryService} from '../category.service';
 import {Page} from '../../../model/page.model';
+import {ModelEnum} from '../../../model/enum/model.enum';
 
 @Component({
   selector: 'app-category-detail',
@@ -40,5 +41,20 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
 
   onEdit(): void {
     this.router.navigate(['/admin/categories/', this.category.id, 'edit']);
+  }
+
+  onDelete(): void {
+    this.service.deleteThenFetchAll(this.category.id);
+    this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  onOpenConfirm(): void {
+    this.deletionHandlerService.callModal(ModelEnum.CATEGORY, this.category, false)
+      .then(value => {
+        if (value === 'Ok click') {
+          this.onDelete();
+        }
+      })
+      .catch(err => console.log(err));
   }
 }
