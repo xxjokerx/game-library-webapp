@@ -17,7 +17,6 @@ export class ThemeEditComponent implements OnInit {
   private id: number;
   themeForm: FormGroup;
   label: string;
-  existingThemes: string[];
 
   constructor(private themesService: ThemeService,
               private themesDataService: ThemeDataService,

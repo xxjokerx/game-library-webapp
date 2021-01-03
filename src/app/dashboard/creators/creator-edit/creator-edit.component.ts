@@ -159,7 +159,7 @@ export class CreatorEditComponent implements OnInit {
       }
     }
     return null;
-  };
+  }
 
   namesExistEditModeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
 
@@ -177,5 +177,5 @@ export class CreatorEditComponent implements OnInit {
       }
     }
     return null;
-  };
+  }
 }

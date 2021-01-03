@@ -14,6 +14,7 @@ export class CategoryService {
   private filteredCategories: Category[];
   pageChanged: Subject<PageCustom<Category>> = new Subject<PageCustom<Category>>();
   page: PageCustom<Category> = {};
+  private existingNames = [];
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -21,45 +22,54 @@ export class CategoryService {
   }
 
   /* ============================================== REST API METHODS =================================================================== */
-  /** Get all categories */
+  /** Gets all categories */
   fetchAll(): Observable<Category[]> {
     return this.http
       .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'})
       .pipe(
         tap(
           categories => {
-            console.log(categories);
             this.categories = categories.slice();
           }
         )
       );
   }
 
-  /** Remove a category by id */
+  /** Removes a category by id */
   remove(id: number): any {
     return this.http.delete<Category>(this.apiUri + '/admin/categories/' + id);
   }
 
-  /** Edit an existing category */
+  /** Edits an existing category */
   edit(id: number, category: Category): any {
-    return this.http.put<Category>(this.apiUri + '/admin/categories/' + id, category, {responseType: 'json'});
+    return this.http.put<Category>(this.apiUri + '/admin/categories/' + id, category, {responseType: 'json'})
+      .subscribe(returnedCategory => {
+        const index = this.categories.indexOf(this.getCategoryById(category.id));
+        this.categories.splice(index, 1);
+        this.categories.push(returnedCategory);
+        this.updatePage();
+      });
   }
 
-  /** Save a new category */
+  /** Saves a new category */
   add(category: Category): any {
-    return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'});
+    return this.http.post<Category>(this.apiUri + '/admin/categories', category, {responseType: 'json'})
+      .subscribe(returnedCategory => {
+        this.categories.push(returnedCategory);
+        this.updatePage();
+      });
   }
 
   /* ================================================ OTHER METHODS ==================================================================== */
 
-  /** set the page to the debut value */
+  /** sets the page to the debut value */
   initPage(): void {
     this.page.pageSize = this.config.getNumberOfElements();
     this.page.pageNumber = 0;
     this.updatePage();
   }
 
-  /** filter the categories list with then given string then updated the page */
+  /** filters the categories list with then given string then updated the page */
   filter(str: string): void {
     this.filteredCategories = this.categories.filter(
       category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();
@@ -67,19 +77,18 @@ export class CategoryService {
     this.pageChanged.next(this.page);
   }
 
-  /** Update the paged object as well as notifier the Subject a change occurred */
+  /** Updates the paged object as well as notifier the Subject a change occurred */
   updatePage(): void {
     this.page.content = this.categories.slice();
-    console.log(this.page);
     this.pageChanged.next(this.page);
   }
 
-  /** find and return the category with the given id */
+  /** finds and return the category with the given id */
   getCategoryById(id: number): Category {
     return this.page.content.find(category => category.id === id);
   }
 
-  /** Use concatMap to successively remove category, fetch all categories then update the page */
+  /** Uses concatMap to successively remove category, fetch all categories then update the page */
   deleteThenFetchAll(id: number): void {
     const myObs = of(id);
     myObs.pipe(
@@ -94,10 +103,18 @@ export class CategoryService {
     });
   }
 
-  /** reverse the filtering, set filteredCategories to an empty list */
+  /** reverses the filtering, set filteredCategories to an empty list */
   removeFilter(): void {
     this.updatePage();
     this.filteredCategories = [];
+  }
+
+  /** returns a list of all categories after a lower case and trim operation */
+  getLowerCasedAndTrimmedCategoryNames(): string[] {
+    const categories = this.page.content.slice();
+    const names = [];
+    categories.forEach(category => names.push(category.name.toLowerCase().trim()));
+    return names;
   }
 }
 

@@ -36,7 +36,6 @@ export class CategoryListComponent implements OnInit, OnDestroy {
       this.totalElements = page.content.length;
       this.page = page.pageNumber;
       this.pageSize = page.pageSize;
-      console.log('categories changed, updated');
     });
     this.service.initPage();
   }
