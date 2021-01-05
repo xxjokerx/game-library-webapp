@@ -14,7 +14,7 @@ export class CategoryService {
   private filteredCategories: Category[];
   pageChanged: Subject<PageCustom<Category>> = new Subject<PageCustom<Category>>();
   page: PageCustom<Category> = {};
-  private existingNames = [];
+  private existingNames: string[] = [];
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -109,12 +109,16 @@ export class CategoryService {
     this.filteredCategories = [];
   }
 
-  /** returns a list of all categories after a lower case and trim operation */
+  /** returns a list of existingNames (lower case and trim) */
   getLowerCasedAndTrimmedCategoryNames(): string[] {
+    return this.existingNames;
+  }
+
+  /** lower case and trim all categories' name, then store them into a private array */
+  setLowerCasedAndTrimmedCategoryNames(): void {
     const categories = this.page.content.slice();
-    const names = [];
-    categories.forEach(category => names.push(category.name.toLowerCase().trim()));
-    return names;
+    this.existingNames = [];
+    categories.forEach(category => this.existingNames.push(category.name.toLowerCase().trim()));
   }
 }
 

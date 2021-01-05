@@ -66,7 +66,7 @@ export class CategoryEditComponent implements OnInit {
     } else {
       this.label = 'Création d\'une catégorie';
     }
-
+    this.service.setLowerCasedAndTrimmedCategoryNames();
     this.categoryForm = new FormGroup({
         'name': new FormControl(categoryName, [Validators.required, Validators.maxLength(50)]),
       },
@@ -76,7 +76,7 @@ export class CategoryEditComponent implements OnInit {
   namesExistValidator(control: FormControl): ValidationErrors | null {
     const currentName = control.get('name').value.toLowerCase().trim();
     const names = this.service.getLowerCasedAndTrimmedCategoryNames();
-    console.log(control);
+
     if (names.indexOf(currentName) !== -1) {
       return {nameAlreadyExists: true};
     }
