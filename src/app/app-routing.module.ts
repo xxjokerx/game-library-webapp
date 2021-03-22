@@ -27,65 +27,106 @@ import {CategoriesComponent} from './dashboard/categories/categories.component';
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 import {CategoryResolver} from './dashboard/categories/category-resolver.service';
+import {SimpleWrapperComponent} from './wrapper/simple-wrapper/simple-wrapper.component';
+import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
+import {ErrorPageComponent} from './error/error-page/error-page.component';
+import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
+import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
-    component: DashboardComponent,
+    path: '',
+    redirectTo: '/admin',
+    pathMatch: 'full',
+  },
+  {
+    path: 'admin/locked-mode',
+    component: SimpleWrapperComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']},
+    data: {roles: ['ADMIN']}
+  },
+  {
+    path: 'admin',
+    component: NavWrapperComponent,
     children: [
       {
-        path: 'themes',
-        component: ThemesComponent,
-        children: [
-          {path: 'new', component: ThemeEditComponent, resolve: [ExistingThemesResolver]},
-          {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolver, ExistingThemesResolver]},
-          {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
-        ]
+        path: 'editor',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ADMIN']},
+        children: [{
+          path: 'themes',
+          component: ThemesComponent,
+          children: [
+            {path: 'new', component: ThemeEditComponent, resolve: [ExistingThemesResolver]},
+            {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolver, ExistingThemesResolver]},
+            {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
+          ]
+        },
+          {
+            path: 'creators',
+            component: CreatorsComponent,
+            children: [
+              {path: 'new', component: CreatorEditComponent, resolve: [CreatorNameResolver]},
+              {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolver, CreatorNameResolver]},
+              {path: ':id', component: CreatorDetailComponent, resolve: [CreatorResolver]}
+            ]
+          },
+          {
+            path: 'product-lines',
+            component: ProductLinesComponent,
+            children: [
+              {path: 'new', component: ProductLineEditComponent, resolve: [ProductLineNamesResolver]},
+              {path: ':id/edit', component: ProductLineEditComponent, resolve: [ProductLineResolver, ProductLineNamesResolver]},
+              {path: ':id', component: ProductLineDetailComponent, resolve: [ProductLineResolver]}
+            ]
+          },
+          {
+            path: 'publishers',
+            component: PublishersComponent,
+            children: [
+              {path: 'new', component: PublisherEditComponent, resolve: [PublishersNamesResolver]},
+              {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolver, PublishersNamesResolver]},
+              {path: ':id', component: PublisherDetailComponent, resolve: [PublishersResolver]}
+            ]
+          },
+          {
+            path: 'categories',
+            component: CategoriesComponent,
+            resolve: [CategoryResolver],
+            children: [
+              {path: 'new', component: CategoryEditComponent},
+              {path: ':id/edit', component: CategoryEditComponent, resolve: [CategoryResolver]},
+              {path: ':id', component: CategoryDetailComponent, resolve: [CategoryResolver]}
+            ]
+          },
+          {
+            path: 'configuration',
+            component: ConfigurationComponent
+          }]
       },
       {
-        path: 'creators',
-        component: CreatorsComponent,
-        children: [
-          {path: 'new', component: CreatorEditComponent, resolve: [CreatorNameResolver]},
-          {path: ':id/edit', component: CreatorEditComponent, resolve: [CreatorResolver, CreatorNameResolver]},
-          {path: ':id', component: CreatorDetailComponent, resolve: [CreatorResolver]}
-        ]
+        path: 'loans',
+        component: DashboardLoanComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ADMIN']},
       },
       {
-        path: 'product-lines',
-        component: ProductLinesComponent,
-        children: [
-          {path: 'new', component: ProductLineEditComponent, resolve: [ProductLineNamesResolver]},
-          {path: ':id/edit', component: ProductLineEditComponent, resolve: [ProductLineResolver, ProductLineNamesResolver]},
-          {path: ':id', component: ProductLineDetailComponent, resolve: [ProductLineResolver]}
-        ]
-      },
-      {
-        path: 'publishers',
-        component: PublishersComponent,
-        children: [
-          {path: 'new', component: PublisherEditComponent, resolve: [PublishersNamesResolver]},
-          {path: ':id/edit', component: PublisherEditComponent, resolve: [PublishersResolver, PublishersNamesResolver]},
-          {path: ':id', component: PublisherDetailComponent, resolve: [PublishersResolver]}
-        ]
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent,
-        resolve: [CategoryResolver],
-        children: [
-          {path: 'new', component: CategoryEditComponent},
-          {path: ':id/edit', component: CategoryEditComponent, resolve: [CategoryResolver]},
-          {path: ':id', component: CategoryDetailComponent, resolve: [CategoryResolver]}
-        ]
-      },
-      {
-        path: 'configuration',
-        component: ConfigurationComponent
+        path: 'users',
+        component: DashboardUserComponent,
+        canActivate: [AuthGuard],
+        data: {roles: ['ADMIN']},
       }
     ]
+  },
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: {message: 'page not found!'}
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found'
   }
 ];
 

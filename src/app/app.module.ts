@@ -36,6 +36,11 @@ import {CategoriesComponent} from './dashboard/categories/categories.component';
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryListComponent} from './dashboard/categories/category-list/category-list.component';
+import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
+import {SimpleWrapperComponent} from './wrapper/simple-wrapper/simple-wrapper.component';
+import {ErrorPageComponent} from './error/error-page/error-page.component';
+import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
+import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -83,7 +88,12 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CategoriesComponent,
     CategoryDetailComponent,
     CategoryEditComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    NavWrapperComponent,
+    SimpleWrapperComponent,
+    ErrorPageComponent,
+    DashboardLoanComponent,
+    DashboardUserComponent
   ],
   imports: [
     BrowserModule,

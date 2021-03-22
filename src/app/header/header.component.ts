@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+    this.isAdministrator = this.keycloak.isUserInRole('ADMIN');
   }
 
   onLogin(): void {
@@ -42,8 +43,16 @@ export class HeaderComponent implements OnInit {
     this.keycloak.logout(environment.keycloak.clientBaseUrl);
   }
 
-  onOpenNavbar(): void {
-    this.router.navigate(['/admin']);
+  onOpenGamesNavbar(): void {
+    this.router.navigate(['/admin/editor']);
     this.sidebarService.expand();
+  }
+
+  onOpenLoansNavbar(): void {
+    this.router.navigate(['/admin/loans']);
+  }
+
+  onOpenUsersNavbar(): void {
+    this.router.navigate(['/admin/users']);
   }
 }
