@@ -9,7 +9,7 @@
    style="cursor: pointer;"
    routerLinkActive="active"
    class="list-group-item list-group-item-action"
-   [routerLink]="['/admin/creators', creator.id]">
+   [routerLink]="['/admin/editor/creators', creator.id]">
   {{ creator.firstName }} {{creator.lastName}} (id:{{creator.id}})</a>
 
 <div class="mb-3"></div>
@@ -24,7 +24,7 @@
 <button
   class="btn btn-secondary mr-2 mb-2"
   type="button"
-  routerLink="/admin/creators/new">Ajouter un auteur
+  routerLink="/admin/editor/creators/new">Ajouter un auteur
 </button>
 
 <button

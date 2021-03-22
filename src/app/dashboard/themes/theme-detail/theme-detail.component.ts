@@ -42,7 +42,7 @@ export class ThemeDetailComponent implements OnInit, OnDestroy {
   }
 
   onEdit(): void {
-    this.router.navigate(['/admin/themes/', this.theme.id, 'edit']);
+    this.router.navigate(['/admin/editor/themes/', this.theme.id, 'edit']);
   }
 
   onDelete(): void {

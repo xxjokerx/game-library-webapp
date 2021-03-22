@@ -43,7 +43,7 @@ export class ProductLineDetailComponent implements OnInit, OnDestroy {
   }
 
   onEdit(): void {
-    this.router.navigate(['/admin/product-lines/', this.line.id, 'edit']);
+    this.router.navigate(['/admin/editor/product-lines/', this.line.id, 'edit']);
   }
 
   onDelete(): void {
