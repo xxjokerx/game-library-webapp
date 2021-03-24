@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {ContactService} from './contact.service';
-import {CountryDataService} from '../country-data.service';
+import {CountryDataService} from '../../services/country-data.service';
 
 @Component({
   selector: 'app-contact-form',

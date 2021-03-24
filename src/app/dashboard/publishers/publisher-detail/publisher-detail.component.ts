@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Publisher} from '../../../model/publisher.model';
 import {of, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {Page} from '../../../model/page.model';
 import {ModelEnum} from '../../../model/enum/model.enum';
 import {concatMap} from 'rxjs/operators';

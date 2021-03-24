@@ -1,5 +1,5 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {SidebarControlService} from '../shared/sidebar-control.service';
+import {SidebarControlService} from '../shared/services/sidebar-control.service';
 import {Subscription} from 'rxjs';
 
 @Component({

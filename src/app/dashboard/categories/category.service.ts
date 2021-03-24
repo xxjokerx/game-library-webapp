@@ -69,7 +69,7 @@ export class CategoryService {
     this.updatePage();
   }
 
-  /** filters the categories list with then given string then updated the page */
+  /** filters the categories list with the given string then updated the page */
   filter(str: string): void {
     this.filteredCategories = this.categories.filter(
       category => category.name.toLowerCase().includes(str.toLocaleLowerCase())).slice();

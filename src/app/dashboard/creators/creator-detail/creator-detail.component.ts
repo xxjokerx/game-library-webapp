@@ -5,7 +5,7 @@ import {CreatorDataService} from '../creator-data.service';
 import {Creator} from '../../../model/creator.model';
 import {of, Subscription} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
 import {Page} from '../../../model/page.model';
 

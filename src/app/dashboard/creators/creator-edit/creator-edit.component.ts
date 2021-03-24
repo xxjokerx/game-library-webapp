@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Creator} from '../../../model/creator.model';
 import {CreatorRoleEnum} from '../../../model/enum/creator-role.enum';
-import {CountryDataService} from '../../../shared/country-data.service';
+import {CountryDataService} from '../../../shared/services/country-data.service';
 
 @Component({
   selector: 'app-creator-edit',

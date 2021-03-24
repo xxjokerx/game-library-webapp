@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
+import {ConfirmModalComponent} from '../components/confirm-modal/confirm-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Creator} from '../model/creator.model';
-import {ModelEnum} from '../model/enum/model.enum';
-import {ModelInterface} from '../model/interface/model.interface';
-import {Person} from '../model/interface/person.interface';
-import {ImpersonalInterface} from '../model/interface/impersonal.interface';
+import {Creator} from '../../model/creator.model';
+import {ModelEnum} from '../../model/enum/model.enum';
+import {ModelInterface} from '../../model/interface/model.interface';
+import {Person} from '../../model/interface/person.interface';
+import {ImpersonalInterface} from '../../model/interface/impersonal.interface';
 
 @Injectable({providedIn: 'root'})
 export class DeletionHandlerService {

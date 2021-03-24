@@ -7,7 +7,7 @@ import {concatMap} from 'rxjs/operators';
 import {ProductLineService} from '../product-line.service';
 import {ProductLineDataService} from '../product-line-data.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 
 @Component({
   selector: 'app-product-line-detail',

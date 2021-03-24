@@ -32,6 +32,8 @@ import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
+import {GamesComponent} from './dashboard/games/games.component';
+import {GameResolver} from './dashboard/games/game-resovler.service';
 
 const routes: Routes = [
   {
@@ -63,6 +65,12 @@ const routes: Routes = [
             {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
           ]
         },
+          {
+            path: 'games',
+            component: GamesComponent,
+            resolve: [GameResolver],
+            children: []
+          },
           {
             path: 'creators',
             component: CreatorsComponent,

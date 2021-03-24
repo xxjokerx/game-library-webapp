@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CountryDataService} from '../../../shared/country-data.service';
+import {CountryDataService} from '../../../shared/services/country-data.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Publisher} from '../../../model/publisher.model';
 import {PublisherDataService} from '../publisher-data.service';

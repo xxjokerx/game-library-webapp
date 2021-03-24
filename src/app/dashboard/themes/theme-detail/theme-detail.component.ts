@@ -6,7 +6,7 @@ import {of, Subscription} from 'rxjs';
 import {ThemeDataService} from '../theme-data.service';
 import {Page} from '../../../model/page.model';
 import {concatMap} from 'rxjs/operators';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
 
 @Component({

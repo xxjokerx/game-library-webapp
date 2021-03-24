@@ -7,7 +7,7 @@ import {ThemesComponent} from './dashboard/themes/themes.component';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {environment} from '../environments/environment';
 import {AppRoutingModule} from './app-routing.module';
-import {HeaderComponent} from './header/header.component';
+import {HeaderComponent} from './shared/components/header/header.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ThemeEditComponent} from './dashboard/themes/theme-edit/theme-edit.component';
@@ -20,9 +20,9 @@ import {CreatorListComponent} from './dashboard/creators/creator-list/creator-li
 import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
 import {StringEnumPipe} from './dashboard/creators/string-enum.pipe';
-import {ConfirmModalComponent} from './shared/confirm-modal/confirm-modal.component';
-import {EnumToValuePipe} from './shared/enum-to-value.pipe';
-import {ContactFormComponent} from './shared/contact-form/contact-form.component';
+import {ConfirmModalComponent} from './shared/components/confirm-modal/confirm-modal.component';
+import {EnumToValuePipe} from './shared/pipes/enum-to-value.pipe';
+import {ContactFormComponent} from './shared/components/contact-form/contact-form.component';
 import {SimpleFilterFormComponent} from './dashboard/shared/simple-filter-form/simple-filter-form.component';
 import {ProductLinesComponent} from './dashboard/product-line/product-lines.component';
 import {ProductLineListComponent} from './dashboard/product-line/product-line-list/product-line-list.component';
@@ -41,6 +41,8 @@ import {SimpleWrapperComponent} from './wrapper/simple-wrapper/simple-wrapper.co
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
+import {GamesComponent} from './dashboard/games/games.component';
+import {GameListComponent} from './dashboard/games/game-list/game-list.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -93,7 +95,9 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     SimpleWrapperComponent,
     ErrorPageComponent,
     DashboardLoanComponent,
-    DashboardUserComponent
+    DashboardUserComponent,
+    GamesComponent,
+    GameListComponent
   ],
   imports: [
     BrowserModule,

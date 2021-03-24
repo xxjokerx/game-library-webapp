@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakService} from 'keycloak-angular';
 import {Router} from '@angular/router';
-import {environment} from '../../environments/environment';
-import {SidebarControlService} from '../shared/sidebar-control.service';
+import {environment} from '../../../../environments/environment';
+import {SidebarControlService} from '../../services/sidebar-control.service';
 
 @Component({
   selector: 'app-header',

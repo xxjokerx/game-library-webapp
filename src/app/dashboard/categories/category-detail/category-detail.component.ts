@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Category} from '../../../model/category.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {CategoryService} from '../category.service';
 import {Page} from '../../../model/page.model';
 import {ModelEnum} from '../../../model/enum/model.enum';
