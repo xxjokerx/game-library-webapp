@@ -34,6 +34,8 @@ import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component'
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 import {GamesComponent} from './dashboard/games/games.component';
 import {GameResolver} from './dashboard/games/game-resovler.service';
+import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/game-summary.component';
+import {GameListComponent} from './dashboard/games/game-list/game-list.component';
 
 const routes: Routes = [
   {
@@ -56,20 +58,27 @@ const routes: Routes = [
         component: DashboardComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ADMIN']},
-        children: [{
-          path: 'themes',
-          component: ThemesComponent,
-          children: [
-            {path: 'new', component: ThemeEditComponent, resolve: [ExistingThemesResolver]},
-            {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolver, ExistingThemesResolver]},
-            {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
-          ]
-        },
+        children: [
           {
             path: 'games',
             component: GamesComponent,
             resolve: [GameResolver],
-            children: []
+            children: [
+              {
+                path: 'list',
+                component: GameListComponent,
+                children: [{path: ':id', component: GameSummaryComponent}]
+              },
+            ]
+          },
+          {
+            path: 'themes',
+            component: ThemesComponent,
+            children: [
+              {path: 'new', component: ThemeEditComponent, resolve: [ExistingThemesResolver]},
+              {path: ':id/edit', component: ThemeEditComponent, resolve: [ThemeResolver, ExistingThemesResolver]},
+              {path: ':id', component: ThemeDetailComponent, resolve: [ThemeResolver]}
+            ]
           },
           {
             path: 'creators',

@@ -43,6 +43,8 @@ import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component'
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 import {GamesComponent} from './dashboard/games/games.component';
 import {GameListComponent} from './dashboard/games/game-list/game-list.component';
+import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/game-summary.component';
+import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -97,7 +99,9 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     DashboardLoanComponent,
     DashboardUserComponent,
     GamesComponent,
-    GameListComponent
+    GameListComponent,
+    GameSummaryComponent,
+    GameDetailComponent
   ],
   imports: [
     BrowserModule,

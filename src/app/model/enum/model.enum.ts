@@ -4,5 +4,6 @@ export enum ModelEnum {
   CONTACT,
   PUBLISHER,
   PRODUCT_LINE,
-  CATEGORY
+  CATEGORY,
+  GAME
 }

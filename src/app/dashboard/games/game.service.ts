@@ -56,4 +56,8 @@ export class GameService {
     this.pageChanged.next(this.page);
   }
 
+  /** finds and return the game with the given id */
+  getGameById(id: number): Game {
+    return this.page.content.find(game => game.id === id);
+  }
 }
