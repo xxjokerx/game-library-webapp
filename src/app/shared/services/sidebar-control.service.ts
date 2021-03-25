@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class SidebarControlService {
 
-  isCollapseSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  isCollapseSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }

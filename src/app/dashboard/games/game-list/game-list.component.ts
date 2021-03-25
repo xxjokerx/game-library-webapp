@@ -32,34 +32,39 @@ export class GameListComponent implements OnInit {
     this.initForm();
     this.subscription = this.service.pageChanged.subscribe((page: Page<Game>) => {
       this.games = page.content.slice();
-      console.log(this.games);
       this.totalElements = page.totalElements;
     });
     this.service.initPage();
-
-
-  }
-
-  initForm(): void {
-    this.filterForm = new FormGroup({
-      'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
-    });
   }
 
   onFilter(): void {
-
+    this.service
+      .fetchGames(0, this.filterForm.value.keyword)
+      .subscribe(() => this.service.updatePage());
+    this.initForm();
+    this.router.navigate(['/admin/editor/games']);
   }
 
   onRefreshList(): void {
-
+    this.service
+      .fetchGames()
+      .subscribe(() => this.service.updatePage());
+    this.router.navigate(['/admin/editor/games']);
   }
 
   onDelete(): void {
-
+    this.initForm();
   }
 
   onPageChange(): void {
     this.service.fetchGames(this.page);
     this.router.navigate(['/admin/editor/games']);
   }
+
+  private initForm(): void {
+    this.filterForm = new FormGroup({
+      'keyword': new FormControl('', [Validators.required, Validators.maxLength(50)])
+    });
+  }
+
 }

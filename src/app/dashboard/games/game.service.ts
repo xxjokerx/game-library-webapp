@@ -33,13 +33,11 @@ export class GameService {
     }
     const size = this.config.getNumberOfElements();
     const params = '?page=' + page + '&size=' + size + '&sort=id' + keywordParam;
-
     return this.http
       .get<Page<Game>>(this.apiUri + '/admin/games/page/overview' + params, {responseType: 'json'})
       .pipe(
         tap(
           pagedGames => {
-            console.log(pagedGames);
             this.page = pagedGames;
           }
         )
@@ -50,6 +48,11 @@ export class GameService {
   /** sets the page to the debut value */
   initPage(): void {
     this.fetchGames();
+    this.pageChanged.next(this.page);
+  }
+
+  /** Updates the paged object as well as notifier the Subject a change occurred */
+  updatePage(): void {
     this.pageChanged.next(this.page);
   }
 

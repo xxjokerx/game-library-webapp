@@ -1,8 +1,8 @@
 <div [ngClass]="{'row sidebar': true , 'h-100': innerWidth >= '768' , 'h-auto': innerWidth < '768' }">
   <div
     class="col-md-2 bg-secondary"
-    *ngIf="innerWidth >= '768' && !isSideCollapsed">
-
+    *ngIf="!isSideCollapsed">
+    <!--innerWidth >= '768' && !isSideCollapsed -->
     <div class="row">
       <a
         class="nav-link text-light col-12"
