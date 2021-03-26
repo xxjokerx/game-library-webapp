@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {Game} from '../../../model/game.model';
 import {ConfigurationService} from '../../configuration/configuration.service';
 import {Router} from '@angular/router';
 import {GameService} from '../game.service';
 import {Page} from '../../../model/page.model';
+import {GameOverview} from '../../../model/game-overview.model';
 
 @Component({
   selector: 'app-game-list',
@@ -17,7 +17,7 @@ export class GameListComponent implements OnInit {
   private subscription: Subscription;
 
   /* Pagination */
-  games: Game[];
+  games: GameOverview[];
   totalElements: number;
   pageSize: number;
   page: number;
@@ -30,7 +30,7 @@ export class GameListComponent implements OnInit {
   ngOnInit(): void {
     /* the resolver load paged games then ... */
     this.initForm();
-    this.subscription = this.service.pageChanged.subscribe((page: Page<Game>) => {
+    this.subscription = this.service.pageChanged.subscribe((page: Page<GameOverview>) => {
       this.games = page.content.slice();
       this.totalElements = page.totalElements;
     });

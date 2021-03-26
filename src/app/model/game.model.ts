@@ -7,7 +7,6 @@ import {Theme} from './theme.model';
 import {Creator} from './creator.model';
 
 export class Game implements ModelInterface, ImpersonalInterface {
-
   id?: number;
   name: string;
   coreGame?: Game;
@@ -33,4 +32,5 @@ export class Game implements ModelInterface, ImpersonalInterface {
   themes?: Theme[];
   creators?: Creator[];
   imageIds?: number[];
+  gameCopyCount: number;
 }

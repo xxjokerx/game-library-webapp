@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {Game} from '../../model/game.model';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ConfigurationService} from '../configuration/configuration.service';
 import {Page} from '../../model/page.model';
 import {tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {GameOverview} from '../../model/game-overview.model';
 
 @Injectable({providedIn: 'root'})
 export class GameService {
   apiUri: string;
-  games: Game[];
-  private filteredGames: Game[];
-  pageChanged: Subject<Page<Game>> = new Subject<Page<Game>>();
-  page: Page<Game> = {};
+  games: GameOverview[];
+  private filteredGameOverviews: GameOverview[];
+  pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
+  page: Page<GameOverview> = {};
   private existingNames: string[] = [];
 
   constructor(private http: HttpClient,
@@ -23,7 +23,7 @@ export class GameService {
 
   /* ============================================== REST API METHODS =================================================================== */
   /** Gets paged games */
-  fetchGames(page?: number, keyword?: string): Observable<Page<Game>> {
+  fetchGames(page?: number, keyword?: string): Observable<Page<GameOverview>> {
     if (!page) {
       page = 0;
     }
@@ -34,11 +34,11 @@ export class GameService {
     const size = this.config.getNumberOfElements();
     const params = '?page=' + page + '&size=' + size + '&sort=id' + keywordParam;
     return this.http
-      .get<Page<Game>>(this.apiUri + '/admin/games/page/overview' + params, {responseType: 'json'})
+      .get<Page<GameOverview>>(this.apiUri + '/admin/games/page/overview' + params, {responseType: 'json'})
       .pipe(
         tap(
-          pagedGames => {
-            this.page = pagedGames;
+          pagedGameOverviews => {
+            this.page = pagedGameOverviews;
           }
         )
       );
@@ -57,7 +57,7 @@ export class GameService {
   }
 
   /** finds and return the game with the given id */
-  getGameById(id: number): Game {
+  getGameById(id: number): GameOverview {
     return this.page.content.find(game => game.id === id);
   }
 }

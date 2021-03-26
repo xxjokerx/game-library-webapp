@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game} from '../../../../model/game.model';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {DeletionHandlerService} from '../../../../shared/services/deletion-handler.service';
 import {GameService} from '../../game.service';
 import {Page} from '../../../../model/page.model';
 import {ModelEnum} from '../../../../model/enum/model.enum';
+import {GameOverview} from '../../../../model/game-overview.model';
 
 @Component({
   selector: 'app-game-detail',
@@ -13,7 +13,7 @@ import {ModelEnum} from '../../../../model/enum/model.enum';
   styleUrls: ['./game-summary.component.css']
 })
 export class GameSummaryComponent implements OnInit, OnDestroy {
-  game: Game;
+  game: GameOverview;
 
   private paramId: number;
   private subscription: Subscription;
@@ -30,7 +30,7 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
       this.paramId = +params[id];
       this.game = this.service.getGameById(+this.paramId);
     });
-    this.subscription = this.service.pageChanged.subscribe((page: Page<Game>) => {
+    this.subscription = this.service.pageChanged.subscribe((page: Page<GameOverview>) => {
       this.game = page.content.find(game => game.id === this.paramId);
     });
   }

@@ -1,7 +1,22 @@
 <div class="row">
-  <h4>{{ game.name }}</h4>
+  <div class="col-md-7">
+    <h4>{{ game.name }}</h4>
+    <div class="text-primary">{{ game.gameCopyCount }} exemplaire(s)</div>
+    <div class="text-primary">{{ game.expansions.length }} extension(s)</div>
+    <div class="mt-5">Catégories :</div>
+    <span *ngFor="let category of game.categories">
+     <span class="badge-secondary badge mr-2">{{ category.name }}</span>
+    </span>
+    <div class="mt-5" *ngFor="let creator of game.creators">
+      <span>{{ creator.role | enumToString }} : {{ creator.firstName }} {{ creator.lastName}}</span>
+    </div>
+  </div>
+  <div class="col-md-5">
+
+  </div>
 </div>
-<div class="row">
+
+<div class="row mt-5">
   <button
     class="btn btn-secondary mr-2"
     type="button"

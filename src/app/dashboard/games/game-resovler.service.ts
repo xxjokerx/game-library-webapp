@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Game} from '../../model/game.model';
 import {GameService} from './game.service';
 import {Page} from '../../model/page.model';
+import {GameOverview} from '../../model/game-overview.model';
 
 @Injectable({providedIn: 'root'})
-export class GameResolver implements Resolve<Page<Game>> {
+export class GameResolver implements Resolve<Page<GameOverview>> {
   constructor(private service: GameService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-    Observable<Page<Game>> | Promise<Page<Game>> | Page<Game> {
+    Observable<Page<GameOverview>> | Promise<Page<GameOverview>> | Page<GameOverview> {
 
     return this.service.fetchGames();
   }
