@@ -6,6 +6,7 @@ import {GameService} from '../../game.service';
 import {Page} from '../../../../model/page.model';
 import {ModelEnum} from '../../../../model/enum/model.enum';
 import {GameOverview} from '../../../../model/game-overview.model';
+import {ImageService} from '../../../../shared/services/image.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -14,11 +15,12 @@ import {GameOverview} from '../../../../model/game-overview.model';
 })
 export class GameSummaryComponent implements OnInit, OnDestroy {
   game: GameOverview;
-
+  dataUri;
   private paramId: number;
   private subscription: Subscription;
 
   constructor(private service: GameService,
+              private imageService: ImageService,
               private route: ActivatedRoute,
               private router: Router,
               private deletionHandlerService: DeletionHandlerService) {
@@ -30,9 +32,12 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
       this.paramId = +params[id];
       this.game = this.service.getGameById(+this.paramId);
     });
-    this.subscription = this.service.pageChanged.subscribe((page: Page<GameOverview>) => {
-      this.game = page.content.find(game => game.id === this.paramId);
-    });
+    this.subscription = this.service.pageChanged
+      .subscribe((page: Page<GameOverview>) => {
+        this.game = page.content.find(game => game.id === this.paramId);
+        this.dataUri = this.game.imageIds[0];
+      });
+    this.imageService.fetchImage(this.game.imageIds[2]).subscribe(imageData => this.dataUri = 'data:image/png;base64,' + imageData);
   }
 
   ngOnDestroy(): void {
@@ -58,3 +63,4 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
       .catch(err => console.log(err));
   }
 }
+

@@ -53,6 +53,11 @@ export class DeletionHandlerService {
         objectName = (associatedModel as ImpersonalInterface).name;
         break;
       }
+      case ModelEnum.GAME: {
+        objectType = 'Le jeu';
+        objectName = (associatedModel as ImpersonalInterface).name;
+        break;
+      }
     }
 
     const modalRef = this.modalService.open(ConfirmModalComponent);

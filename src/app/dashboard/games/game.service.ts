@@ -47,6 +47,7 @@ export class GameService {
   /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */
   initPage(): void {
+    // todo remove this.fetchGames
     this.fetchGames();
     this.pageChanged.next(this.page);
   }
