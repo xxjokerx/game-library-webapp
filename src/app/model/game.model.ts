@@ -13,8 +13,8 @@ export class Game implements ModelInterface, ImpersonalInterface {
   expansions?: Game[];
   description?: string;
   playTime?: string;
-  minPlayer?: number;
-  maxPlayer?: number;
+  minNumberOfPlayer?: number;
+  maxNumberOfPlayer?: number;
   minMonth?: number;
   stuff?: string;
   preparation?: string;

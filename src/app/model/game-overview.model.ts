@@ -12,9 +12,11 @@ export class GameOverview implements ModelInterface, ImpersonalInterface {
   expansions?: Game[];
   description?: string;
   playTime?: string;
-  minPlayer?: number;
-  maxPlayer?: number;
+  minNumberOfPlayer?: number;
+  maxNumberOfPlayer?: number;
   minMonth?: number;
+  minAge?: number;
+  maxAge?: number;
   categories?: Category[];
   creators?: Creator[];
   imageIds?: number[];

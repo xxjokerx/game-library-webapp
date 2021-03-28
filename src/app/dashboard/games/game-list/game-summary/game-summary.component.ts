@@ -18,6 +18,8 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
   dataUri;
   private paramId: number;
   private subscription: Subscription;
+  numberOfPlayers: string;
+  limitAge: string;
 
   constructor(private service: GameService,
               private imageService: ImageService,
@@ -31,13 +33,17 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
       const id = 'id';
       this.paramId = +params[id];
       this.game = this.service.getGameById(+this.paramId);
+      console.log(this.game);
     });
     this.subscription = this.service.pageChanged
       .subscribe((page: Page<GameOverview>) => {
         this.game = page.content.find(game => game.id === this.paramId);
         this.dataUri = this.game.imageIds[0];
       });
-    this.imageService.fetchImage(this.game.imageIds[2]).subscribe(imageData => this.dataUri = 'data:image/png;base64,' + imageData);
+    this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
+    this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
+    this.imageService.fetchImage(this.game.imageIds[0]).subscribe(imageData => this.dataUri = 'data:image/png;base64,' + imageData);
+
   }
 
   ngOnDestroy(): void {

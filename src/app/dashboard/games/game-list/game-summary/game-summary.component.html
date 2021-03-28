@@ -1,21 +1,42 @@
 <div class="row">
   <div class="col-md-7">
-    <h4>{{ game.name }}</h4>
+    <h2>{{ game.name }}</h2>
     <div class="text-primary">{{ game.gameCopyCount }} exemplaire(s)</div>
     <div class="text-primary">{{ game.expansions.length }} extension(s)</div>
-    <div class="mt-5">Catégories :</div>
+    <h4 class="mt-5">Catégories</h4>
     <span *ngFor="let category of game.categories">
      <span class="badge-secondary badge mr-2">{{ category.name }}</span>
     </span>
-    <div class="mt-5" *ngFor="let creator of game.creators">
+    <h4 *ngIf="game.creators" class="mt-5">Créateurs</h4>
+    <div *ngFor="let creator of game.creators">
+
       <span>{{ creator.role | enumToString }} : {{ creator.firstName }} {{ creator.lastName}}</span>
     </div>
   </div>
   <div class="col-md-5">
-    <img src="{{ dataUri }}"/>
+    <img *ngIf="game.imageIds"
+         src="{{ dataUri }}"
+         alt="{{ game.name }} image"
+         class="img-fluid"/>
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5>{{ numberOfPlayers }}</h5>
+        <h5 *ngIf="game.playTime">{{ game.playTime }}</h5>
+        <h5 *ngIf="limitAge.length > 0">{{ limitAge }}</h5>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row mt-2">
+  <div class="col-md-12">
+    <div class="mt-5" *ngIf="game.description">
+      <h4>Description</h4>
+      <div>{{ game.description }}</div>
+    </div>
   </div>
 </div>
-
 <div class="row mt-5">
   <button
     class="btn btn-secondary mr-2"
@@ -29,4 +50,3 @@
   >Supprimer ce jeu
   </button>
 </div>
-
