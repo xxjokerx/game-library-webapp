@@ -1,10 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {DeletionHandlerService} from '../../../../shared/services/deletion-handler.service';
 import {GameService} from '../../game.service';
 import {Page} from '../../../../model/page.model';
-import {ModelEnum} from '../../../../model/enum/model.enum';
 import {GameOverview} from '../../../../model/game-overview.model';
 import {ImageService} from '../../../../shared/services/image.service';
 
@@ -24,15 +22,14 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
   constructor(private service: GameService,
               private imageService: ImageService,
               private route: ActivatedRoute,
-              private router: Router,
-              private deletionHandlerService: DeletionHandlerService) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const id = 'id';
       this.paramId = +params[id];
-      this.game = this.service.getGameById(+this.paramId);
+      this.game = this.service.getGameOverviewById(+this.paramId);
       console.log(this.game);
     });
     this.subscription = this.service.pageChanged
@@ -50,23 +47,8 @@ export class GameSummaryComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  onEdit(): void {
-    this.router.navigate(['/admin/editor/games/list']);
-  }
-
-  onDelete(): void {
-    // this.service.deleteThenFetchAll(this.game.id);
-    this.router.navigate(['../'], {relativeTo: this.route});
-  }
-
-  onOpenConfirm(): void {
-    this.deletionHandlerService.callModal(ModelEnum.GAME, this.game, false)
-      .then(value => {
-        if (value === 'Ok click') {
-          this.onDelete();
-        }
-      })
-      .catch(err => console.log(err));
+  onViewDetail(): void {
+    this.router.navigate(['/admin/editor/games/detail/' + this.paramId]);
   }
 }
 

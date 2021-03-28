@@ -13,9 +13,11 @@ export class Game implements ModelInterface, ImpersonalInterface {
   expansions?: Game[];
   description?: string;
   playTime?: string;
-  minNumberOfPlayer?: number;
-  maxNumberOfPlayer?: number;
-  minMonth?: number;
+  minNumberOfPlayer: number;
+  maxNumberOfPlayer: number;
+  minMonth: number;
+  minAge: number;
+  maxAge: number;
   stuff?: string;
   preparation?: string;
   goal?: string;
@@ -33,4 +35,5 @@ export class Game implements ModelInterface, ImpersonalInterface {
   creators?: Creator[];
   imageIds?: number[];
   gameCopyCount: number;
+
 }

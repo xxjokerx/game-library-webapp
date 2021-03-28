@@ -33,9 +33,11 @@ import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 import {GamesComponent} from './dashboard/games/games.component';
-import {GameResolver} from './dashboard/games/game-resovler.service';
+import {GameOverviewResolver} from './dashboard/games/game-overview-resolver.service';
 import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/game-summary.component';
 import {GameListComponent} from './dashboard/games/game-list/game-list.component';
+import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
+import {GameResolver} from './dashboard/games/game-resolver.service';
 
 const routes: Routes = [
   {
@@ -62,13 +64,20 @@ const routes: Routes = [
           {
             path: 'games',
             component: GamesComponent,
-            resolve: [GameResolver],
+            resolve: [GameOverviewResolver],
             children: [
               {
                 path: 'list',
                 component: GameListComponent,
-                children: [{path: ':id', component: GameSummaryComponent}]
+                resolve: [GameOverviewResolver],
+                children: [
+                  {path: ':id', component: GameSummaryComponent}]
               },
+              {
+                path: 'detail/:id',
+                component: GameDetailComponent,
+                resolve: [GameResolver]
+              }
             ]
           },
           {
@@ -148,7 +157,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes
+    // , {enableTracing: true}
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -6,10 +6,12 @@ import {Page} from '../../model/page.model';
 import {tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {GameOverview} from '../../model/game-overview.model';
+import {Game} from '../../model/game.model';
 
 @Injectable({providedIn: 'root'})
 export class GameService {
   apiUri: string;
+  game: Game;
   games: GameOverview[];
   private filteredGameOverviews: GameOverview[];
   pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
@@ -22,7 +24,7 @@ export class GameService {
   }
 
   /* ============================================== REST API METHODS =================================================================== */
-  /** Gets paged games */
+  /** Get paged overview games */
   fetchGames(page?: number, keyword?: string): Observable<Page<GameOverview>> {
     if (!page) {
       page = 0;
@@ -44,6 +46,16 @@ export class GameService {
       );
   }
 
+  /** Get a game by id */
+  fetchGameById(id: number): Observable<Game> {
+    return this.http
+      .get<Game>(this.apiUri + '/admin/games/' + id, {responseType: 'json'})
+      .pipe(tap(game => this.game = game));
+  }
+
+  deleteThenFetchAll(id: number): void {
+  }
+
   /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */
   initPage(): void {
@@ -58,11 +70,16 @@ export class GameService {
   }
 
   /** finds and return the game with the given id */
-  getGameById(id: number): GameOverview {
+  getGameOverviewById(id: number): GameOverview {
     return this.page.content.find(game => game.id === id);
   }
 
-  /** Get min and max numbers of player the return a string */
+  /** finds and return the game with the given id */
+  getDetailedGame(): Game {
+    return this.game;
+  }
+
+  /** Get min and max numbers of player then return a string */
   buildPLayers(min: number, max: number): string {
     let str = '';
     if (max === 1) {
@@ -78,6 +95,7 @@ export class GameService {
     return str;
   }
 
+  /** Get limit age then return the age range in a string */
   buildAge(minAge: number, maxAge: number, minMonth: number): string {
     let str = '';
     if (minAge === 0 && maxAge === 0 && minMonth === 0) {
