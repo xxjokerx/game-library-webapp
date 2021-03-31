@@ -15,6 +15,7 @@ export class GameDetailComponent implements OnInit {
 
   game: Game;
   dataUri;
+  dataUriArray: string[] = [];
   numberOfPlayers: string;
   limitAge: string;
 
@@ -30,7 +31,7 @@ export class GameDetailComponent implements OnInit {
     this.game = this.service.getDetailedGame();
     this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
     this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
-    this.imageService.fetchImage(this.game.imageIds[0]).subscribe(imageData => this.dataUri = 'data:image/png;base64,' + imageData);
+    this.loadAllImages();
     console.log(this.game);
   }
 
@@ -52,5 +53,16 @@ export class GameDetailComponent implements OnInit {
         }
       })
       .catch(err => console.log(err));
+  }
+
+  private loadAllImages(): void {
+    this.game.imageIds.forEach(id => {
+      this.imageService
+        .fetchImage(id)
+        .subscribe(
+          imageData => this.dataUriArray.push('data:image/png;base64,' + imageData)
+          // imageData => this.dataUriArray[this.game.imageIds.indexOf(id, 0)] = 'data:image/png;base64,' + imageData
+        );
+    });
   }
 }

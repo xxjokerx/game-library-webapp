@@ -5,6 +5,7 @@ import {Publisher} from './publisher.model';
 import {Category} from './category.model';
 import {Theme} from './theme.model';
 import {Creator} from './creator.model';
+import {GameNatureEnum} from './enum/game-nature.enum';
 
 export class Game implements ModelInterface, ImpersonalInterface {
   id?: number;
@@ -24,7 +25,7 @@ export class Game implements ModelInterface, ImpersonalInterface {
   coreRules?: string;
   variant?: string;
   ending?: string;
-  nature?: string;
+  nature?: GameNatureEnum;
   size?: string;
   editionNumber?: string;
 

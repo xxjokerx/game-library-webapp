@@ -19,7 +19,7 @@ import {CreatorsComponent} from './dashboard/creators/creators.component';
 import {CreatorListComponent} from './dashboard/creators/creator-list/creator-list.component';
 import {CreatorEditComponent} from './dashboard/creators/creator-edit/creator-edit.component';
 import {CreatorDetailComponent} from './dashboard/creators/creator-detail/creator-detail.component';
-import {StringEnumPipe} from './dashboard/creators/string-enum.pipe';
+import {StringEnumPipe} from './shared/pipes/string-enum.pipe';
 import {ConfirmModalComponent} from './shared/components/confirm-modal/confirm-modal.component';
 import {EnumToValuePipe} from './shared/pipes/enum-to-value.pipe';
 import {ContactFormComponent} from './shared/components/contact-form/contact-form.component';

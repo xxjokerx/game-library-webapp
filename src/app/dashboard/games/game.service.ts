@@ -13,7 +13,6 @@ export class GameService {
   apiUri: string;
   game: Game;
   games: GameOverview[];
-  private filteredGameOverviews: GameOverview[];
   pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
   page: Page<GameOverview> = {};
   private existingNames: string[] = [];
