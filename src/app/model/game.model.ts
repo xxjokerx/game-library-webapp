@@ -6,6 +6,7 @@ import {Category} from './category.model';
 import {Theme} from './theme.model';
 import {Creator} from './creator.model';
 import {GameNatureEnum} from './enum/game-nature.enum';
+import {GameCopy} from './game-copy.model';
 
 export class Game implements ModelInterface, ImpersonalInterface {
   id?: number;
@@ -34,7 +35,8 @@ export class Game implements ModelInterface, ImpersonalInterface {
   categories?: Category[];
   themes?: Theme[];
   creators?: Creator[];
+  copy?: GameCopy[];
   imageIds?: number[];
-  gameCopyCount: number;
+
 
 }

@@ -69,13 +69,13 @@
 
 <div class="row">
   <div class="col-md-12">
-    <h5 class="mt-5">Taille / encombrement</h5>
+    <h4 class="mt-5">Taille / encombrement</h4>
     <div>{{ game.size }}</div>
-    <h5 class="mt-5">Materiel</h5>
+    <h4 class="mt-5">Materiel</h4>
     <div>{{ game.stuff }}</div>
   </div>
 </div>
-<div class="row mb-5">
+<div class="row">
   <div class="col-lg-6"></div>
   <div class="col-lg-6">
     <button class="btn btn-warning mt-5"
@@ -90,5 +90,34 @@
             type="button"
             (click)="onBack()">Supprimer le jeu
     </button>
+  </div>
+</div>
+<div class="row mt-5 mb-5">
+  <div class="col-md-12">
+    <h4 class="text-primary">
+      <span (click)="toggleRuleDisplay()" style="cursor: pointer;">
+      Afficher / masquer les règles</span></h4>
+  </div>
+</div>
+<div *ngIf="areRulesDisplayed">
+  <div class="col-md-12">
+    <hr>
+    <div *ngIf="game.goal" class="mt-5">
+      <h4>But du jeu</h4>
+      <p>{{ game.goal }}</p>
+    </div>
+    <div *ngIf="game.coreRules" class="mt-5">
+      <h4>Règles</h4>
+      <p>{{ game.coreRules }}</p>
+    </div>
+    <div *ngIf="game.variant" class="mt-5">
+      <h4>Variantes</h4>
+      <p>{{ game.variant }}</p>
+    </div>
+    <div *ngIf="game.ending" class="mt-5">
+      <h4>Fin de partie</h4>
+      <p>{{ game.ending }}</p>
+    </div>
+    <span class="mb-5"></span>
   </div>
 </div>

@@ -18,6 +18,7 @@ export class GameDetailComponent implements OnInit {
   dataUriArray: string[] = [];
   numberOfPlayers: string;
   limitAge: string;
+  areRulesDisplayed: boolean;
 
   constructor(private service: GameService,
               private imageService: ImageService,
@@ -32,6 +33,7 @@ export class GameDetailComponent implements OnInit {
     this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
     this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
     this.loadAllImages();
+    this.areRulesDisplayed = false;
     console.log(this.game);
   }
 
@@ -64,5 +66,9 @@ export class GameDetailComponent implements OnInit {
           // imageData => this.dataUriArray[this.game.imageIds.indexOf(id, 0)] = 'data:image/png;base64,' + imageData
         );
     });
+  }
+
+  toggleRuleDisplay(): void {
+    this.areRulesDisplayed = !this.areRulesDisplayed;
   }
 }
