@@ -35,7 +35,7 @@ export class Game implements ModelInterface, ImpersonalInterface {
   categories?: Category[];
   themes?: Theme[];
   creators?: Creator[];
-  copy?: GameCopy[];
+  copies?: GameCopy[];
   imageIds?: number[];
 
 
