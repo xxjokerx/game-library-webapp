@@ -37,7 +37,6 @@ import {CategoryDetailComponent} from './dashboard/categories/category-detail/ca
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryListComponent} from './dashboard/categories/category-list/category-list.component';
 import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
-import {SimpleWrapperComponent} from './wrapper/simple-wrapper/simple-wrapper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
@@ -46,6 +45,8 @@ import {GameListComponent} from './dashboard/games/game-list/game-list.component
 import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/game-summary.component';
 import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 import {CommonModule} from '@angular/common';
+import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
+import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -95,14 +96,15 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CategoryEditComponent,
     CategoryListComponent,
     NavWrapperComponent,
-    SimpleWrapperComponent,
     ErrorPageComponent,
     DashboardLoanComponent,
     DashboardUserComponent,
     GamesComponent,
     GameListComponent,
     GameSummaryComponent,
-    GameDetailComponent
+    GameDetailComponent,
+    LockedModeWrapperComponent,
+    GameEditComponent
   ],
   imports: [
     BrowserModule,

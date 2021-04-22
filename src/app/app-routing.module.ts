@@ -27,7 +27,6 @@ import {CategoriesComponent} from './dashboard/categories/categories.component';
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 import {CategoryResolver} from './dashboard/categories/category-resolver.service';
-import {SimpleWrapperComponent} from './wrapper/simple-wrapper/simple-wrapper.component';
 import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
@@ -38,6 +37,8 @@ import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/gam
 import {GameListComponent} from './dashboard/games/game-list/game-list.component';
 import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 import {GameResolver} from './dashboard/games/game-resolver.service';
+import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
+import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 
 const routes: Routes = [
   {
@@ -47,9 +48,15 @@ const routes: Routes = [
   },
   {
     path: 'admin/locked-mode',
-    component: SimpleWrapperComponent,
+    component: LockedModeWrapperComponent,
     canActivate: [AuthGuard],
-    data: {roles: ['ADMIN']}
+    data: {roles: ['ADMIN']},
+    children: [
+      {
+        path: 'games/edit',
+        component: GameEditComponent,
+      }
+    ]
   },
   {
     path: 'admin',
