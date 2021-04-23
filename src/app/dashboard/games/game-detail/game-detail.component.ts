@@ -28,13 +28,11 @@ export class GameDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = 'id';
     this.game = this.service.getDetailedGame();
     this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
     this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
     this.loadAllImages();
     this.areRulesDisplayed = false;
-    console.log(this.game);
   }
 
   onBack(): void {
@@ -70,5 +68,9 @@ export class GameDetailComponent implements OnInit {
 
   toggleRuleDisplay(): void {
     this.areRulesDisplayed = !this.areRulesDisplayed;
+  }
+
+  onEdit(): void {
+    this.router.navigate(['admin/locked-mode/games/45/edit']);
   }
 }

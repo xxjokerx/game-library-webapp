@@ -39,6 +39,7 @@ import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.com
 import {GameResolver} from './dashboard/games/game-resolver.service';
 import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
+import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
 
 const routes: Routes = [
   {
@@ -53,8 +54,15 @@ const routes: Routes = [
     data: {roles: ['ADMIN']},
     children: [
       {
-        path: 'games/edit',
+        path: 'games/:id/edit',
         component: GameEditComponent,
+        resolve: [GameResolver],
+        children: [
+          {
+            path: 'categories',
+            component: CategoryHandlerComponent
+          }
+        ]
       }
     ]
   },

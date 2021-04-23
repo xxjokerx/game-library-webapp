@@ -47,6 +47,7 @@ import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.com
 import {CommonModule} from '@angular/common';
 import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
+import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -104,7 +105,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     GameSummaryComponent,
     GameDetailComponent,
     LockedModeWrapperComponent,
-    GameEditComponent
+    GameEditComponent,
+    CategoryHandlerComponent
   ],
   imports: [
     BrowserModule,
