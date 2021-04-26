@@ -1,13 +1,21 @@
+body {
+
+  margin: 0;
+  display: grid;
+  height: 100%;
+  grid-template-columns: min-content 1fr;
+}
+
 .sidenav {
+  white-space: nowrap;
   width: 48px;
   height: 100%;
-  position: fixed;
-  overflow-x: hidden;
-  border-right: #28a745 2px solid;
+  /*overflow-x: hidden;*/
+  background: #28a745;
+  /*border-right: #28a745 2px solid;*/
 }
 
 .main {
-  margin-left: 48px;
 }
 
 .stripped {
@@ -22,4 +30,22 @@
     white 2px,
     white 10px /*#6c757d 10px*/
   );
+}
+
+.list {
+  color: white;
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+
+.sidenav .list {
+  position: sticky;
+  top: 0;
+}
+
+.sidenav .list li {
+  display: block;
 }
