@@ -9,3 +9,25 @@ ngb-carousel {
   height: 30vh;
   border-radius: 5px;
 }
+
+.highlightable {
+  padding: 15px;
+}
+
+.info {
+  display: none;
+}
+
+.highlightable:hover {
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 15px;
+}
+
+
+.highlightable:hover .info {
+  display: inline;
+  float: right;
+}
+
+
