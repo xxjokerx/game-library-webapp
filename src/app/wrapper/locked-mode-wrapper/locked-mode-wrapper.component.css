@@ -1,35 +1,17 @@
 body {
-
   margin: 0;
   display: grid;
-  height: 100%;
-  grid-template-columns: min-content 1fr;
+  height: calc(100vh - 40px);
+  grid-template-columns: 48px auto;
 }
 
 .sidenav {
   white-space: nowrap;
   width: 48px;
-  height: 100%;
+  height: calc(100vh - 40px);
   /*overflow-x: hidden;*/
   background: #28a745;
   /*border-right: #28a745 2px solid;*/
-}
-
-.main {
-}
-
-.stripped {
-  width: 46px;
-  height: 100%;
-  z-index: 1;
-  color: white;
-  background: repeating-linear-gradient(
-    45deg,
-    #28a745,
-    #28a745 8px,
-    white 2px,
-    white 10px /*#6c757d 10px*/
-  );
 }
 
 .list {
@@ -39,7 +21,6 @@ body {
   padding: 0;
   margin: 0;
 }
-
 
 .sidenav .list {
   position: sticky;

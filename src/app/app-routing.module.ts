@@ -28,7 +28,6 @@ import {CategoryEditComponent} from './dashboard/categories/category-edit/catego
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 import {CategoryResolver} from './dashboard/categories/category-resolver.service';
 import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
-import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 import {GamesComponent} from './dashboard/games/games.component';
@@ -40,6 +39,16 @@ import {GameResolver} from './dashboard/games/game-resolver.service';
 import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
+import {NameHandlerComponent} from './dashboard/games/game-edit/name-handler/name-handler.component';
+import {ThemeHandlerComponent} from './dashboard/games/game-edit/theme-handler/theme-handler.component';
+import {InfoHandlerComponent} from './dashboard/games/game-edit/info-handler/info-handler.component';
+import {CreatorHandlerComponent} from './dashboard/games/game-edit/creator-handler/creator-handler.component';
+import {LineHandlerComponent} from './dashboard/games/game-edit/line-handler/line-handler.component';
+import {PublisherHandlerComponent} from './dashboard/games/game-edit/publisher-handler/publisher-handler.component';
+import {DescrptionHandlerComponent} from './dashboard/games/game-edit/descrption-handler/descrption-handler.component';
+import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/size-handler.component';
+import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
+import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
 
 const routes: Routes = [
   {
@@ -59,9 +68,49 @@ const routes: Routes = [
         resolve: [GameResolver],
         children: [
           {
+            path: 'name',
+            component: NameHandlerComponent
+          },
+          {
             path: 'categories',
             component: CategoryHandlerComponent
-          }
+          },
+          {
+            path: 'themes',
+            component: ThemeHandlerComponent
+          },
+          {
+            path: 'infos',
+            component: InfoHandlerComponent
+          },
+          {
+            path: 'creators',
+            component: CreatorHandlerComponent
+          },
+          {
+            path: 'line',
+            component: LineHandlerComponent
+          },
+          {
+            path: 'publisher',
+            component: PublisherHandlerComponent
+          },
+          {
+            path: 'description',
+            component: DescrptionHandlerComponent
+          },
+          {
+            path: 'size',
+            component: SizeHandlerComponent
+          },
+          {
+            path: 'stuff',
+            component: StuffHandlerComponent
+          },
+          {
+            path: 'images',
+            component: ImageHandlerComponent
+          },
         ]
       }
     ]
@@ -160,15 +209,15 @@ const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'not-found',
-    component: ErrorPageComponent,
-    data: {message: 'page not found!'}
-  },
-  {
-    path: '**',
-    redirectTo: '/not-found'
-  }
+  // {
+  //   path: 'not-found',
+  //   component: ErrorPageComponent,
+  //   data: {message: 'page not found!'}
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/not-found'
+  // }
 ];
 
 @NgModule({

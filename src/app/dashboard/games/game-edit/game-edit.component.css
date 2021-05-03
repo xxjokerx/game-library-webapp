@@ -1,3 +1,24 @@
+.flex-container {
+  margin: 0;
+  display: grid;
+  height: calc(100vh - 40px);
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+
+}
+
+.left-panel {
+  padding: 1em;
+  background-color: rgb(127, 255, 127);
+}
+
+.right-panel {
+  padding: 1em;
+  overflow-y: scroll;
+  background-color: rgb(255, 255, 0);
+
+}
+
 ngb-carousel {
   background: darkgrey;
   border-radius: 15px;
@@ -23,7 +44,6 @@ ngb-carousel {
   background-color: lightgray;
   border-radius: 15px;
 }
-
 
 .highlightable:hover .info {
   display: inline;
