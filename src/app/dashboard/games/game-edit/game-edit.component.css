@@ -1,4 +1,4 @@
-.flex-container {
+.grid-container {
   margin: 0;
   display: grid;
   height: calc(100vh - 40px);
@@ -7,16 +7,13 @@
 
 }
 
-.left-panel {
+.edit-panel {
   padding: 1em;
-  background-color: rgb(127, 255, 127);
 }
 
-.right-panel {
+.detail-panel {
   padding: 1em;
   overflow-y: scroll;
-  background-color: rgb(255, 255, 0);
-
 }
 
 ngb-carousel {
@@ -32,7 +29,8 @@ ngb-carousel {
 }
 
 .highlightable {
-  padding: 15px;
+  padding: 1em;
+  margin: 0.5em;
 }
 
 .info {
@@ -45,9 +43,17 @@ ngb-carousel {
   border-radius: 15px;
 }
 
+.active {
+  cursor: pointer;
+  background-color: lightgray;
+  border-radius: 15px;
+  border: 2px #28a745 solid;
+}
+
 .highlightable:hover .info {
   display: inline;
   float: right;
 }
+
 
 

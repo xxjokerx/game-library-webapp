@@ -58,6 +58,7 @@ import {DescrptionHandlerComponent} from './dashboard/games/game-edit/descrption
 import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/size-handler.component';
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
+import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -126,7 +127,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     DescrptionHandlerComponent,
     SizeHandlerComponent,
     StuffHandlerComponent,
-    ImageHandlerComponent
+    ImageHandlerComponent,
+    GameEditHelperComponent
   ],
   imports: [
     BrowserModule,

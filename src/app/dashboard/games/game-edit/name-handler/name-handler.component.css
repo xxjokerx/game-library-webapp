@@ -1,1 +1,8 @@
+.name-container {
+  padding: 1.5em;
+  border: 3px solid #28a745;
+}
 
+.form-group {
+  width: 50%;
+}
