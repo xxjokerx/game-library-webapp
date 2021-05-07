@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {GameService} from '../../game.service';
+import {Game} from '../../../../model/game.model';
+import {UniqueTitleValidator} from '../../../../shared/validators/unique-title-validator.service';
 
 @Component({
   selector: 'app-name-handler',
@@ -8,20 +11,25 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class NameHandlerComponent implements OnInit {
 
-  nameForm: FormGroup;
+  form: FormGroup;
+  game: Game;
 
-  constructor() {
+  constructor(private service: GameService,
+              private takenNameValidator: UniqueTitleValidator) {
   }
 
   ngOnInit(): void {
+    this.game = this.service.getDetailedGame();
     this.initForm();
   }
 
   private initForm(): void {
-    this.nameForm = new FormGroup({
-      'name': new FormControl('', [
-        Validators.required,
-        Validators.maxLength(255)])
+    this.form = new FormGroup({
+      'name': new FormControl(this.game.name, [
+          Validators.required,
+          Validators.maxLength(255),
+        ], [this.takenNameValidator.validate.bind(this.takenNameValidator)]
+      )
     });
   }
 

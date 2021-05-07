@@ -9,7 +9,7 @@ body {
   white-space: nowrap;
   width: 48px;
   height: calc(100vh - 40px);
-  /*overflow-x: hidden;*/
+  overflow-x: hidden;
   background: #28a745;
   /*border-right: #28a745 2px solid;*/
 }

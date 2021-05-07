@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ConfigurationService} from '../configuration/configuration.service';
 import {Page} from '../../model/page.model';
@@ -13,9 +13,9 @@ export class GameService {
   apiUri: string;
   game: Game;
   games: GameOverview[];
-  pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
   page: Page<GameOverview> = {};
-  private existingNames: string[] = [];
+  pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
+  private takenTitles: string[];
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -55,7 +55,23 @@ export class GameService {
   deleteThenFetchAll(id: number): void {
   }
 
+  fetchNames(): Observable<string[]> {
+    return this.http
+      .get<string[]>(this.apiUri + '/admin/games/names', {responseType: 'json'});
+  }
+
   /* ================================================ OTHER METHODS ==================================================================== */
+  isTitleTaken(title: string): Observable<boolean> {
+    let isTaken;
+    this.fetchNames().pipe(tap(titles => {
+      if (titles.includes(title)) {
+        isTaken = true;
+      }
+      isTaken = false;
+    })).subscribe();
+    return of(isTaken);
+  }
+
   /** sets the page to the debut value */
   initPage(): void {
     // todo remove this.fetchGames
@@ -121,4 +137,6 @@ export class GameService {
     }
     return str;
   }
+
+
 }

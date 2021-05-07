@@ -1,7 +1,7 @@
 <div class="name-container">
   <h4>Modifiez le nom :</h4>
   <form
-    [formGroup]="nameForm"
+    [formGroup]="form"
     (ngSubmit)="onSubmit()">
 
     <div class="form-group">
@@ -17,7 +17,7 @@
         <button
           type="submit"
           class="btn btn-success mr-2"
-          [disabled]="false">Sauvegarder
+          [disabled]="!form.valid">Sauvegarder
         </button>
         <button
           type="button"

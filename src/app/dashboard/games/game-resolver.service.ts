@@ -12,6 +12,7 @@ export class GameResolver implements Resolve<Game> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<Game> | Promise<Game> | Game {
     const id = 'id';
+    console.log('Resolver triggered with param ' + route.params[id]);
     return this.service.fetchGameById(route.params[id]);
   }
 }

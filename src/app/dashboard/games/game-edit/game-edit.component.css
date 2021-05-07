@@ -9,6 +9,7 @@
 
 .edit-panel {
   padding: 1em;
+  overflow-y: auto;
 }
 
 .detail-panel {
