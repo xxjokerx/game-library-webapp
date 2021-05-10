@@ -27,7 +27,6 @@ export class GameEditComponent implements OnInit {
       this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
       this.dataUriArray ? console.log('loadAllImages was skipped') : this.loadAllImages();
     });
-
   }
 
   private loadAllImages(): void {

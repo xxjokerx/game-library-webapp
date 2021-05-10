@@ -1,1 +1,8 @@
-<p>category-handler works!</p>
+<div class="block-container">
+  <h4>Catégories</h4>
+  <ul>
+    <li *ngFor="let category of currentCategories | async">
+      <div class="btn btn-lg btn-secondary">{{ category.name }}</div>
+    </li>
+  </ul>
+</div>

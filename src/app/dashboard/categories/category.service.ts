@@ -35,6 +35,12 @@ export class CategoryService {
       );
   }
 
+  /** Get categories as a string list, use in game's category submodule */
+  fetchNames(): Observable<string[]> {
+    return this.http
+      .get<string[]>(this.apiUri + '/admin/categories/names', {responseType: 'json'});
+  }
+
   /** Removes a category by id */
   remove(id: number): any {
     return this.http.delete<Category>(this.apiUri + '/admin/categories/' + id);
