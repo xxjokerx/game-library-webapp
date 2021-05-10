@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Game} from '../../../model/game.model';
 import {GameService} from '../game.service';
 import {ImageService} from '../../../shared/services/image.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -19,10 +17,7 @@ export class GameEditComponent implements OnInit {
   dataUriArray: string[] = null;
 
   constructor(private service: GameService,
-              private imageService: ImageService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private deletionHandlerService: DeletionHandlerService) {
+              private imageService: ImageService) {
   }
 
   ngOnInit(): void {
@@ -42,7 +37,6 @@ export class GameEditComponent implements OnInit {
         .fetchImage(id)
         .subscribe(
           imageData => this.dataUriArray.push('data:image/png;base64,' + imageData)
-          // imageData => this.dataUriArray[this.game.imageIds.indexOf(id, 0)] = 'data:image/png;base64,' + imageData
         );
     });
   }

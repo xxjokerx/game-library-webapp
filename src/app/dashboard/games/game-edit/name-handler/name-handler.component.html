@@ -1,5 +1,5 @@
 <div class="name-container">
-  <h4>Modifiez le nom :</h4>
+  <h4>Titre du jeu</h4>
   <form
     [formGroup]="form"
     (ngSubmit)="onSubmit()">
@@ -21,8 +21,15 @@
         </button>
         <button
           type="button"
-          class="btn btn-warning"
-        >Annuler
+          class="btn btn-secondary mr-2"
+          (click)="onCancel()"
+        >Restaurer
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning mr-2"
+          (click)="onBack()"
+        >Retour
         </button>
       </div>
 

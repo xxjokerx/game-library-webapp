@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {GameService} from '../../game.service';
 import {Game} from '../../../../model/game.model';
 import {UniqueTitleValidator} from '../../../../shared/validators/unique-title-validator.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,8 @@ export class NameHandlerComponent implements OnInit {
 
   constructor(private service: GameService,
               private takenNameValidator: UniqueTitleValidator,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -44,5 +45,14 @@ export class NameHandlerComponent implements OnInit {
       this.takenNameValidator.updateTakenNames();
       this.service.updateDetailedGame(this.game);
     });
+  }
+
+
+  onCancel(): void {
+    this.form.patchValue({name: this.game.name});
+  }
+
+  onBack(): void {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }
