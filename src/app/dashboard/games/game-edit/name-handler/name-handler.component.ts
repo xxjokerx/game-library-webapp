@@ -1,31 +1,29 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {GameService} from '../../game.service';
 import {Game} from '../../../../model/game.model';
 import {UniqueTitleValidator} from '../../../../shared/validators/unique-title-validator.service';
+import {ActivatedRoute} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-name-handler',
   templateUrl: './name-handler.component.html',
   styleUrls: ['./name-handler.component.css']
 })
-export class NameHandlerComponent implements OnInit, OnDestroy {
+export class NameHandlerComponent implements OnInit {
 
   form: FormGroup;
   game: Game;
 
   constructor(private service: GameService,
-              private takenNameValidator: UniqueTitleValidator) {
+              private takenNameValidator: UniqueTitleValidator,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.game = this.service.getDetailedGame();
     this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    console.log('reset validators memory');
-    this.takenNameValidator.resetMemory();
   }
 
   private initForm(): void {
@@ -39,6 +37,12 @@ export class NameHandlerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log('submitted !');
+    this.game.name = this.form.get('name').value;
+    this.service.editGame(this.game.id, this.game)
+      .pipe(map(game => this.game = game)).subscribe(() => {
+      this.initForm();
+      this.takenNameValidator.updateTakenNames();
+      this.service.updateDetailedGame(this.game);
+    });
   }
 }

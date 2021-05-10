@@ -17,7 +17,7 @@ export class Game implements ModelInterface, ImpersonalInterface {
   playTime?: string;
   minNumberOfPlayer: number;
   maxNumberOfPlayer: number;
-  minMonth: number;
+  minMonth?: number;
   minAge: number;
   maxAge: number;
   stuff?: string;

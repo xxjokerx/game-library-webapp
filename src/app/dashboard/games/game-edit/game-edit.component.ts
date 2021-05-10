@@ -4,6 +4,7 @@ import {GameService} from '../game.service';
 import {ImageService} from '../../../shared/services/image.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-game-edit',
@@ -15,7 +16,7 @@ export class GameEditComponent implements OnInit {
   game: Game;
   numberOfPlayers: string;
   limitAge: string;
-  dataUriArray: string[] = [];
+  dataUriArray: string[] = null;
 
   constructor(private service: GameService,
               private imageService: ImageService,
@@ -25,13 +26,17 @@ export class GameEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.game = this.service.getDetailedGame();
-    this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
-    this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
-    this.loadAllImages();
+    console.log('GameEditComponent on init !!');
+    this.service.detailedGameSubject.pipe(map(game => this.game = game)).subscribe(() => {
+      this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
+      this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
+      this.dataUriArray ? console.log('loadAllImages was skipped') : this.loadAllImages();
+    });
+
   }
 
   private loadAllImages(): void {
+    this.dataUriArray = [];
     this.game.imageIds.forEach(id => {
       this.imageService
         .fetchImage(id)

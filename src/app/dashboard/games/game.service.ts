@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {ConfigurationService} from '../configuration/configuration.service';
 import {Page} from '../../model/page.model';
@@ -15,7 +15,9 @@ export class GameService {
   games: GameOverview[];
   page: Page<GameOverview> = {};
   pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
-  private takenTitles: string[];
+
+  /* Used in locked mode */
+  detailedGameSubject: BehaviorSubject<Game> = new BehaviorSubject<Game>(null);
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -25,6 +27,7 @@ export class GameService {
   /* ============================================== REST API METHODS =================================================================== */
   /** Get paged overview games */
   fetchGames(page?: number, keyword?: string): Observable<Page<GameOverview>> {
+    console.log('fetchGames called!!');
     if (!page) {
       page = 0;
     }
@@ -49,29 +52,28 @@ export class GameService {
   fetchGameById(id: number): Observable<Game> {
     return this.http
       .get<Game>(this.apiUri + '/admin/games/' + id, {responseType: 'json'})
-      .pipe(tap(game => this.game = game));
+      .pipe(tap(game => {
+        this.detailedGameSubject.next(game);
+        this.game = game;
+      }));
   }
 
   deleteThenFetchAll(id: number): void {
   }
 
+  /** */
   fetchNames(): Observable<string[]> {
     return this.http
       .get<string[]>(this.apiUri + '/admin/games/names', {responseType: 'json'});
   }
 
-  /* ================================================ OTHER METHODS ==================================================================== */
-  isTitleTaken(title: string): Observable<boolean> {
-    let isTaken;
-    this.fetchNames().pipe(tap(titles => {
-      if (titles.includes(title)) {
-        isTaken = true;
-      }
-      isTaken = false;
-    })).subscribe();
-    return of(isTaken);
+  /** Edit the game via PUT request */
+  editGame(id: number, game: Game): Observable<Game> {
+    return this.http
+      .put<Game>(this.apiUri + '/admin/games/' + id, game, {responseType: 'json'});
   }
 
+  /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */
   initPage(): void {
     // todo remove this.fetchGames
@@ -89,9 +91,14 @@ export class GameService {
     return this.page.content.find(game => game.id === id);
   }
 
-  /** finds and return the game with the given id */
+  /** finds and return the last stored game */
   getDetailedGame(): Game {
     return this.game;
+  }
+
+  /** Update the behavior subject game */
+  updateDetailedGame(game: Game): void {
+    this.detailedGameSubject.next(game);
   }
 
   /** Get min and max numbers of player then return a string */

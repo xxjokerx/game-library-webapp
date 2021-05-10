@@ -10,9 +10,7 @@ export class UniqueTitleValidator implements AsyncValidator {
 
 
   constructor(private gameService: GameService) {
-    this.isTaken = true;
-    this.gameService.fetchNames()
-      .subscribe(names => this.takenNames = names);
+    this.updateTakenNames();
   }
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
@@ -22,7 +20,9 @@ export class UniqueTitleValidator implements AsyncValidator {
     return of(this.isTaken ? {uniqueTitle: true} : null);
   }
 
-  resetMemory(): void {
-    this.takenNames = null;
+  updateTakenNames(): void {
+    this.isTaken = true;
+    this.gameService.fetchNames()
+      .subscribe(names => this.takenNames = names);
   }
 }
