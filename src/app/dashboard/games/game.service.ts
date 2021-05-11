@@ -53,6 +53,7 @@ export class GameService {
     return this.http
       .get<Game>(this.apiUri + '/admin/games/' + id, {responseType: 'json'})
       .pipe(tap(game => {
+        console.log('updating games');
         this.detailedGame$.next(game);
         this.game = game;
       }));
@@ -72,6 +73,19 @@ export class GameService {
     return this.http
       .put<Game>(this.apiUri + '/admin/games/' + id, game, {responseType: 'json'});
   }
+
+  /** Attach the category to the game */
+  addCategory(gameId: number, categoryId: number): Observable<Game> {
+    return this.http
+      .post<Game>(this.apiUri + '/admin/games/' + gameId + '/add-category/' + categoryId, null, {responseType: 'json'});
+  }
+
+  /** Remove the category to the game */
+  unlinkCategory(gameId: number, categoryId: number): Observable<Game> {
+    return this.http
+      .delete<Game>(this.apiUri + '/admin/games/' + gameId + '/unlink-category/' + categoryId, {responseType: 'json'});
+  }
+
 
   /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */

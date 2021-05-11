@@ -1,20 +1,28 @@
-<form [formGroup]="form"
-      (ngSubmit)="onSubmit()">
-  <div class="btn-group">
-    <label for="typeahead-focus"></label>
-    <input
-      id="typeahead-focus"
-      type="text"
-      class="form-control"
-      [ngbTypeahead]="search"
-      (focus)="focus$.next($any($event).target.value)"
-      (click)="click$.next($any($event).target.value)"
-      #instance="ngbTypeahead"
-      formControlName="categoryField"
-    />
-    <button type=submit
-            class="btn btn-success ml-3 rounded"
-            [disabled]="!form.valid">Ajouter
-    </button>
-  </div>
-</form>
+<div class="form-container">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div class="btn-group">
+      <label for="typeahead-focus"></label>
+      <input
+        id="typeahead-focus"
+        type="text"
+        class="form-control"
+        [ngbTypeahead]="search"
+        (focus)="focus$.next($any($event).target.value)"
+        (click)="click$.next($any($event).target.value)"
+        #instance="ngbTypeahead"
+        formControlName="categoryField"
+      />
+      <button type="submit"
+              class="btn btn-success ml-3 rounded"
+              [disabled]="!form.valid"
+      >Associer
+      </button>
+      <button type="button"
+              class="btn btn-warning ml-3 rounded"
+              (click)="onBack()">Retour
+      </button>
+    </div>
+  </form>
+</div>
