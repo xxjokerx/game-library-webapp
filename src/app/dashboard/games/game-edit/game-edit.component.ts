@@ -21,8 +21,7 @@ export class GameEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('GameEditComponent on init !!');
-    this.service.detailedGameSubject.pipe(map(game => this.game = game)).subscribe(() => {
+    this.service.detailedGame$.pipe(map(game => this.game = game)).subscribe(() => {
       this.numberOfPlayers = this.service.buildPLayers(this.game.minNumberOfPlayer, this.game.maxNumberOfPlayer);
       this.limitAge = this.service.buildAge(this.game.minAge, this.game.maxAge, this.game.minMonth);
       this.dataUriArray ? console.log('loadAllImages was skipped') : this.loadAllImages();

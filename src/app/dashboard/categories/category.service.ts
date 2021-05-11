@@ -25,7 +25,12 @@ export class CategoryService {
   /** Gets all categories */
   fetchAll(): Observable<Category[]> {
     return this.http
-      .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'})
+      .get<Category[]>(this.apiUri + '/admin/categories', {responseType: 'json'});
+  }
+
+  /** Gets all categories then store them to an array field */
+  fetchAllAndStore(): Observable<Category[]> {
+    return this.fetchAll()
       .pipe(
         tap(
           categories => {
@@ -102,7 +107,7 @@ export class CategoryService {
         return this.remove(categoryId);
       }),
       concatMap(() => {
-        return this.fetchAll();
+        return this.fetchAllAndStore();
       })
     ).subscribe(() => {
       this.updatePage();

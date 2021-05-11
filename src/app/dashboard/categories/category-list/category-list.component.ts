@@ -60,7 +60,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   }
 
   onRefreshList(): void {
-    this.service.fetchAll();
+    this.service.fetchAllAndStore();
     this.service.updatePage();
     this.router.navigate(['/admin/editor/categories']);
   }

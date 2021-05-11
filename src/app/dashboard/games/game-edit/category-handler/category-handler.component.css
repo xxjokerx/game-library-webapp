@@ -7,6 +7,28 @@ h4 {
   text-align: center;
 }
 
+ul {
+  padding: 1.5em;
+}
+
 li {
   list-style-type: none;
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.hover-control {
+  display: none;
+}
+
+.category-line:hover .hover-control {
+  display: inline;
+}
+
+.nav-link {
+  width: fit-content;
+}
+
+.nav-link:hover {
+  cursor: pointer;
 }

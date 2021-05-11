@@ -17,7 +17,7 @@ export class GameService {
   pageChanged: Subject<Page<GameOverview>> = new Subject<Page<GameOverview>>();
 
   /* Used in locked mode */
-  detailedGameSubject: BehaviorSubject<Game> = new BehaviorSubject<Game>(null);
+  detailedGame$: BehaviorSubject<Game> = new BehaviorSubject<Game>(null);
 
   constructor(private http: HttpClient,
               private config: ConfigurationService) {
@@ -53,7 +53,7 @@ export class GameService {
     return this.http
       .get<Game>(this.apiUri + '/admin/games/' + id, {responseType: 'json'})
       .pipe(tap(game => {
-        this.detailedGameSubject.next(game);
+        this.detailedGame$.next(game);
         this.game = game;
       }));
   }
@@ -98,7 +98,7 @@ export class GameService {
 
   /** Update the behavior subject game */
   updateDetailedGame(game: Game): void {
-    this.detailedGameSubject.next(game);
+    this.detailedGame$.next(game);
   }
 
   /** Get min and max numbers of player then return a string */

@@ -59,6 +59,8 @@ import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/siz
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
+import {CategoryPickerComponent} from './dashboard/games/game-edit/category-handler/category-picker/category-picker.component';
+import {ObjectToStringPipe} from './shared/pipes/object-to-string.pipe';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -93,6 +95,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     StringEnumPipe,
     ConfirmModalComponent,
     EnumToValuePipe,
+    ObjectToStringPipe,
     ContactFormComponent,
     SimpleFilterFormComponent,
     ProductLinesComponent,
@@ -128,7 +131,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     SizeHandlerComponent,
     StuffHandlerComponent,
     ImageHandlerComponent,
-    GameEditHelperComponent
+    GameEditHelperComponent,
+    CategoryPickerComponent
   ],
   imports: [
     BrowserModule,

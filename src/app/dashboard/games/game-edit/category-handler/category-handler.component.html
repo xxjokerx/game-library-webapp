@@ -1,8 +1,24 @@
 <div class="block-container">
   <h4>Catégories</h4>
   <ul>
-    <li *ngFor="let category of currentCategories | async">
+    <li class="category-line" *ngFor="let category of gameCategories | async">
       <div class="btn btn-lg btn-secondary">{{ category.name }}</div>
+      <div class="btn btn-outline-secondary hover-control ml-3">Retirer</div>
+    </li>
+    <li *ngIf="!addModeOn">
+      <a class="nav-link" (click)="onAddMode()">Associer une catégorie.</a>
     </li>
   </ul>
+
+  <ng-container *ngIf="addModeOn">
+    <ng-container *ngIf="{
+  all: allCategories$ | async,
+  current: gameCategories | async }
+  as data">
+      <app-category-picker
+        *ngIf="data.all && data.current"
+        [categories]="data.all"
+        [gameCategories]="data.current"></app-category-picker>
+    </ng-container>
+  </ng-container>
 </div>
