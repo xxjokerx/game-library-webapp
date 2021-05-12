@@ -5,11 +5,11 @@
       <div class="btn btn-lg btn-secondary">{{ category.name }}</div>
       <div class="btn btn-outline-secondary hover-control ml-3" (click)="onRemove(category.id)">Retirer</div>
     </li>
-    <li *ngIf="!addModeOn">
-      <a class="nav-link" (click)="onAddMode()">Associer une catégorie.</a>
-    </li>
   </ul>
 
+  <div class="add-nav" *ngIf="!addModeOn">
+    <a class="nav-link" (click)="onAddMode()">Associer une catégorie.</a>
+  </div>
   <ng-container *ngIf="addModeOn">
     <ng-container *ngIf="{
   all: allCategories$ | async,

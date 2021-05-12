@@ -68,12 +68,11 @@ export class CategoryPickerComponent implements OnInit {
     );
   };
 
-  categoryAvailable(control: FormControl): { [s: string]: boolean } {
-    return !this.availableCategoriesTitle.includes(control.value) ? {'notAvailableCategory': true} : null;
-  }
-
-
   private retrieveId(title: string): Category {
     return this.availableCategories.find(c => c.name === title);
+  }
+
+  categoryAvailable(control: FormControl): { [s: string]: boolean } {
+    return !this.availableCategoriesTitle.includes(control.value) ? {'notAvailableCategory': true} : null;
   }
 }

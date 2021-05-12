@@ -18,6 +18,10 @@ li {
   margin: 0;
 }
 
+.add-nav {
+  padding: 0 1.5em;
+}
+
 .hover-control {
   display: none;
 }

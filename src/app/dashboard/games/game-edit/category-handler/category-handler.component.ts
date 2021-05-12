@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Category} from '../../../../model/category.model';
 import {GameService} from '../../game.service';
 import {CategoryService} from '../../../categories/category.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {Game} from '../../../../model/game.model';
 
 @Component({
@@ -15,6 +15,7 @@ export class CategoryHandlerComponent implements OnInit, OnDestroy {
   gameCategories$: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>(null);
   addModeOn: boolean;
   private game: Game;
+  subscription: Subscription;
 
   constructor(private service: GameService,
               private categoryService: CategoryService) {
@@ -22,7 +23,7 @@ export class CategoryHandlerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.addModeOn = false;
-    this.service.detailedGame$.subscribe(game => {
+    this.subscription = this.service.detailedGame$.subscribe(game => {
       this.gameCategories$.next(game.categories);
       this.game = game;
     });
@@ -30,7 +31,7 @@ export class CategoryHandlerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.gameCategories$.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onAddMode(): void {
