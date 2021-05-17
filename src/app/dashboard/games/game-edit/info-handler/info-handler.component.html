@@ -1,1 +1,78 @@
-<p>info-handler works!</p>
+<div class="block-container">
+  <h4>Titre du jeu</h4>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="nature">Type</label>
+      <input
+        id="nature"
+        type="text"
+        formControlName="gameNature"
+        class="form-control">
+    </div>
+    <label for="players">Joueurs</label>
+    <div formGroupName="numberOfPlayers"
+         id="players">
+      <label for="minPlayers">Min</label>
+      <input
+        id="minPlayers"
+        type="number"
+        formControlName="min"
+        class="form-control">
+      <label for="maxPlayers">Max</label>
+      <input
+        id="maxPlayers"
+        type="number"
+        formControlName="max"
+        class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="duration">Durée</label>
+      <input
+        id="duration"
+        type="text"
+        formControlName="duration"
+        class="form-control">
+    </div>
+    <label for="ageRange">Age</label>
+    <div formGroupName="ageRange"
+         id="ageRange">
+      <label for="ageMin">Min</label>
+      <input
+        id="ageMin"
+        type="number"
+        formControlName="min"
+        class="form-control">
+      <label for="ageMax">Max</label>
+      <input
+        id="ageMax"
+        type="number"
+        formControlName="max"
+        class="form-control">
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <button
+          type="submit"
+          class="btn btn-success mr-2"
+          [disabled]="!form.valid">Sauvegarder
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary mr-2"
+          (click)="onCancel()"
+        >Restaurer
+        </button>
+        <button
+          type="button"
+          class="btn btn-warning mr-2"
+          (click)="onBack()"
+        >Retour
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>
