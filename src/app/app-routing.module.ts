@@ -138,7 +138,7 @@ const routes: Routes = [
               {
                 path: 'list',
                 component: GameListComponent,
-                resolve: [GameOverviewResolver],
+                // resolve: [GameOverviewResolver],
                 children: [
                   {path: ':id', component: GameSummaryComponent}]
               },

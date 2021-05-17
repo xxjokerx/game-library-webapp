@@ -56,9 +56,11 @@ export class GameListComponent implements OnInit {
     this.initForm();
   }
 
-  onPageChange(): void {
-    this.service.fetchGames(this.page);
-    this.router.navigate(['/admin/editor/games/list']);
+  onPageChange(pageNumber): void {
+    if (!Number.isNaN(pageNumber)) {
+      this.service.fetchGames(this.page);
+      this.router.navigate(['/admin/editor/games/list']);
+    }
   }
 
   private initForm(): void {

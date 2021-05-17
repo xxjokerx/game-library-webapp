@@ -36,8 +36,7 @@ export class GameDetailComponent implements OnInit {
   }
 
   onBack(): void {
-    // this.router.navigate(['../45'], {relativeTo: this.route});
-    this.router.navigate(['/admin/editor/games/list']);
+    this.router.navigate(['/admin/editor/games/list/', this.game.id]);
   }
 
   onDelete(): void {
