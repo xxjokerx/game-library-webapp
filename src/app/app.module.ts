@@ -61,6 +61,7 @@ import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/i
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
 import {CategoryPickerComponent} from './dashboard/games/game-edit/category-handler/category-picker/category-picker.component';
 import {ObjectToStringPipe} from './shared/pipes/object-to-string.pipe';
+import {ThemePickerComponent} from './dashboard/games/game-edit/theme-handler/theme-picker/theme-picker.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -132,7 +133,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     StuffHandlerComponent,
     ImageHandlerComponent,
     GameEditHelperComponent,
-    CategoryPickerComponent
+    CategoryPickerComponent,
+    ThemePickerComponent
   ],
   imports: [
     BrowserModule,
