@@ -6,11 +6,16 @@
 
     <div class="form-group">
       <label for="nature">Type</label>
-      <input
+      <select
         id="nature"
-        type="text"
-        formControlName="gameNature"
-        class="form-control">
+        class="form-control w-auto"
+        formControlName="gameNature">
+        <option
+          *ngFor="let nature of natureList"
+          [value]="nature"
+        >{{ actualEnumType[nature] }}
+        </option>
+      </select>
     </div>
     <label for="players">Joueurs</label>
     <div formGroupName="numberOfPlayers"
@@ -21,13 +26,25 @@
         type="number"
         formControlName="min"
         class="form-control">
-      <label for="maxPlayers">Max</label>
-      <input
-        id="maxPlayers"
-        type="number"
-        formControlName="max"
-        class="form-control">
+      <ng-container *ngIf="hasMaxP">
+        <label for="maxPlayers">Max</label>
+        <input
+          id="maxPlayers"
+          type="number"
+          formControlName="max"
+          class="form-control"
+        >
+      </ng-container>
     </div>
+    <div class="text-primary lead"
+         *ngIf="!hasMaxP"
+         (click)="addMaxP()">Définir un maximum
+    </div>
+    <div class="text-primary lead"
+         *ngIf="hasMaxP"
+         (click)="removeMaxP()">Retirer le champ
+    </div>
+    <div>{{ buildPlayers(this.form.get('numberOfPlayers.min').value, this.form.get('numberOfPlayers.max').value) }}</div>
     <div class="form-group">
       <label for="duration">Durée</label>
       <input
@@ -44,12 +61,14 @@
         id="ageMin"
         type="number"
         formControlName="min"
+        min="1"
         class="form-control">
       <label for="ageMax">Max</label>
       <input
         id="ageMax"
         type="number"
         formControlName="max"
+        min="0"
         class="form-control">
     </div>
     <div class="row mt-5">

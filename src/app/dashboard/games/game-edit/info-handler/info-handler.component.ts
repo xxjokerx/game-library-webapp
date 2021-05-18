@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {GameService} from '../../game.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Game} from '../../../../model/game.model';
+import {GameNatureEnum} from '../../../../model/enum/game-nature.enum';
 
 @Component({
   selector: 'app-info-handler',
@@ -13,13 +14,23 @@ export class InfoHandlerComponent implements OnInit {
   form: FormGroup;
   game: Game;
 
+  natureList: Array<string>;
+  actualEnumType: typeof GameNatureEnum;
+
+  hasMaxP: boolean;
+
   constructor(private service: GameService,
               private route: ActivatedRoute,
               private router: Router) {
+    this.natureList = Object.keys(GameNatureEnum);
+    this.actualEnumType = GameNatureEnum;
+
+
   }
 
   ngOnInit(): void {
     this.game = this.service.getDetailedGame();
+    this.hasMaxP = this.game.maxNumberOfPlayer > 1;
     this.initForm();
   }
 
@@ -27,9 +38,9 @@ export class InfoHandlerComponent implements OnInit {
     this.form = new FormGroup({
       'gameNature': new FormControl(this.game.nature, [Validators.required]),
       'numberOfPlayers': new FormGroup({
-        'min': new FormControl(this.game.minNumberOfPlayer),
-        'max': new FormControl(this.game.maxNumberOfPlayer),
-      }),
+        'min': new FormControl(this.game.minNumberOfPlayer, [Validators.min(1), Validators.required]),
+        'max': new FormControl(this.game.maxNumberOfPlayer, [Validators.min(0)]),
+      }, [this.ageRangeValidator.bind(this)]),
       'duration': new FormControl(this.game.playTime),
       'ageRange': new FormGroup({
         'month': new FormControl(this.game.minMonth),
@@ -50,4 +61,31 @@ export class InfoHandlerComponent implements OnInit {
   onBack(): void {
 
   }
+
+  buildPlayers(min?: number, max?: number): string {
+    if (!max) {
+      max = 0;
+    }
+    if (min) {
+      return this.service.buildPLayers(min, max);
+    }
+    return '...';
+  }
+
+  removeMaxP(): void {
+    this.hasMaxP = false;
+    this.form.patchValue({numberOfPlayers: {max: 0}});
+  }
+
+  addMaxP(): void {
+    this.hasMaxP = true;
+  }
+
+  ageRangeValidator: ValidatorFn = (fg: FormGroup) => {
+    const min = fg.get('min').value;
+    const max = fg.get('max').value;
+    return (min > 1 && min <= max) || max === 0
+      ? null
+      : {ageRangeError: true};
+  };
 }

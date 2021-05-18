@@ -129,8 +129,8 @@ export class GameService {
 
   /** Get min and max numbers of player then return a string */
   buildPLayers(min: number, max: number): string {
-    let str = '';
-    if (max === 1) {
+    let str = '...';
+    if (min === 1 && max === 1) {
       str = 'Jeu solo';
     }
     if (max > 1 && max === min) {

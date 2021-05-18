@@ -71,7 +71,8 @@
     "semicolon": {
       "options": [
         "always"
-      ]
+      ],
+      "severity": "warning"
     },
     "space-before-function-paren": {
       "options": {

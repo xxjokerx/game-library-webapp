@@ -60,7 +60,6 @@ export class GameDetailComponent implements OnInit {
         .fetchImage(id)
         .subscribe(
           imageData => this.dataUriArray.push('data:image/png;base64,' + imageData)
-          // imageData => this.dataUriArray[this.game.imageIds.indexOf(id, 0)] = 'data:image/png;base64,' + imageData
         );
     });
   }

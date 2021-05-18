@@ -50,6 +50,7 @@ import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/siz
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
+import {ErrorPageComponent} from './error/error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -214,15 +215,15 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: 'not-found',
-  //   component: ErrorPageComponent,
-  //   data: {message: 'page not found!'}
-  // },
-  // {
-  //   path: '**',
-  //   redirectTo: '/not-found'
-  // }
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: {message: 'page not found!'}
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found'
+  }
 ];
 
 @NgModule({

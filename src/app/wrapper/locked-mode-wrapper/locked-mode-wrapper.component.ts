@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {GameService} from '../../dashboard/games/game.service';
 
 @Component({
   selector: 'app-locked-mode-wrapper',
@@ -7,10 +9,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LockedModeWrapperComponent implements OnInit {
 
-  constructor() {
+  editString = 'Édition';
+
+  constructor(private router: Router,
+              private service: GameService) {
   }
 
   ngOnInit(): void {
   }
 
+  onBack(): void {
+    this.service.game ? this.router.navigate(['/admin/editor/games/list', this.service.game.id])
+      : this.router.navigate(['/admin/editor/games/list']);
+  }
 }

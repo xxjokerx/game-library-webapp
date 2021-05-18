@@ -7,7 +7,16 @@
 
 <body>
 <div class="sidenav">
-  <ul class="list">
+  <div class="back-button"
+       (click)="onBack()">
+    <div>
+      <img
+        class="svg-icon"
+        src="assets/icons/arrow-left-white.svg"
+        alt="R"/>
+    </div>
+  </div>
+  <ul class="list mt-3">
     <li>É</li>
     <li>D</li>
     <li>I</li>
