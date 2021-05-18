@@ -155,7 +155,7 @@ export class GameService {
       } else if (minAge === 1) {
         str += minAge.toString() + ' an.';
       } else if (minMonth >= 1) {
-        str += minMonth.toString() + 'mois.';
+        str += minMonth.toString() + ' mois.';
       }
       return str;
     } else if (maxAge > 0) {

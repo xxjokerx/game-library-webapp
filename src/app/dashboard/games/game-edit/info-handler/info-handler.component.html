@@ -1,14 +1,15 @@
 <div class="block-container">
-  <h4>Titre du jeu</h4>
+  <h4>Informations</h4>
   <form
+    class="custom-form"
     [formGroup]="form"
     (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-      <label for="nature">Type</label>
+    <div class="selector">
+      <label for="nature" class="inline font-lg">Type</label>
       <select
         id="nature"
-        class="form-control w-auto"
+        class="form-control w-auto inline"
         formControlName="gameNature">
         <option
           *ngFor="let nature of natureList"
@@ -17,81 +18,130 @@
         </option>
       </select>
     </div>
-    <label for="players">Joueurs</label>
-    <div formGroupName="numberOfPlayers"
-         id="players">
-      <label for="minPlayers">Min</label>
-      <input
-        id="minPlayers"
-        type="number"
-        formControlName="min"
-        class="form-control">
-      <ng-container *ngIf="hasMaxP">
-        <label for="maxPlayers">Max</label>
-        <input
-          id="maxPlayers"
-          type="number"
-          formControlName="max"
-          class="form-control"
-        >
-      </ng-container>
+
+
+    <div class="player-range">
+      <div class="form-group">
+        <label for="players" class="inline font-lg">Joueurs</label>
+        <div formGroupName="numberOfPlayers"
+             class="inline"
+             id="players">
+          <input
+            id="minPlayers"
+            type="number"
+            formControlName="min"
+            class="form-control inline number-field">
+          <label for="minPlayers" class="inline">Min</label>
+          <ng-container *ngIf="hasMaxP">
+            <input
+              id="maxPlayers"
+              type="number"
+              formControlName="max"
+              class="form-control inline number-field"
+            >
+            <label for="maxPlayers" class="inline">Max</label>
+          </ng-container>
+        </div>
+        <div class="text-primary lead inline"
+             *ngIf="!hasMaxP"
+             (click)="onAddMaxP()">Définir un maximum
+        </div>
+        <div class="text-primary lead inline"
+             *ngIf="hasMaxP"
+             (click)="onRemoveMaxP()">Retirer le champ 'Max'
+        </div>
+        <div
+          class="block mt-4 mb-4">{{ buildPlayers(this.form.get('numberOfPlayers.min').value, this.form.get('numberOfPlayers.max').value) }}</div>
+      </div>
     </div>
-    <div class="text-primary lead"
-         *ngIf="!hasMaxP"
-         (click)="addMaxP()">Définir un maximum
-    </div>
-    <div class="text-primary lead"
-         *ngIf="hasMaxP"
-         (click)="removeMaxP()">Retirer le champ
-    </div>
-    <div>{{ buildPlayers(this.form.get('numberOfPlayers.min').value, this.form.get('numberOfPlayers.max').value) }}</div>
+
     <div class="form-group">
-      <label for="duration">Durée</label>
+      <label for="duration" class="font-lg">Durée</label>
       <input
         id="duration"
         type="text"
         formControlName="duration"
         class="form-control">
     </div>
-    <label for="ageRange">Age</label>
-    <div formGroupName="ageRange"
-         id="ageRange">
-      <label for="ageMin">Min</label>
-      <input
-        id="ageMin"
-        type="number"
-        formControlName="min"
-        min="1"
-        class="form-control">
-      <label for="ageMax">Max</label>
-      <input
-        id="ageMax"
-        type="number"
-        formControlName="max"
-        min="0"
-        class="form-control">
-    </div>
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <button
-          type="submit"
-          class="btn btn-success mr-2"
-          [disabled]="!form.valid">Sauvegarder
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary mr-2"
-          (click)="onCancel()"
-        >Restaurer
-        </button>
-        <button
-          type="button"
-          class="btn btn-warning mr-2"
-          (click)="onBack()"
-        >Retour
-        </button>
+
+    <div class="age-range">
+      <label for="age" class="font-lg">Âge</label>
+      <div formGroupName="ageRange"
+           id="age">
+        <div class="age-line">
+          <div class="inline" *ngIf="ageInYear">
+            <label for="ageMin" class="age-label">Min</label>
+            <input
+              id="ageMin"
+              type="number"
+              formControlName="min"
+              min="1"
+              class="form-control number-field"
+            >
+          </div>
+          <div class="inline" *ngIf="!ageInYear">
+            <label for="monthMin" class="age-label">Min</label>
+            <input
+              id="monthMin"
+              type="number"
+              formControlName="month"
+              min="1"
+              class="form-control number-field"
+            >
+          </div>
+          <div class="inline">{{ timeUnit }}
+          </div>
+          <div class="inline lead text-primary" (click)="onSwitchToMonth()" *ngIf="ageInYear">En mois ?</div>
+          <div class="inline lead text-primary" (click)="onSwitchToYear()" *ngIf="!ageInYear">En Années ?</div>
+        </div>
+        <div class="age-line">
+          <ng-container *ngIf="hasMaxA">
+            <div class="inline">
+              <label for="ageMax" class="age-label block">Max</label>
+              <input
+                id="ageMax"
+                type="number"
+                formControlName="max"
+                min="0"
+                class="form-control number-field">
+            </div>
+            <div class="inline">ans</div>
+            <div class="inline lead text-primary" (click)="onRemoveMaxA()">Retirer l'âge max
+            </div>
+          </ng-container>
+
+          <div class="lead text-primary max-age-text" (click)="onAddMaxA()" *ngIf="!hasMaxA">Définir un âge max
+          </div>
+
+        </div>
+        <div class="mt-4 mb-4">{{ buildAge(
+          this.form.get('ageRange.min').value,
+          this.form.get('ageRange.max').value,
+          this.form.get('ageRange.month').value)
+          }}</div>
       </div>
 
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <button
+            type="submit"
+            class="btn btn-success mr-2"
+            [disabled]="!form.valid">Sauvegarder
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary mr-2"
+            (click)="onCancel()"
+          >Restaurer
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning mr-2"
+            (click)="onBack()"
+          >Retour
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>

@@ -13,11 +13,16 @@ import {GameNatureEnum} from '../../../../model/enum/game-nature.enum';
 export class InfoHandlerComponent implements OnInit {
   form: FormGroup;
   game: Game;
-
   natureList: Array<string>;
   actualEnumType: typeof GameNatureEnum;
 
   hasMaxP: boolean;
+
+  hasMaxA: boolean;
+  timeUnit: string;
+  timeUnitSwitch: string;
+  ageInYear: boolean;
+  maxAgeFieldControl = '';
 
   constructor(private service: GameService,
               private route: ActivatedRoute,
@@ -31,6 +36,17 @@ export class InfoHandlerComponent implements OnInit {
   ngOnInit(): void {
     this.game = this.service.getDetailedGame();
     this.hasMaxP = this.game.maxNumberOfPlayer > 1;
+    this.hasMaxA = this.game.maxAge > 1;
+
+    if (this.game.minMonth > 0) {
+      this.timeUnit = 'mois';
+      this.timeUnitSwitch = 'Âge en années ?';
+      this.ageInYear = false;
+    } else {
+      this.timeUnit = 'ans';
+      this.timeUnitSwitch = 'Âge en mois ?';
+      this.ageInYear = true;
+    }
     this.initForm();
   }
 
@@ -45,7 +61,7 @@ export class InfoHandlerComponent implements OnInit {
       'ageRange': new FormGroup({
         'month': new FormControl(this.game.minMonth),
         'min': new FormControl(this.game.minAge),
-        'max': new FormControl(this.game.minNumberOfPlayer)
+        'max': new FormControl(this.game.maxAge)
       }),
     });
   }
@@ -62,22 +78,13 @@ export class InfoHandlerComponent implements OnInit {
 
   }
 
-  buildPlayers(min?: number, max?: number): string {
-    if (!max) {
-      max = 0;
-    }
-    if (min) {
-      return this.service.buildPLayers(min, max);
-    }
-    return '...';
-  }
 
-  removeMaxP(): void {
+  onRemoveMaxP(): void {
     this.hasMaxP = false;
     this.form.patchValue({numberOfPlayers: {max: 0}});
   }
 
-  addMaxP(): void {
+  onAddMaxP(): void {
     this.hasMaxP = true;
   }
 
@@ -88,4 +95,46 @@ export class InfoHandlerComponent implements OnInit {
       ? null
       : {ageRangeError: true};
   };
+
+  onRemoveMaxA(): void {
+    this.hasMaxA = false;
+    this.form.patchValue({ageRange: {max: 0}});
+  }
+
+  onAddMaxA(): void {
+    this.hasMaxA = true;
+  }
+
+  onSwitchToMonth(): void {
+    this.ageInYear = false;
+    this.timeUnit = 'mois';
+
+    this.form.patchValue({ageRange: {month: this.form.get('ageRange.min').value}});
+    this.form.patchValue({ageRange: {min: 0}});
+  }
+
+  onSwitchToYear(): void {
+    this.ageInYear = true;
+    this.timeUnit = 'ans';
+
+    this.form.patchValue({ageRange: {min: this.form.get('ageRange.month').value}});
+    this.form.patchValue({ageRange: {month: 0}});
+  }
+
+  buildPlayers(min?: number, max?: number): string {
+    if (!max) {
+      max = 0;
+    }
+    if (min) {
+      return this.service.buildPLayers(min, max);
+    }
+    return '...';
+  }
+
+  buildAge(minAge: number, maxAge: number, minMonth: number): string {
+    if (maxAge === 0 || (maxAge > minAge && maxAge * 12 > minMonth)) {
+      return this.service.buildAge(minAge, maxAge, minMonth);
+    }
+    return '...';
+  }
 }
