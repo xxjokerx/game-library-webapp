@@ -53,7 +53,7 @@
              (click)="onRemoveMaxP()">Retirer le champ 'Max'
         </div>
         <div
-          class="block mt-4 mb-4">{{ buildPlayers(this.form.get('numberOfPlayers.min').value, this.form.get('numberOfPlayers.max').value) }}</div>
+          class="block mt-4 mb-4">{{ this.playerQuickDisplay }}</div>
       </div>
     </div>
 
@@ -126,11 +126,7 @@
         <div
           class="form-text mt-4 mb-4"
           *ngIf="!form.get('ageRange').valid"><i>Fourchette invalide (l'âge minimal doit être inférieur).</i></div>
-        <div class="mt-4 mb-4">{{ buildAge(
-          this.form.get('ageRange.min').value,
-          this.form.get('ageRange.max').value,
-          this.form.get('ageRange.month').value)
-          }}</div>
+        <div class="mt-4 mb-4">{{ this.ageRangeQuickDisplay }}</div>
       </div>
 
       <div class="row mt-5">

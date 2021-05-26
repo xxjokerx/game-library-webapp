@@ -1,35 +1,41 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {GameService} from '../../game.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Game} from '../../../../model/game.model';
 import {GameNatureEnum} from '../../../../model/enum/game-nature.enum';
 import {map} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-info-handler',
   templateUrl: './info-handler.component.html',
   styleUrls: ['./info-handler.component.css']
 })
-export class InfoHandlerComponent implements OnInit {
+export class InfoHandlerComponent implements OnInit, OnDestroy {
   form: FormGroup;
   game: Game;
   natureList: Array<string>;
   actualEnumType: typeof GameNatureEnum;
 
   hasMaxP: boolean;
-
   hasMaxA: boolean;
   timeUnit: string;
   timeUnitSwitch: string;
   ageInYear: boolean;
-  maxAgeFieldControl = '';
+
+  playerQuickDisplay: string;
+  ageRangeQuickDisplay: string;
+  playerSubscription: Subscription;
+  ageRangeSubscription: Subscription;
 
   constructor(private service: GameService,
               private route: ActivatedRoute,
               private router: Router) {
     this.natureList = Object.keys(GameNatureEnum);
     this.actualEnumType = GameNatureEnum;
+    this.playerQuickDisplay = '';
+    this.ageRangeQuickDisplay = '';
 
 
   }
@@ -48,7 +54,23 @@ export class InfoHandlerComponent implements OnInit {
       this.timeUnitSwitch = 'Âge en mois ?';
       this.ageInYear = true;
     }
+
     this.initForm();
+    this.playerQuickDisplay = this.buildPlayers(this.form.get('numberOfPlayers.min').value, this.form.get('numberOfPlayers.max').value);
+    this.ageRangeQuickDisplay = this.buildAge(this.form.get('ageRange.min').value, this.form.get('ageRange.max').value, this.form.get('ageRange.month').value);
+
+    this.playerSubscription = this.form.get('numberOfPlayers').valueChanges.subscribe(data => {
+      this.playerQuickDisplay = this.buildPlayers(data.min, data.max);
+    });
+
+    this.ageRangeSubscription = this.form.get('ageRange').valueChanges.subscribe(data => {
+      this.ageRangeQuickDisplay = this.buildAge(data.min, data.max, data.month);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.playerSubscription.unsubscribe();
+    this.ageRangeSubscription.unsubscribe();
   }
 
   private initForm(): void {
@@ -168,7 +190,10 @@ export class InfoHandlerComponent implements OnInit {
   }
 
   buildAge(minAge: number, maxAge: number, minMonth: number): string {
-    if (!minAge || !maxAge || !minMonth) {
+    // console.log('minAge: ' + minAge);
+    // console.log('minMonth: ' + minMonth);
+    // console.log('maxAge: ' + maxAge);
+    if (minAge === null || maxAge === null || minMonth === null) {
       return '';
     }
     if (maxAge === 0 || (maxAge > minAge && maxAge * 12 > minMonth)) {
