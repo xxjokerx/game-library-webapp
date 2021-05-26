@@ -166,6 +166,9 @@ export class GameService {
         str += minMonth.toString() + ' mois à ' + maxAge.toString() + ' ans.';
       } else if (minMonth > 0 && maxAge === 1) {
         str += minMonth.toString() + ' mois à ' + maxAge.toString() + ' an.';
+      } else if (minAge === 0 && minMonth === 0) {
+        str = 'Jusqu\'à ' + maxAge;
+        maxAge === 1 ? str += ' an.' : str += ' ans';
       }
     }
     return str;

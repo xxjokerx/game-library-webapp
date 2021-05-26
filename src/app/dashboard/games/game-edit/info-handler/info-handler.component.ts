@@ -56,13 +56,13 @@ export class InfoHandlerComponent implements OnInit {
       'numberOfPlayers': new FormGroup({
         'min': new FormControl(this.game.minNumberOfPlayer, [Validators.min(1), Validators.required]),
         'max': new FormControl(this.game.maxNumberOfPlayer, [Validators.min(0)]),
-      }, [this.ageRangeValidator.bind(this)]),
+      }, [this.playerRangeValidator.bind(this)]),
       'duration': new FormControl(this.game.playTime),
       'ageRange': new FormGroup({
         'month': new FormControl(this.game.minMonth),
-        'min': new FormControl(this.game.minAge),
-        'max': new FormControl(this.game.maxAge)
-      }),
+        'min': new FormControl(this.game.minAge, [Validators.min(0)]),
+        'max': new FormControl(this.game.maxAge, [Validators.min(0)])
+      }, [this.ageRangeValidator.bind(this)]),
     });
   }
 
@@ -88,12 +88,22 @@ export class InfoHandlerComponent implements OnInit {
     this.hasMaxP = true;
   }
 
-  ageRangeValidator: ValidatorFn = (fg: FormGroup) => {
+  playerRangeValidator: ValidatorFn = (fg: FormGroup) => {
     const min = fg.get('min').value;
     const max = fg.get('max').value;
-    return (min > 1 && min <= max) || max === 0
+    return (min >= 1 && min <= max) || max === 0
       ? null
-      : {ageRangeError: true};
+      : {playerRangeError: true};
+  };
+
+  ageRangeValidator: ValidatorFn = (fg: FormGroup) => {
+    const month = fg.get('month').value;
+    const min = fg.get('min').value;
+    const max = fg.get('max').value;
+    if ((min >= 0 && min < max && month < max * 12) || max === 0) {
+      return null;
+    }
+    return {ageRangeError: true};
   };
 
   onRemoveMaxA(): void {

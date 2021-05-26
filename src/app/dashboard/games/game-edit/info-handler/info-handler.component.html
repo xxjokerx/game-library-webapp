@@ -30,6 +30,7 @@
             id="minPlayers"
             type="number"
             formControlName="min"
+            min="1"
             class="form-control inline number-field">
           <label for="minPlayers" class="inline">Min</label>
           <ng-container *ngIf="hasMaxP">
@@ -37,6 +38,7 @@
               id="maxPlayers"
               type="number"
               formControlName="max"
+              min="0"
               class="form-control inline number-field"
             >
             <label for="maxPlayers" class="inline">Max</label>
@@ -75,7 +77,7 @@
               id="ageMin"
               type="number"
               formControlName="min"
-              min="1"
+              min="0"
               class="form-control number-field"
             >
           </div>
@@ -85,7 +87,7 @@
               id="monthMin"
               type="number"
               formControlName="month"
-              min="1"
+              min="0"
               class="form-control number-field"
             >
           </div>
