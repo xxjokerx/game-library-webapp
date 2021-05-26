@@ -4,6 +4,7 @@ import {GameService} from '../../game.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Game} from '../../../../model/game.model';
 import {GameNatureEnum} from '../../../../model/enum/game-nature.enum';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-handler',
@@ -55,27 +56,52 @@ export class InfoHandlerComponent implements OnInit {
       'gameNature': new FormControl(this.game.nature, [Validators.required]),
       'numberOfPlayers': new FormGroup({
         'min': new FormControl(this.game.minNumberOfPlayer, [Validators.min(1), Validators.required]),
-        'max': new FormControl(this.game.maxNumberOfPlayer, [Validators.min(0)]),
+        'max': new FormControl(this.game.maxNumberOfPlayer, [Validators.min(0), Validators.required]),
       }, [this.playerRangeValidator.bind(this)]),
-      'duration': new FormControl(this.game.playTime),
+      'duration': new FormControl(this.game.playTime, [Validators.maxLength(20)]),
       'ageRange': new FormGroup({
-        'month': new FormControl(this.game.minMonth),
-        'min': new FormControl(this.game.minAge, [Validators.min(0)]),
-        'max': new FormControl(this.game.maxAge, [Validators.min(0)])
+        'month': new FormControl(this.game.minMonth, [Validators.min(0), Validators.required]),
+        'min': new FormControl(this.game.minAge, [Validators.min(0), Validators.required]),
+        'max': new FormControl(this.game.maxAge, [Validators.min(0), Validators.required])
       }, [this.ageRangeValidator.bind(this)]),
     });
   }
 
   onSubmit(): void {
+    this.game.nature = this.form.get('gameNature').value;
+    this.game.minNumberOfPlayer = this.form.get('numberOfPlayers.min').value;
+    this.game.maxNumberOfPlayer = this.form.get('numberOfPlayers.max').value;
+    this.game.playTime = this.form.get('duration').value;
+    this.game.minMonth = this.form.get('ageRange.month').value;
+    this.game.minAge = this.form.get('ageRange.min').value;
+    this.game.maxAge = this.form.get('ageRange.max').value;
 
+    this.service.editGame(this.game.id, this.game)
+      .pipe(map(game => this.game = game)).subscribe(() => {
+      this.initForm();
+      this.service.updateDetailedGame(this.game);
+    });
   }
 
   onCancel(): void {
-
+    this.form.patchValue(
+      {
+        gameNature: this.game.nature,
+        numberOfPlayers: {
+          min: this.game.minNumberOfPlayer,
+          max: this.game.maxNumberOfPlayer
+        },
+        duration: this.game.playTime,
+        ageRange: {
+          min: this.game.minAge,
+          month: this.game.minMonth,
+          max: this.game.maxAge
+        }
+      });
   }
 
   onBack(): void {
-
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 
@@ -138,13 +164,16 @@ export class InfoHandlerComponent implements OnInit {
     if (min) {
       return this.service.buildPLayers(min, max);
     }
-    return '...';
+    return '';
   }
 
   buildAge(minAge: number, maxAge: number, minMonth: number): string {
+    if (!minAge || !maxAge || !minMonth) {
+      return '';
+    }
     if (maxAge === 0 || (maxAge > minAge && maxAge * 12 > minMonth)) {
       return this.service.buildAge(minAge, maxAge, minMonth);
     }
-    return '...';
+    return '';
   }
 }

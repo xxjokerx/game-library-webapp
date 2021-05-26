@@ -58,7 +58,10 @@
     </div>
 
     <div class="form-group">
-      <label for="duration" class="font-lg">Durée</label>
+      <label for="duration" class="font-lg">Durée
+
+      </label>
+      <span class="ml-2" *ngIf="!this.form.get('duration').valid"><i>20 caractères maximum !</i></span>
       <input
         id="duration"
         type="text"
@@ -116,6 +119,13 @@
           </div>
 
         </div>
+        <div
+          class="form-text mt-4 mb-4"
+          *ngIf="!form.get('ageRange.min').valid || !form.get('ageRange.max').valid || !form.get('ageRange.month').valid">
+          <i>Les champs doivent être renseignés.</i></div>
+        <div
+          class="form-text mt-4 mb-4"
+          *ngIf="!form.get('ageRange').valid"><i>Fourchette invalide (l'âge minimal doit être inférieur).</i></div>
         <div class="mt-4 mb-4">{{ buildAge(
           this.form.get('ageRange.min').value,
           this.form.get('ageRange.max').value,

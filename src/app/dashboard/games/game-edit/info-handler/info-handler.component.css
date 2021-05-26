@@ -53,3 +53,7 @@ select.inline {
 label.age-label {
   margin: 0.5em 0;
 }
+
+input.ng-invalid {
+  border: 1px solid darkred;
+}
