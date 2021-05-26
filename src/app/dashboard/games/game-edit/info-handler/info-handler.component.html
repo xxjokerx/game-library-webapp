@@ -53,6 +53,14 @@
              (click)="onRemoveMaxP()">Retirer le champ 'Max'
         </div>
         <div
+          class="form-text mt-4 mb-4"
+          *ngIf="!form.get('numberOfPlayers.min').valid || !form.get('numberOfPlayers.max').valid">
+          <i>Les champs doivent être renseignés.</i></div>
+        <div
+          class="form-text mt-4 mb-4"
+          *ngIf="!form.get('numberOfPlayers').valid"><i>Fourchette invalide (Nombre de joueurs minimum doit être
+          inférieur).</i></div>
+        <div
           class="block mt-4 mb-4">{{ this.playerQuickDisplay }}</div>
       </div>
     </div>

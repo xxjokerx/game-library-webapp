@@ -100,7 +100,6 @@ export class InfoHandlerComponent implements OnInit, OnDestroy {
 
     this.service.editGame(this.game.id, this.game)
       .pipe(map(game => this.game = game)).subscribe(() => {
-      this.initForm();
       this.service.updateDetailedGame(this.game);
     });
   }
@@ -180,19 +179,16 @@ export class InfoHandlerComponent implements OnInit, OnDestroy {
   }
 
   buildPlayers(min?: number, max?: number): string {
-    if (!max) {
-      max = 0;
+    if (min === null || max === null) {
+      return '';
     }
-    if (min) {
+    if (max >= min || max === 0) {
       return this.service.buildPLayers(min, max);
     }
     return '';
   }
 
   buildAge(minAge: number, maxAge: number, minMonth: number): string {
-    // console.log('minAge: ' + minAge);
-    // console.log('minMonth: ' + minMonth);
-    // console.log('maxAge: ' + maxAge);
     if (minAge === null || maxAge === null || minMonth === null) {
       return '';
     }
