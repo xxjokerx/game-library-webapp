@@ -98,6 +98,17 @@ export class GameService {
       .delete<Game>(this.apiUri + '/admin/games/' + gameId + '/unlink-theme/' + themeId, {responseType: 'json'});
   }
 
+  /** Attach the creator to the game */
+  addCreator(gameId: number, creatorId: number): Observable<Game> {
+    return this.http
+      .post<Game>(this.apiUri + '/admin/games/' + gameId + '/add-creator/' + creatorId, null, {responseType: 'json'});
+  }
+
+  /** Remove the creator to the game */
+  unlinkCreator(gameId: number, creatorId: number): Observable<Game> {
+    return this.http
+      .delete<Game>(this.apiUri + '/admin/games/' + gameId + '/unlink-creator/' + creatorId, {responseType: 'json'});
+  }
 
   /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */

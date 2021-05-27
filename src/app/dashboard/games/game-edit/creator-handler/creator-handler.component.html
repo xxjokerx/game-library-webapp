@@ -1,1 +1,15 @@
-<p>creator-handler works!</p>
+<div class="block-container">
+  <h4>Créateurs</h4>
+  <div class="creator-handler-body">
+    <ul>
+      <li class="creator-line" *ngFor="let creator of gameCreators$ | async">
+        <span class="name">{{ creator.firstName }} {{ creator.lastName}}</span>
+        <span class="role ml-3 badge-info badge">{{ actualEnumType[creator.role]}}</span>
+        <span class="creator-control ml-3 lead">Retirer</span>
+      </li>
+    </ul>
+    <div class="add-nav" *ngIf="!addModeOn">
+      <a class="nav-link lead" (click)="onAddMode()">Associer un créateur.</a>
+    </div>
+  </div>
+</div>

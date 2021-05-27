@@ -7,5 +7,6 @@
 - [] game.duration is a string, try to make it a short in minutes 
 - [] responsiveness in game edit components.
 - [] enumeration : rework those like in game informations edit module
+- [] improve nav css
 
 ## V2 (Update)

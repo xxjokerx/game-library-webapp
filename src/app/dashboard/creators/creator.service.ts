@@ -1,18 +1,22 @@
 import {Injectable} from '@angular/core';
 import {Creator} from '../../model/creator.model';
 import {Page} from '../../model/page.model';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Person} from '../../model/interface/person.interface';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreatorService {
+  readonly apiUri: string;
   pagedCreators: Page<Creator>;
   pagedCreatorsChanged: Subject<Page<Creator>> = new Subject<Page<Creator>>();
   existingNames: Person[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
+    this.apiUri = environment.apiUri;
   }
 
   setPagedCreators(pagedCreators: Page<Creator>): void {
@@ -46,5 +50,10 @@ export class CreatorService {
     });
     console.table(names);
     this.existingNames = names.slice();
+  }
+
+  /* ============================================== REST API METHODS =================================================================== */
+  fetchAllNames(): Observable<Creator[]> {
+    return this.http.get<Creator[]>(this.apiUri + '/admin/creators/names', {responseType: 'json'});
   }
 }

@@ -9,7 +9,7 @@ import {PageCustom} from '../../model/page-custom.model';
 
 @Injectable({providedIn: 'root'})
 export class CategoryService {
-  apiUri: string;
+  readonly apiUri: string;
   categories: Category[];
   private filteredCategories: Category[];
   pageChanged: Subject<PageCustom<Category>> = new Subject<PageCustom<Category>>();
