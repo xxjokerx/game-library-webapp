@@ -42,7 +42,7 @@ export class CreatorListComponent implements OnInit, OnDestroy {
 
   onRefreshList(): void {
     this.fetchCreators();
-    this.router.navigate(['/admin/creators']);
+    this.router.navigate(['/admin/creatorsName']);
   }
 
   onPageChange(): void {

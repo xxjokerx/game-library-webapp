@@ -7,6 +7,6 @@ export class Creator implements ModelInterface, Person {
   id?: number;
   firstName: string;
   lastName: string;
-  role: CreatorRoleEnum;
+  role?: CreatorRoleEnum;
   contact?: Contact;
 }

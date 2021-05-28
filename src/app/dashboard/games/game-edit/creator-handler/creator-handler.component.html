@@ -11,5 +11,17 @@
     <div class="add-nav" *ngIf="!addModeOn">
       <a class="nav-link lead" (click)="onAddMode()">Associer un créateur.</a>
     </div>
+    <div class="picker-component" *ngIf="addModeOn">
+      <ng-container *ngIf="{
+        all: allCreatorsName$ | async,
+        current: gameCreators$ | async }
+        as data">
+        <app-creator-picker
+          *ngIf="data.all && data.current"
+          [allCreators]="data.all"
+          [currentGameCreators]="data.current"
+          (backEvent)="attachCreator($event)"></app-creator-picker>
+      </ng-container>
+    </div>
   </div>
 </div>

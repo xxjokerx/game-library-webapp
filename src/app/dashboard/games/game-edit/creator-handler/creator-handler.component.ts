@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {Creator} from '../../../../model/creator.model';
 import {Game} from '../../../../model/game.model';
 import {CreatorRoleEnum} from '../../../../model/enum/creator-role.enum';
+import {concatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-creator-handler',
@@ -12,7 +13,7 @@ import {CreatorRoleEnum} from '../../../../model/enum/creator-role.enum';
   styleUrls: ['./creator-handler.component.css']
 })
 export class CreatorHandlerComponent implements OnInit, OnDestroy {
-  allCreators$: Observable<Creator[]>;
+  allCreatorsName$: Observable<Creator[]>;
   gameCreators$: BehaviorSubject<Creator[]> = new BehaviorSubject<Creator[]>(null);
   private game: Game;
   addModeOn: boolean;
@@ -30,7 +31,7 @@ export class CreatorHandlerComponent implements OnInit, OnDestroy {
       this.gameCreators$.next(game.creators);
       this.game = game;
     });
-    this.allCreators$ = this.creatorService.fetchAllNames();
+    this.allCreatorsName$ = this.creatorService.fetchAllNames();
   }
 
   ngOnDestroy(): void {
@@ -41,11 +42,15 @@ export class CreatorHandlerComponent implements OnInit, OnDestroy {
     this.addModeOn = true;
   }
 
-  attachCreator($creator: Creator): void {
+  attachCreator($creatorFullName: string): void {
     this.addModeOn = false;
-    if ($creator) {
-      this.service.addCreator(this.game.id, $creator.id).subscribe(game => this.service.detailedGame$.next(game));
-    }
+    this.creatorService
+      .findByFullName($creatorFullName.toLowerCase().replace(' ', ''))
+      .pipe(
+        concatMap(creator => this.service.addCreator(this.game.id, creator.id))
+      ).subscribe(game => this.service.detailedGame$.next(game));
+
+
   }
 
   onRemove(creatorId: number): void {

@@ -56,4 +56,8 @@ export class CreatorService {
   fetchAllNames(): Observable<Creator[]> {
     return this.http.get<Creator[]>(this.apiUri + '/admin/creators/names', {responseType: 'json'});
   }
+
+  findByFullName(fullName: string): Observable<Creator> {
+    return this.http.get<Creator>(this.apiUri + '/admin/creators?full-name=' + fullName, {responseType: 'json'});
+  }
 }

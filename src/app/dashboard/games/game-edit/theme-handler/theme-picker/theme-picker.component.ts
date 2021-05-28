@@ -49,7 +49,7 @@ export class ThemePickerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const themeRetrieved = this.retrieveId(this.form.get('themeField').value as string);
+    const themeRetrieved = this.retrieveTheme(this.form.get('themeField').value as string);
     /* this event remove the 'add mode', and triggers the service procedure to attach this theme to current game */
     this.backEvent.emit(themeRetrieved);
   }
@@ -70,7 +70,7 @@ export class ThemePickerComponent implements OnInit {
     );
   };
 
-  private retrieveId(title: string): Theme {
+  private retrieveTheme(title: string): Theme {
     return this.availableThemes.find(c => c.name === title);
   }
 

@@ -43,7 +43,7 @@ li {
 }
 
 .add-nav {
-  padding: 0 1.5em;
+  padding: 1.5em 1.5em;
 }
 
 .nav-link {
@@ -52,4 +52,8 @@ li {
 
 .nav-link:hover {
   cursor: pointer;
+}
+
+.picker-component {
+  padding: 2em 2em 0.5em;
 }

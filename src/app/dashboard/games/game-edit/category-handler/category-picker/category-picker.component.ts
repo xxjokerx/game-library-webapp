@@ -47,7 +47,7 @@ export class CategoryPickerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const categoryRetrieved = this.retrieveId(this.form.get('categoryField').value as string);
+    const categoryRetrieved = this.retrieveCategory(this.form.get('categoryField').value as string);
     /* this event remove the 'add mode', and triggers the service procedure to attach this category to current game */
     this.backEvent.emit(categoryRetrieved);
   }
@@ -68,7 +68,7 @@ export class CategoryPickerComponent implements OnInit {
     );
   };
 
-  private retrieveId(title: string): Category {
+  private retrieveCategory(title: string): Category {
     return this.availableCategories.find(c => c.name === title);
   }
 
