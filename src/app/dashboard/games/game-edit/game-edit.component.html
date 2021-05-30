@@ -66,15 +66,6 @@
 
     <div class="highlightable"
          routerLinkActive="active"
-         [routerLink]="['/admin/locked-mode/games', game.id, 'edit', 'publisher']">
-      <h4 *ngIf="game.publisher">Éditeur
-        <span class="info text-primary lead">Éditer</span>
-      </h4>
-      <div>{{ game.publisher.name }}</div>
-    </div>
-
-    <div class="highlightable"
-         routerLinkActive="active"
          [routerLink]="['/admin/locked-mode/games', game.id, 'edit', 'description']">
       <h4 *ngIf="game.description">Description
         <span class="info text-primary lead">Éditer</span>
