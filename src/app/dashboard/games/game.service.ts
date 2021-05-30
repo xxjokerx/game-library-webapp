@@ -110,6 +110,18 @@ export class GameService {
       .delete<Game>(this.apiUri + '/admin/games/' + gameId + '/unlink-creator/' + creatorId, {responseType: 'json'});
   }
 
+  addProductLine(gameId: number, lineId: number): Observable<Game> {
+    return this.http
+      .post<Game>(this.apiUri + '/admin/games/' + gameId + '/add-product-line/' + lineId, null, {responseType: 'json'});
+
+  }
+
+  /** Remove the product line to the game */
+  unlinkProductLine(gameId: number, lineId: number): Observable<Game> {
+    return this.http
+      .delete<Game>(this.apiUri + '/admin/games/' + gameId + '/unlink-product-line/' + lineId, {responseType: 'json'});
+  }
+
   /* ================================================ OTHER METHODS ==================================================================== */
   /** sets the page to the debut value */
   initPage(): void {
@@ -184,6 +196,4 @@ export class GameService {
     }
     return str;
   }
-
-
 }
