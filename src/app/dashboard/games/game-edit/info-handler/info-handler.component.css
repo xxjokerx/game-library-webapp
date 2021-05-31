@@ -14,6 +14,7 @@ h4 {
 .field-control.max-age-text {
   margin-left: 0;
   margin-top: 2em;
+  width: fit-content;
 }
 
 label.font-lg {

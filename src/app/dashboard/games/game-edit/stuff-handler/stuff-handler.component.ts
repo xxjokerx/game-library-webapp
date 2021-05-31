@@ -49,7 +49,7 @@ export class StuffHandlerComponent implements OnInit {
 
 
   onCancel(): void {
-    this.form.patchValue({name: this.game.stuff});
+    this.form.patchValue({stuff: this.game.stuff});
   }
 
   onBack(): void {

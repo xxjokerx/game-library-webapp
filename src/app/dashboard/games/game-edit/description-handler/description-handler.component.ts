@@ -47,7 +47,7 @@ export class DescriptionHandlerComponent implements OnInit {
 
 
   onCancel(): void {
-    this.form.patchValue({name: this.game.description});
+    this.form.patchValue({description: this.game.description});
   }
 
   onBack(): void {
