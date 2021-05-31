@@ -15,9 +15,10 @@
         as data">
 
         <app-line-picker
-          *ngIf="data.all && data.current ; else spinnerBlock"
-          [allProductLine]="data.all"
-          [currentGameCreators]="data.current"
+          *ngIf="data.all ; else spinnerBlock"
+
+          [allProductLines]="data.all"
+          [currentGameProductLine]="data.current"
           (backEvent)="attachProductLine($event)"></app-line-picker>
 
         <ng-template #spinnerBlock>
@@ -28,7 +29,6 @@
           </div>
         </ng-template>
       </ng-container>
-
     </div>
   </div>
 </div>

@@ -49,8 +49,6 @@ export class CreatorHandlerComponent implements OnInit, OnDestroy {
       .pipe(
         concatMap(creator => this.service.addCreator(this.game.id, creator.id))
       ).subscribe(game => this.service.detailedGame$.next(game));
-
-
   }
 
   onRemove(creatorId: number): void {
