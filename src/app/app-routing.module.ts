@@ -45,12 +45,12 @@ import {InfoHandlerComponent} from './dashboard/games/game-edit/info-handler/inf
 import {CreatorHandlerComponent} from './dashboard/games/game-edit/creator-handler/creator-handler.component';
 import {LineHandlerComponent} from './dashboard/games/game-edit/line-handler/line-handler.component';
 import {PublisherHandlerComponent} from './dashboard/games/game-edit/publisher-handler/publisher-handler.component';
-import {DescrptionHandlerComponent} from './dashboard/games/game-edit/descrption-handler/descrption-handler.component';
 import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/size-handler.component';
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
+import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 
 const routes: Routes = [
   {
@@ -103,7 +103,7 @@ const routes: Routes = [
           },
           {
             path: 'description',
-            component: DescrptionHandlerComponent
+            component: DescriptionHandlerComponent
           },
           {
             path: 'size',

@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {DescrptionHandlerComponent} from './descrption-handler.component';
+import {DescriptionHandlerComponent} from './description-handler.component';
 
-describe('DescrptionHandlerComponent', () => {
-  let component: DescrptionHandlerComponent;
-  let fixture: ComponentFixture<DescrptionHandlerComponent>;
+describe('DescriptionHandlerComponent', () => {
+  let component: DescriptionHandlerComponent;
+  let fixture: ComponentFixture<DescriptionHandlerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DescrptionHandlerComponent]
+      declarations: [DescriptionHandlerComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DescrptionHandlerComponent);
+    fixture = TestBed.createComponent(DescriptionHandlerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

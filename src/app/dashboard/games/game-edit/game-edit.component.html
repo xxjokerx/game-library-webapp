@@ -67,10 +67,10 @@
     <div class="highlightable"
          routerLinkActive="active"
          [routerLink]="['/admin/locked-mode/games', game.id, 'edit', 'description']">
-      <h4 *ngIf="game.description">Description
+      <h4>Description
         <span class="info text-primary lead">Éditer</span>
       </h4>
-      <div>{{ game.description }}</div>
+      <div *ngIf="game.description">{{ game.description }}</div>
     </div>
 
     <div class="highlightable"

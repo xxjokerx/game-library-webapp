@@ -6,12 +6,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-stuff-handler',
-  templateUrl: './stuff-handler.component.html',
-  styleUrls: ['./stuff-handler.component.css']
+  selector: 'app-description-handler',
+  templateUrl: './description-handler.component.html',
+  styleUrls: ['./description-handler.component.css']
 })
-export class StuffHandlerComponent implements OnInit {
-
+export class DescriptionHandlerComponent implements OnInit {
 
   form: FormGroup;
   game: Game;
@@ -29,7 +28,7 @@ export class StuffHandlerComponent implements OnInit {
 
   private initForm(): void {
     this.form = new FormGroup({
-      'stuff': new FormControl(this.game.stuff, [
+      'description': new FormControl(this.game.description, [
           Validators.maxLength(1000),
         ], []
       )
@@ -37,7 +36,7 @@ export class StuffHandlerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.game.stuff = this.form.get('stuff').value;
+    this.game.description = this.form.get('description').value;
     this.service.editGame(this.game.id, this.game)
       .pipe(map(game => this.game = game)).subscribe(() => {
       this.initForm();
@@ -47,7 +46,7 @@ export class StuffHandlerComponent implements OnInit {
 
 
   onCancel(): void {
-    this.form.patchValue({name: this.game.stuff});
+    this.form.patchValue({name: this.game.description});
   }
 
   onBack(): void {

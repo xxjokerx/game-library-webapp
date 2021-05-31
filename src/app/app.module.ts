@@ -54,7 +54,6 @@ import {CreatorHandlerComponent} from './dashboard/games/game-edit/creator-handl
 import {LineHandlerComponent} from './dashboard/games/game-edit/line-handler/line-handler.component';
 import {PublisherHandlerComponent} from './dashboard/games/game-edit/publisher-handler/publisher-handler.component';
 import {InfoHandlerComponent} from './dashboard/games/game-edit/info-handler/info-handler.component';
-import {DescrptionHandlerComponent} from './dashboard/games/game-edit/descrption-handler/descrption-handler.component';
 import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/size-handler.component';
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
@@ -64,6 +63,7 @@ import {ObjectToStringPipe} from './shared/pipes/object-to-string.pipe';
 import {ThemePickerComponent} from './dashboard/games/game-edit/theme-handler/theme-picker/theme-picker.component';
 import {CreatorPickerComponent} from './dashboard/games/game-edit/creator-handler/creator-picker/creator-picker.component';
 import {LinePickerComponent} from './dashboard/games/game-edit/line-handler/line-picker/line-picker.component';
+import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -130,7 +130,6 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     LineHandlerComponent,
     PublisherHandlerComponent,
     InfoHandlerComponent,
-    DescrptionHandlerComponent,
     SizeHandlerComponent,
     StuffHandlerComponent,
     ImageHandlerComponent,
@@ -138,7 +137,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     CategoryPickerComponent,
     ThemePickerComponent,
     CreatorPickerComponent,
-    LinePickerComponent
+    LinePickerComponent,
+    DescriptionHandlerComponent
   ],
   imports: [
     BrowserModule,

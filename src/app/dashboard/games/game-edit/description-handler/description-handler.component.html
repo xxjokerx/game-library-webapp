@@ -1,19 +1,19 @@
 <div class="block-container">
-  <h4>Matériel</h4>
+  <h4>Description du jeu</h4>
   <form
     class="custom-form"
     [formGroup]="form"
     (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-      <label for="stuff"></label>
+      <label for="description"></label>
       <textarea
-        id="stuff"
+        id="description"
         rows="20"
-        formControlName="stuff"
+        formControlName="description"
         class="form-control">
       </textarea>
-      <div>{{ this.form.get('stuff').value.length}} / 1000</div>
+      <div>{{ this.form.get('description').value.length}} / 1000</div>
     </div>
     <div class="row mt-5">
       <div class="col-md-12">
