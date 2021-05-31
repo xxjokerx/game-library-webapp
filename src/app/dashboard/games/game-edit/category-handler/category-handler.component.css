@@ -37,3 +37,7 @@ li {
 .nav-link:hover {
   cursor: pointer;
 }
+
+.inline {
+  display: inline-block;
+}

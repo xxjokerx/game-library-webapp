@@ -45,6 +45,7 @@ export class NameHandlerComponent implements OnInit {
       this.takenNameValidator.updateTakenNames();
       this.service.updateDetailedGame(this.game);
     });
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 
 

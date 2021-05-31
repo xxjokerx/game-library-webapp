@@ -6,6 +6,7 @@ import {Creator} from '../../../../model/creator.model';
 import {Game} from '../../../../model/game.model';
 import {CreatorRoleEnum} from '../../../../model/enum/creator-role.enum';
 import {concatMap} from 'rxjs/operators';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-creator-handler',
@@ -21,7 +22,9 @@ export class CreatorHandlerComponent implements OnInit, OnDestroy {
   actualEnumType: typeof CreatorRoleEnum;
 
   constructor(private service: GameService,
-              private creatorService: CreatorService) {
+              private creatorService: CreatorService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.actualEnumType = CreatorRoleEnum;
   }
 
@@ -53,5 +56,9 @@ export class CreatorHandlerComponent implements OnInit, OnDestroy {
 
   onRemove(creatorId: number): void {
     this.service.unlinkCreator(this.game.id, creatorId).subscribe(game => this.service.detailedGame$.next(game));
+  }
+
+  onBack(): void {
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 }

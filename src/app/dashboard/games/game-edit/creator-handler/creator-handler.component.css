@@ -57,3 +57,7 @@ li {
 .picker-component {
   padding: 2em 2em 0.5em;
 }
+
+.inline {
+  display: inline-block;
+}

@@ -37,11 +37,11 @@ body {
   width: 36px;
   height: 36px;
   margin: 12px 6px;
-  background-color: #FFC107;
+  background-color: #28a745;
 }
 
 .back-button:hover {
-  background-color: #E0A800;
+  background-color: #218838;
   cursor: pointer;
 }
 

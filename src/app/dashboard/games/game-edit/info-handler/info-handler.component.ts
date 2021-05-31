@@ -102,6 +102,7 @@ export class InfoHandlerComponent implements OnInit, OnDestroy {
       .pipe(map(game => this.game = game)).subscribe(() => {
       this.service.updateDetailedGame(this.game);
     });
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 
   onCancel(): void {

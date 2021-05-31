@@ -4,6 +4,7 @@ import {GameService} from '../../game.service';
 import {CategoryService} from '../../../categories/category.service';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {Game} from '../../../../model/game.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-handler',
@@ -18,7 +19,9 @@ export class CategoryHandlerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private service: GameService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -47,5 +50,9 @@ export class CategoryHandlerComponent implements OnInit, OnDestroy {
 
   onRemove(categoryId: number): void {
     this.service.unlinkCategory(this.game.id, categoryId).subscribe(game => this.service.detailedGame$.next(game));
+  }
+
+  onBack(): void {
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 }

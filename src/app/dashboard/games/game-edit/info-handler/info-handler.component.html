@@ -44,11 +44,11 @@
             <label for="maxPlayers" class="inline">Max</label>
           </ng-container>
         </div>
-        <div class="text-primary lead inline"
+        <div class="lead inline field-control"
              *ngIf="!hasMaxP"
              (click)="onAddMaxP()">Définir un maximum
         </div>
-        <div class="text-primary lead inline"
+        <div class="lead inline field-control"
              *ngIf="hasMaxP"
              (click)="onRemoveMaxP()">Retirer le champ 'Max'
         </div>
@@ -104,8 +104,8 @@
           </div>
           <div class="inline">{{ timeUnit }}
           </div>
-          <div class="inline lead text-primary" (click)="onSwitchToMonth()" *ngIf="ageInYear">En mois ?</div>
-          <div class="inline lead text-primary" (click)="onSwitchToYear()" *ngIf="!ageInYear">En Années ?</div>
+          <div class="inline lead field-control" (click)="onSwitchToMonth()" *ngIf="ageInYear">En mois ?</div>
+          <div class="inline lead field-control" (click)="onSwitchToYear()" *ngIf="!ageInYear">En Années ?</div>
         </div>
         <div class="age-line">
           <ng-container *ngIf="hasMaxA">
@@ -119,11 +119,11 @@
                 class="form-control number-field">
             </div>
             <div class="inline">ans</div>
-            <div class="inline lead text-primary" (click)="onRemoveMaxA()">Retirer l'âge max
+            <div class="inline lead field-control" (click)="onRemoveMaxA()">Retirer l'âge max
             </div>
           </ng-container>
 
-          <div class="lead text-primary max-age-text" (click)="onAddMaxA()" *ngIf="!hasMaxA">Définir un âge max
+          <div class="lead max-age-text field-control" (click)="onAddMaxA()" *ngIf="!hasMaxA">Définir un âge max
           </div>
 
         </div>

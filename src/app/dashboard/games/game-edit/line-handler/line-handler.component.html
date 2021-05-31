@@ -5,8 +5,10 @@
       <span class="name">{{ gameProductLine$.value.name }}</span>
       <span class="line-control ml-3 lead" (click)="onRemove(gameProductLine$.value.id)">Retirer</span>
     </div>
-    <div class="add-nav" *ngIf="!addModeOn && game.productLine == null">
-      <a class="nav-link lead" (click)="onAddMode()">Associer à une gamme.</a>
+    <div class="add-nav">
+      <a class="nav-link lead inline" (click)="onAddMode()" *ngIf="!addModeOn && game.productLine == null">Associer à
+        une gamme</a>
+      <a class="nav-link lead inline" (click)="onBack()" *ngIf="!addModeOn">Retour</a>
     </div>
     <div class="picker-component" *ngIf="addModeOn">
       <ng-container *ngIf="{

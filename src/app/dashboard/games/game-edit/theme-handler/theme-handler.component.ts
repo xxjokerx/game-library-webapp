@@ -4,6 +4,7 @@ import {Game} from '../../../../model/game.model';
 import {GameService} from '../../game.service';
 import {ThemeService} from '../../../themes/theme.service';
 import {Theme} from '../../../../model/theme.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-theme-handler',
@@ -18,7 +19,9 @@ export class ThemeHandlerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private service: GameService,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -47,5 +50,9 @@ export class ThemeHandlerComponent implements OnInit, OnDestroy {
 
   onRemove(themeId: number): void {
     this.service.unlinkTheme(this.game.id, themeId).subscribe(game => this.service.detailedGame$.next(game));
+  }
+
+  onBack(): void {
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 }

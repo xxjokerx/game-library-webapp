@@ -4,6 +4,7 @@ import {Game} from '../../../../model/game.model';
 import {ProductLine} from '../../../../model/product-line.model';
 import {GameService} from '../../game.service';
 import {ProductLineService} from '../../../product-line/product-line.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-line-handler',
@@ -18,7 +19,9 @@ export class LineHandlerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private service: GameService,
-              private lineService: ProductLineService) {
+              private lineService: ProductLineService,
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -47,5 +50,9 @@ export class LineHandlerComponent implements OnInit, OnDestroy {
 
   onRemove(lineId: number): void {
     this.service.unlinkProductLine(this.game.id, lineId).subscribe(game => this.service.detailedGame$.next(game));
+  }
+
+  onBack(): void {
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 }

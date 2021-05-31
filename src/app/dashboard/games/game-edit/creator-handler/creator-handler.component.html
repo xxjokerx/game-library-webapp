@@ -9,7 +9,8 @@
       </li>
     </ul>
     <div class="add-nav" *ngIf="!addModeOn">
-      <a class="nav-link lead" (click)="onAddMode()">Associer un créateur.</a>
+      <a class="nav-link lead inline" (click)="onAddMode()">Associer un créateur</a>
+      <a class="nav-link lead inline" (click)="onBack()">Retour</a>
     </div>
     <div class="picker-component" *ngIf="addModeOn">
       <ng-container *ngIf="{

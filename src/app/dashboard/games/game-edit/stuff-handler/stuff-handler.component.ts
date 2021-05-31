@@ -43,6 +43,8 @@ export class StuffHandlerComponent implements OnInit {
       this.initForm();
       this.service.updateDetailedGame(this.game);
     });
+    this.router.navigate(['./..'], {relativeTo: this.route});
+
   }
 
 

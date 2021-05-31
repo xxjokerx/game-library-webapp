@@ -41,6 +41,7 @@ export class SizeHandlerComponent implements OnInit {
       this.initForm();
       this.service.updateDetailedGame(this.game);
     });
+    this.router.navigate(['./..'], {relativeTo: this.route});
   }
 
 
