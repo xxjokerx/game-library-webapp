@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LockedModeWrapperComponent} from './locked-mode-wrapper.component';
+import {BannerComponent} from './banner.component';
 
-describe('LockedModeWrapperComponent', () => {
-  let component: LockedModeWrapperComponent;
-  let fixture: ComponentFixture<LockedModeWrapperComponent>;
+describe('BannerComponent', () => {
+  let component: BannerComponent;
+  let fixture: ComponentFixture<BannerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LockedModeWrapperComponent]
+      declarations: [BannerComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LockedModeWrapperComponent);
+    fixture = TestBed.createComponent(BannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

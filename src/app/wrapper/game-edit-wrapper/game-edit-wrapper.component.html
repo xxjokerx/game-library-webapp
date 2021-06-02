@@ -1,0 +1,22 @@
+<app-locked-header [entity]="entity" [mode]="mode"></app-locked-header>
+
+<body>
+<div class="sidenav">
+  <div class="back-button"
+       (click)="onBack()">
+    <div>
+      <img
+        class="svg-icon"
+        src="assets/icons/arrow-left-white.svg"
+        alt="R"/>
+    </div>
+  </div>
+  <app-banner class="list mt-3" [mode]="mode">
+  </app-banner>
+</div>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+</body>
+

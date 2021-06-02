@@ -36,7 +36,7 @@ import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/gam
 import {GameListComponent} from './dashboard/games/game-list/game-list.component';
 import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 import {GameResolver} from './dashboard/games/game-resolver.service';
-import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
+import {GameEditWrapperComponent} from './wrapper/game-edit-wrapper/game-edit-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
 import {NameHandlerComponent} from './dashboard/games/game-edit/name-handler/name-handler.component';
@@ -60,7 +60,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/locked-mode',
-    component: LockedModeWrapperComponent,
+    component: GameEditWrapperComponent,
     canActivate: [AuthGuard],
     data: {roles: ['ADMIN']},
     children: [

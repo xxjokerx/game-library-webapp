@@ -45,7 +45,7 @@ import {GameListComponent} from './dashboard/games/game-list/game-list.component
 import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/game-summary.component';
 import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 import {CommonModule} from '@angular/common';
-import {LockedModeWrapperComponent} from './wrapper/locked-mode-wrapper/locked-mode-wrapper.component';
+import {GameEditWrapperComponent} from './wrapper/game-edit-wrapper/game-edit-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
 import {NameHandlerComponent} from './dashboard/games/game-edit/name-handler/name-handler.component';
@@ -64,6 +64,9 @@ import {ThemePickerComponent} from './dashboard/games/game-edit/theme-handler/th
 import {CreatorPickerComponent} from './dashboard/games/game-edit/creator-handler/creator-picker/creator-picker.component';
 import {LinePickerComponent} from './dashboard/games/game-edit/line-handler/line-picker/line-picker.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
+import {BannerComponent} from './shared/components/banner/banner.component';
+import {NewGameWrapperComponent} from './wrapper/new-game-wrapper/new-game-wrapper.component';
+import {LockedHeaderComponent} from './shared/components/locked-header/locked-header.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -121,7 +124,7 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     GameListComponent,
     GameSummaryComponent,
     GameDetailComponent,
-    LockedModeWrapperComponent,
+    GameEditWrapperComponent,
     GameEditComponent,
     CategoryHandlerComponent,
     NameHandlerComponent,
@@ -138,7 +141,10 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     ThemePickerComponent,
     CreatorPickerComponent,
     LinePickerComponent,
-    DescriptionHandlerComponent
+    DescriptionHandlerComponent,
+    BannerComponent,
+    NewGameWrapperComponent,
+    LockedHeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -14,22 +14,6 @@ body {
   /*border-right: #28a745 2px solid;*/
 }
 
-.list {
-  color: white;
-  list-style: none;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
-
-.sidenav .list {
-  position: sticky;
-  top: 0;
-}
-
-.sidenav .list li {
-  display: block;
-}
 
 .back-button {
   border-radius: 50%;
