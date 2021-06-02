@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GameService} from '../../dashboard/games/game.service';
-import {WrapperService} from '../../shared/services/wrapper.service';
+import {NAV, WrapperService} from '../../shared/services/wrapper.service';
 
 @Component({
   selector: 'app-locked-mode-wrapper',
@@ -9,9 +9,6 @@ import {WrapperService} from '../../shared/services/wrapper.service';
   styleUrls: ['./game-edit-wrapper.component.css']
 })
 export class GameEditWrapperComponent implements OnInit, OnDestroy {
-
-  mode = 'Édition';
-  entity = 'Jeux';
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -27,6 +24,7 @@ export class GameEditWrapperComponent implements OnInit, OnDestroy {
   }
 
   onBack(): void {
+    this.wrapperService.mode = NAV;
     this.service.game ? this.router.navigate(['/admin/editor/games/list', this.service.game.id])
       : this.router.navigate(['/admin/editor/games/list']);
   }

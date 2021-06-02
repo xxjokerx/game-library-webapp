@@ -5,6 +5,7 @@ import {ImageService} from '../../../shared/services/image.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
+import {EDITION, WrapperService} from '../../../shared/services/wrapper.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -24,7 +25,8 @@ export class GameDetailComponent implements OnInit {
               private imageService: ImageService,
               private route: ActivatedRoute,
               private router: Router,
-              private deletionHandlerService: DeletionHandlerService) {
+              private deletionHandlerService: DeletionHandlerService,
+              private wrapperService: WrapperService) {
   }
 
   ngOnInit(): void {
@@ -69,6 +71,8 @@ export class GameDetailComponent implements OnInit {
   }
 
   onEdit(): void {
+    this.wrapperService.entity = 'Jeux';
+    this.wrapperService.mode = EDITION;
     this.router.navigate(['admin/locked-mode/games/45/edit']);
   }
 }

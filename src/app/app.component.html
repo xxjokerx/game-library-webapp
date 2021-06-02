@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<app-nav-wrapper *ngIf="isNavigation(); else notNavBlock"></app-nav-wrapper>
+
+<ng-template #notNavBlock>
+  <app-locked-mode-wrapper></app-locked-mode-wrapper>
+</ng-template>

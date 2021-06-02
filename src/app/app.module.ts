@@ -65,7 +65,6 @@ import {CreatorPickerComponent} from './dashboard/games/game-edit/creator-handle
 import {LinePickerComponent} from './dashboard/games/game-edit/line-handler/line-picker/line-picker.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 import {BannerComponent} from './shared/components/banner/banner.component';
-import {NewGameWrapperComponent} from './wrapper/new-game-wrapper/new-game-wrapper.component';
 import {LockedHeaderComponent} from './shared/components/locked-header/locked-header.component';
 import {BackButtonComponent} from './shared/components/back-button/back-button.component';
 
@@ -144,7 +143,6 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     LinePickerComponent,
     DescriptionHandlerComponent,
     BannerComponent,
-    NewGameWrapperComponent,
     LockedHeaderComponent,
     BackButtonComponent
   ],

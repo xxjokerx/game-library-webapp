@@ -27,7 +27,6 @@ import {CategoriesComponent} from './dashboard/categories/categories.component';
 import {CategoryEditComponent} from './dashboard/categories/category-edit/category-edit.component';
 import {CategoryDetailComponent} from './dashboard/categories/category-detail/category-detail.component';
 import {CategoryResolver} from './dashboard/categories/category-resolver.service';
-import {NavWrapperComponent} from './wrapper/nav-wrapper/nav-wrapper.component';
 import {DashboardLoanComponent} from './dashboard-loan/dashboard-loan.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 import {GamesComponent} from './dashboard/games/games.component';
@@ -36,7 +35,6 @@ import {GameSummaryComponent} from './dashboard/games/game-list/game-summary/gam
 import {GameListComponent} from './dashboard/games/game-list/game-list.component';
 import {GameDetailComponent} from './dashboard/games/game-detail/game-detail.component';
 import {GameResolver} from './dashboard/games/game-resolver.service';
-import {GameEditWrapperComponent} from './wrapper/game-edit-wrapper/game-edit-wrapper.component';
 import {GameEditComponent} from './dashboard/games/game-edit/game-edit.component';
 import {CategoryHandlerComponent} from './dashboard/games/game-edit/category-handler/category-handler.component';
 import {NameHandlerComponent} from './dashboard/games/game-edit/name-handler/name-handler.component';
@@ -51,7 +49,7 @@ import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/i
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
-import {NewGameWrapperComponent} from './wrapper/new-game-wrapper/new-game-wrapper.component';
+import {WrapperEditResolver} from './shared/resolvers/wrapper-edit-resolver.service';
 
 const routes: Routes = [
   {
@@ -61,14 +59,13 @@ const routes: Routes = [
   },
   {
     path: 'admin/locked-mode',
-    component: GameEditWrapperComponent,
     canActivate: [AuthGuard],
     data: {roles: ['ADMIN']},
     children: [
       {
         path: 'games/:id/edit',
         component: GameEditComponent,
-        resolve: [GameResolver],
+        resolve: [GameResolver, WrapperEditResolver],
         children: [
           {
             path: '',
@@ -123,12 +120,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin/locked-mode-new',
-    component: NewGameWrapperComponent
-  },
-  {
     path: 'admin',
-    component: NavWrapperComponent,
     children: [
       {
         path: 'editor',

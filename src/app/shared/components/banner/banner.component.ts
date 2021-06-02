@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {WrapperService} from '../../services/wrapper.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,13 +8,13 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
-  @Input()
-  mode;
-
-  constructor() {
+  constructor(private wService: WrapperService) {
   }
 
   ngOnInit(): void {
   }
 
+  getMode(): string {
+    return this.wService.getModeName();
+  }
 }

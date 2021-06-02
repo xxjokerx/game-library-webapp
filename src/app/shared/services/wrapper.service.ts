@@ -1,25 +1,38 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {EditorModeEnum} from '../../model/enum/editor-mode.enum';
-import {NavigationStart, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {filter} from 'rxjs/operators';
+import {Router} from '@angular/router';
+
+export const CREATION = 'creation';
+export const EDITION = 'edition';
+export const NAV = 'navigation';
+
 
 @Injectable({providedIn: 'root'})
 export class WrapperService implements OnDestroy {
 
-  currentMode: EditorModeEnum;
-  subscription: Subscription;
+  // put it where needed
+  public MODE_NAMES = {};
+
+  mode: string;
+  entity: string;
+
+  // subscription: Subscription;
 
   constructor(private router: Router) {
-    this.currentMode = 0;
-    console.log(this.router.url.includes('new'));
-    this.subscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationStart))
-      .subscribe(() => console.log(this.router.url.includes('edit')));
+    this.MODE_NAMES[CREATION] = 'Création';
+    this.MODE_NAMES[EDITION] = 'Édition';
+    this.MODE_NAMES[NAV] = 'Navigation';
+    console.log(this.MODE_NAMES);
+    // this.currentMode = 0;
+    // console.log(this.router.url.includes('new'));
+    // this.subscription = this.router.events
+    //   .pipe(filter(event => event instanceof NavigationStart))
+    //   .subscribe(() => console.log(this.router.url.includes('edit')));
   }
 
   ngOnDestroy(): void {
-    console.log('unsubscription');
-    this.subscription.unsubscribe();
+  }
+
+  getModeName(): string {
+    return this.MODE_NAMES[this.mode];
   }
 }

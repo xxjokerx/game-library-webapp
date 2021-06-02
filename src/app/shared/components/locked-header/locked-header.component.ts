@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {WrapperService} from '../../services/wrapper.service';
 
 @Component({
   selector: 'app-locked-header',
@@ -6,17 +7,19 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./locked-header.component.css']
 })
 export class LockedHeaderComponent implements OnInit {
-
-  @Input()
-  entity: string;
-
-  @Input()
-  mode: string;
-
-  constructor() {
+  constructor(private wrapperService: WrapperService) {
   }
 
   ngOnInit(): void {
   }
 
+  getEntity(): string {
+    console.log(this.wrapperService.entity);
+    return this.wrapperService.entity;
+  }
+
+  getMode(): string {
+    console.log(this.wrapperService.mode);
+    return this.wrapperService.MODE_NAMES[this.wrapperService.mode];
+  }
 }
