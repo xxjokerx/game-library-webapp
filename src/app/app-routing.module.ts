@@ -51,6 +51,7 @@ import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/i
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
+import {NewGameWrapperComponent} from './wrapper/new-game-wrapper/new-game-wrapper.component';
 
 const routes: Routes = [
   {
@@ -120,6 +121,10 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: 'admin/locked-mode-new',
+    component: NewGameWrapperComponent
   },
   {
     path: 'admin',

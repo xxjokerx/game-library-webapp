@@ -2,17 +2,8 @@
 
 <body>
 <div class="sidenav">
-  <div class="back-button"
-       (click)="onBack()">
-    <div>
-      <img
-        class="svg-icon"
-        src="assets/icons/arrow-left-white.svg"
-        alt="R"/>
-    </div>
-  </div>
-  <app-banner class="list mt-3" [mode]="mode">
-  </app-banner>
+  <app-back-button (backEvent)="onBack()"></app-back-button>
+  <app-banner class="mt-3" [mode]="mode"></app-banner>
 </div>
 
 <div class="main">

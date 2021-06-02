@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-game-wrapper',
@@ -7,10 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NewGameWrapperComponent implements OnInit {
 
-  constructor() {
+  mode = 'Création';
+  entity = 'Jeux';
+
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  onBack(): void {
+    this.router.navigate(['/admin/editor/games/list']);
+  }
 }

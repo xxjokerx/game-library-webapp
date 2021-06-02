@@ -67,6 +67,7 @@ import {DescriptionHandlerComponent} from './dashboard/games/game-edit/descripti
 import {BannerComponent} from './shared/components/banner/banner.component';
 import {NewGameWrapperComponent} from './wrapper/new-game-wrapper/new-game-wrapper.component';
 import {LockedHeaderComponent} from './shared/components/locked-header/locked-header.component';
+import {BackButtonComponent} from './shared/components/back-button/back-button.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -144,7 +145,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     DescriptionHandlerComponent,
     BannerComponent,
     NewGameWrapperComponent,
-    LockedHeaderComponent
+    LockedHeaderComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,
