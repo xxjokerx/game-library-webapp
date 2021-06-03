@@ -1,5 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 export const CREATION = 'creation';
 export const EDITION = 'edition';
@@ -14,22 +15,30 @@ export class WrapperService implements OnDestroy {
 
   mode: string;
   entity: string;
+  subscription: Subscription;
 
   // subscription: Subscription;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
     this.MODE_NAMES[CREATION] = 'Création';
     this.MODE_NAMES[EDITION] = 'Édition';
     this.MODE_NAMES[NAV] = 'Navigation';
     console.log(this.MODE_NAMES);
-    // this.currentMode = 0;
-    // console.log(this.router.url.includes('new'));
+
+    /* this method seems not secured */
     // this.subscription = this.router.events
     //   .pipe(filter(event => event instanceof NavigationStart))
-    //   .subscribe(() => console.log(this.router.url.includes('edit')));
+    //   .subscribe(() => {
+    //     if (!this.router.url.startsWith('/admin/locked-mode/')) {
+    //       console.log(true);
+    //       this.mode = NAV;
+    //     }
+    //   });
   }
 
   ngOnDestroy(): void {
+    // this.subscription.unsubscribe();
   }
 
   getModeName(): string {

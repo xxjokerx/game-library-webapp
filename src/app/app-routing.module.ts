@@ -50,11 +50,15 @@ import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-hel
 import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 import {WrapperEditResolver} from './shared/resolvers/wrapper-edit-resolver.service';
+import {NavResolverService} from './shared/resolvers/nav-resolver.service';
+import {NewGameComponent} from './dashboard/games/new-game/new-game/new-game.component';
+import {WrapperNewResolver} from './shared/resolvers/wrapper-new-resolver.service';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/admin',
+    resolve: [NavResolverService],
     pathMatch: 'full',
   },
   {
@@ -62,6 +66,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: ['ADMIN']},
     children: [
+      {
+        path: 'games/new',
+        component: NewGameComponent,
+        resolve: [WrapperNewResolver]
+      },
       {
         path: 'games/:id/edit',
         component: GameEditComponent,
@@ -121,6 +130,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    resolve: [NavResolverService],
     children: [
       {
         path: 'editor',

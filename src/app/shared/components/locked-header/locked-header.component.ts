@@ -14,12 +14,10 @@ export class LockedHeaderComponent implements OnInit {
   }
 
   getEntity(): string {
-    console.log(this.wrapperService.entity);
     return this.wrapperService.entity;
   }
 
   getMode(): string {
-    console.log(this.wrapperService.mode);
     return this.wrapperService.MODE_NAMES[this.wrapperService.mode];
   }
 }
