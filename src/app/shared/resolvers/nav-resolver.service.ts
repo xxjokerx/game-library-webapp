@@ -13,6 +13,4 @@ export class NavResolverService implements Resolve<void> {
     this.wrapperService.entity = null;
     this.wrapperService.mode = NAV;
   }
-
-
 }

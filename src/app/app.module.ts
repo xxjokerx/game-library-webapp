@@ -67,7 +67,13 @@ import {DescriptionHandlerComponent} from './dashboard/games/game-edit/descripti
 import {BannerComponent} from './shared/components/banner/banner.component';
 import {LockedHeaderComponent} from './shared/components/locked-header/locked-header.component';
 import {BackButtonComponent} from './shared/components/back-button/back-button.component';
-import {NewGameComponent} from './dashboard/games/new-game/new-game/new-game.component';
+import {NewGameBasicsComponent} from './dashboard/games/new-game/new-game-basics/new-game-basics.component';
+import {NewGameComponent} from './dashboard/games/new-game/new-game.component';
+import {NewGameParentChoiceComponent} from './dashboard/games/new-game/new-game-parent-choice/new-game-parent-choice.component';
+import {NewGameAddCoreComponent} from './dashboard/games/new-game/new-game-add-core/new-game-add-core.component';
+import {NewGameAddExtComponent} from './dashboard/games/new-game/new-game-add-ext/new-game-add-ext.component';
+import {NewGameCoreSummaryComponent} from './dashboard/games/new-game/new-game-core-summary/new-game-core-summary.component';
+import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/new-game-infos.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -146,7 +152,13 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     BannerComponent,
     LockedHeaderComponent,
     BackButtonComponent,
-    NewGameComponent
+    NewGameBasicsComponent,
+    NewGameComponent,
+    NewGameParentChoiceComponent,
+    NewGameAddCoreComponent,
+    NewGameAddExtComponent,
+    NewGameCoreSummaryComponent,
+    NewGameInfosComponent
   ],
   imports: [
     BrowserModule,

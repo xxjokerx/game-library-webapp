@@ -51,8 +51,13 @@ import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 import {WrapperEditResolver} from './shared/resolvers/wrapper-edit-resolver.service';
 import {NavResolverService} from './shared/resolvers/nav-resolver.service';
-import {NewGameComponent} from './dashboard/games/new-game/new-game/new-game.component';
+import {NewGameBasicsComponent} from './dashboard/games/new-game/new-game-basics/new-game-basics.component';
 import {WrapperNewResolver} from './shared/resolvers/wrapper-new-resolver.service';
+import {NewGameComponent} from './dashboard/games/new-game/new-game.component';
+import {NewGameParentChoiceComponent} from './dashboard/games/new-game/new-game-parent-choice/new-game-parent-choice.component';
+import {NewGameAddExtComponent} from './dashboard/games/new-game/new-game-add-ext/new-game-add-ext.component';
+import {NewGameAddCoreComponent} from './dashboard/games/new-game/new-game-add-core/new-game-add-core.component';
+import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/new-game-infos.component';
 
 const routes: Routes = [
   {
@@ -64,12 +69,38 @@ const routes: Routes = [
   {
     path: 'admin/locked-mode',
     canActivate: [AuthGuard],
+    resolve: [WrapperNewResolver],
     data: {roles: ['ADMIN']},
     children: [
       {
         path: 'games/new',
         component: NewGameComponent,
-        resolve: [WrapperNewResolver]
+        children: [
+          {
+            path: 'basics',
+            component: NewGameBasicsComponent
+          },
+          {
+            path: 'parent-choice',
+            component: NewGameParentChoiceComponent
+          },
+          {
+            path: 'add-extension',
+            component: NewGameAddExtComponent
+          },
+          {
+            path: 'add-core',
+            component: NewGameAddCoreComponent
+          },
+          {
+            path: 'add-core-summary',
+            component: GameSummaryComponent
+          },
+          {
+            path: 'infos',
+            component: NewGameInfosComponent
+          },
+        ]
       },
       {
         path: 'games/:id/edit',
@@ -224,6 +255,7 @@ const routes: Routes = [
   },
   {
     path: 'not-found',
+    resolve: [NavResolverService],
     component: ErrorPageComponent,
     data: {message: 'page not found!'}
   },
