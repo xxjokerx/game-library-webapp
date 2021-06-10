@@ -87,6 +87,7 @@ export class InfoHandlerComponent implements OnInit, OnDestroy {
         'max': new FormControl(this.game.maxAge, [Validators.min(0), Validators.required])
       }, [this.ageRangeValidator.bind(this)]),
     });
+    console.log(this.form);
   }
 
   onSubmit(): void {

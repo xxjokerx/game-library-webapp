@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Game} from '../../../../model/game.model';
 import {GameService} from '../../game.service';
 import {GameNatureEnum} from '../../../../model/enum/game-nature.enum';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-new-game',
@@ -13,11 +14,28 @@ export class NewGameBasicsComponent implements OnInit {
 
   form: FormGroup;
 
-
   @Input()
   game: Game;
 
+  natureList: Array<string>;
+  actualEnumType: typeof GameNatureEnum;
+
+  hasMaxP: boolean;
+  hasMaxA: boolean;
+  timeUnit: string;
+  timeUnitSwitch: string;
+  ageInYear: boolean;
+
+  playerQuickDisplay: string;
+  ageRangeQuickDisplay: string;
+  playerSubscription: Subscription;
+  ageRangeSubscription: Subscription;
+
   constructor(private service: GameService) {
+    this.natureList = Object.keys(GameNatureEnum);
+    this.actualEnumType = GameNatureEnum;
+    this.playerQuickDisplay = '';
+    this.ageRangeQuickDisplay = '';
   }
 
   ngOnInit(): void {
@@ -27,12 +45,16 @@ export class NewGameBasicsComponent implements OnInit {
   initForm(currentGame?: Game): void {
     this.form = new FormGroup({
       'name': new FormControl(currentGame ? currentGame.name : ''),
-      'minAge': new FormControl(currentGame ? currentGame.minAge : ''),
-      'minMonth': new FormControl(currentGame ? currentGame.minMonth : ''),
-      'maxAge': new FormControl(currentGame ? currentGame.maxAge : ''),
+      'ageRange': new FormGroup({
+        'min': new FormControl(currentGame ? currentGame.minAge : ''),
+        'month': new FormControl(currentGame ? currentGame.minMonth : ''),
+        'max': new FormControl(currentGame ? currentGame.maxAge : ''),
+      }),
       'duration': new FormControl(currentGame ? currentGame.playTime : ''),
-      'minNumberOfPlayer': new FormControl(currentGame ? currentGame.minNumberOfPlayer : ''),
-      'maxNumberOfPlayer': new FormControl(currentGame ? currentGame.maxNumberOfPlayer : ''),
+      'numberOfPlayers': new FormGroup({
+        'min': new FormControl(currentGame ? currentGame.minNumberOfPlayer : ''),
+        'max': new FormControl(currentGame ? currentGame.maxNumberOfPlayer : '')
+      }),
       'gameNature': new FormControl(currentGame ? currentGame.nature : GameNatureEnum.BOARD_GAME),
       'description': new FormControl(currentGame ? currentGame.description : '')
     });
