@@ -21,6 +21,12 @@
         class="form-control">
     </div>
   </div>
+
+  <span class="form-text"
+        *ngIf="!creatorForm.pristine && creatorForm.errors?.namesExist">
+  <span>Cet auteur existe déjà en base de données</span>
+  </span>
+
   <div class="form-row">
 
     <div class="form-group col-md-12">

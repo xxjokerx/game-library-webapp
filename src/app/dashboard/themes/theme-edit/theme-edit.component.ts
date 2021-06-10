@@ -69,6 +69,7 @@ export class ThemeEditComponent implements OnInit {
   private initFrom(): void {
     let themeName = '';
 
+
     if (this.editMode) {
       const theme: Theme = this.themesService.getThemeById(this.id);
       themeName = theme.name;
@@ -78,8 +79,31 @@ export class ThemeEditComponent implements OnInit {
     }
 
     this.themeForm = new FormGroup({
-      'name': new FormControl(themeName, [Validators.required, Validators.maxLength(50)])
+      'name': new FormControl(themeName, [
+        Validators.required,
+        Validators.maxLength(50),
+        this.nameAlreadyExists.bind(this)])
     });
   }
 
+  nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
+    /* We need spit the case edit mode or not to allow save the current edited name */
+    if (
+      (
+        !this.editMode
+        &&
+        this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+      || (
+        this.editMode
+        &&
+        control.value.toLowerCase().trim() !== this.themesService.getThemeById(this.id).name.toLowerCase().trim()
+        &&
+        this.themesService.getExistingThemes().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+    ) {
+      return {'nameAlreadyExists': true};
+    }
+    return null;
+  }
 }

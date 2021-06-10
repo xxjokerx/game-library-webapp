@@ -1,0 +1,26 @@
+<div class="block-container">
+  <h4>Thèmes</h4>
+  <ul>
+    <li class="theme-line" *ngFor="let theme of gameThemes$ | async">
+      <div class="btn btn-lg btn-secondary">{{ theme.name }}</div>
+      <div class="btn btn-outline-secondary hover-control ml-3" (click)="onRemove(theme.id)">Retirer</div>
+    </li>
+  </ul>
+
+  <div class="add-nav" *ngIf="!addModeOn">
+    <a class="nav-link lead inline" (click)="onAddMode()">Associer un thème</a>
+    <a class="nav-link lead inline" (click)="onBack()">Retour</a>
+  </div>
+  <ng-container *ngIf="addModeOn">
+    <ng-container *ngIf="{
+  all: allThemes$ | async,
+  current: gameThemes$ | async }
+  as data">
+      <app-theme-picker
+        *ngIf="data.all && data.current"
+        [themes]="data.all"
+        [gameThemes]="data.current"
+        (backEvent)="attachTheme($event)"></app-theme-picker>
+    </ng-container>
+  </ng-container>
+</div>

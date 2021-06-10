@@ -7,7 +7,7 @@ import {Theme} from '../../model/theme.model';
 import {Page} from '../../model/page.model';
 
 @Injectable({providedIn: 'root'})
-export class ThemeResolverService implements Resolve<Page<Theme>> {
+export class ThemeResolver implements Resolve<Page<Theme>> {
 
   constructor(private themesDataService: ThemeDataService,
               private themesService: ThemeService) {

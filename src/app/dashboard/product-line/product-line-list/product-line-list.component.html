@@ -9,7 +9,7 @@
    style="cursor: pointer;"
    routerLinkActive="active"
    class="list-group-item list-group-item-action"
-   [routerLink]="['/admin/product-lines', line.id]">
+   [routerLink]="['/admin/editor/product-lines', line.id]">
   {{line.name}} (id:{{line.id}})</a>
 <div class="y-spacer"></div>
 <ngb-pagination
@@ -17,16 +17,16 @@
   [pageSize]="pageSize"
   [(page)]="page"
   (pageChange)="onPageChange()"></ngb-pagination>
-<div class="y-spacer"></div>
+
 <hr/>
-<div class="y-spacer"></div>
+
 <button
-  class="btn btn-secondary mr-2"
+  class="btn btn-secondary mr-2 mb-2"
   type="button"
-  routerLink="/admin/product-lines/new">Nouveau thème
+  routerLink="/admin/editor/product-lines/new">Nouvelle gamme
 </button>
 <button
-  class="btn btn-secondary"
+  class="btn btn-secondary mr-2 mb-2"
   type="button"
   (click)="onRefreshList()">Rafraichir la liste
 </button>

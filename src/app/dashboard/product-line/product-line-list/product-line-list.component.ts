@@ -43,18 +43,18 @@ export class ProductLineListComponent implements OnInit, OnDestroy {
 
   onRefreshList(): void {
     this.fetchProductLines();
-    this.router.navigate(['/admin/product-lines']);
+    this.router.navigate(['/admin/editor/product-lines']);
   }
 
   onPageChange(): void {
     this.fetchProductLines(this.page);
-    this.router.navigate(['/admin/product-lines']);
+    this.router.navigate(['/admin/editor/product-lines']);
   }
 
   onFilter(): void {
     this.fetchProductLines(0, this.filterForm.value.keyword);
     this.initForm();
-    this.router.navigate(['/admin/product-lines']);
+    this.router.navigate(['/admin/editor/product-lines']);
   }
 
   onDelete(): void {

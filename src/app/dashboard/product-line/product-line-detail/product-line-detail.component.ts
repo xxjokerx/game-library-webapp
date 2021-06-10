@@ -2,12 +2,12 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductLine} from '../../../model/product-line.model';
 import {of, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Page} from '../../../model/page.model';
 import {concatMap} from 'rxjs/operators';
-import {ConfirmModalComponent} from '../../../shared/confirm-modal/confirm-modal.component';
 import {ProductLineService} from '../product-line.service';
 import {ProductLineDataService} from '../product-line-data.service';
+import {ModelEnum} from '../../../model/enum/model.enum';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 
 @Component({
   selector: 'app-product-line-detail',
@@ -24,7 +24,7 @@ export class ProductLineDetailComponent implements OnInit, OnDestroy {
               private productLineDataService: ProductLineDataService,
               private route: ActivatedRoute,
               private router: Router,
-              private modalService: NgbModal) {
+              private deletionHandlerService: DeletionHandlerService) {
   }
 
   ngOnInit(): void {
@@ -43,14 +43,14 @@ export class ProductLineDetailComponent implements OnInit, OnDestroy {
   }
 
   onEdit(): void {
-    this.router.navigate(['/admin/product-lines/', this.line.id, 'edit']);
+    this.router.navigate(['/admin/editor/product-lines/', this.line.id, 'edit']);
   }
 
   onDelete(): void {
     const myObs = of(this.line.id);
     myObs.pipe(
       concatMap(id => {
-        return this.productLineDataService.removeTheme(id);
+        return this.productLineDataService.removeProductLine(id);
       }),
       concatMap(() => {
         return this.productLineDataService.fetchProductLines();
@@ -60,10 +60,7 @@ export class ProductLineDetailComponent implements OnInit, OnDestroy {
   }
 
   onOpenConfirm(): void {
-    const modalRef = this.modalService.open(ConfirmModalComponent);
-    modalRef.componentInstance.deletedObjectType = 'la gamme';
-    modalRef.componentInstance.deletedObjectName = this.line.name;
-    modalRef.result
+    this.deletionHandlerService.callModal(ModelEnum.PRODUCT_LINE, this.line, false)
       .then(value => {
         if (value === 'Ok click') {
           this.onDelete();

@@ -1,7 +1,7 @@
 <form
   [formGroup]="filterForm"
   (ngSubmit)="onFilter()">
-  <div class="input-group mb-3">
+  <div class="input-group mb-3" #keywordGroup>
     <label for="input"></label>
     <input
       class="form-control"
@@ -14,19 +14,24 @@
         [disabled]="filterForm.invalid">Filtrer
       </button>
     </div>
-    <div class="input-group-append">
+    <div
+      class="input-group-append"
+      *ngIf="keywordGroup.offsetWidth >= 300">
       <button
         class="btn btn-secondary"
         type="button"
         ngbTooltip="Cliquez pour rafraîchir la liste"
         (click)="onRefreshList()">
         <img
-          src="../../../../assets/refresh-cw.svg"
-          alt="R"
-        />
+          class=""
+          src="assets/icons/arrow-cw.svg"
+          alt="R"/>
       </button>
+
     </div>
-    <div class="input-group-append">
+    <div
+      class="input-group-append"
+      *ngIf="keywordGroup.offsetWidth >= 300">
       <button
         class="btn btn-secondary"
         type="button"
@@ -34,8 +39,8 @@
         (click)="onDelete()"
         [disabled]="filterForm.invalid">
         <img
-          src="../../../../assets/delete.svg"
-          alt="X"
+          src="assets/icons/x-square.svg"
+          alt="X-square"
         />
       </button>
     </div>

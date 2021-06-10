@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {NAV, WrapperService} from './shared/services/wrapper.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,15 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'game-library-webapp';
+
+  constructor(private wrapperService: WrapperService) {
+    this.wrapperService.mode = NAV;
+    this.wrapperService.entity = null;
+  }
+
+  isNavigation(): boolean {
+    return this.wrapperService.mode === NAV;
+  }
+
 
 }

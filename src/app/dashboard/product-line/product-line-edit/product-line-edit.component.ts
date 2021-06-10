@@ -78,7 +78,28 @@ export class ProductLineEditComponent implements OnInit {
     }
 
     this.lineForm = new FormGroup({
-      'name': new FormControl(lineName, [Validators.required, Validators.maxLength(255)])
+      'name': new FormControl(lineName,
+        [Validators.required, Validators.maxLength(255), this.nameAlreadyExists.bind(this)])
     });
+  }
+
+  nameAlreadyExists(control: FormControl): { [s: string]: boolean } {
+    /* We need spit the case edit mode or not to allow save the current edited name */
+    if ((
+        !this.editMode
+        &&
+        this.productLineService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+      || (
+        this.editMode
+        &&
+        control.value.toLowerCase().trim() !== this.productLineService.getProductLineById(this.id).name.toLowerCase().trim()
+        &&
+        this.productLineService.getExistingNames().indexOf(control.value.toLowerCase().trim()) !== -1
+      )
+    ) {
+      return {'nameAlreadyExists': true};
+    }
+    return null;
   }
 }

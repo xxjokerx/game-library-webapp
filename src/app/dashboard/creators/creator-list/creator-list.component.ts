@@ -21,15 +21,15 @@ export class CreatorListComponent implements OnInit, OnDestroy {
   page: number;
   filterForm: FormGroup;
 
-  constructor(private creatorsService: CreatorService,
-              private creatorsDataService: CreatorDataService,
+  constructor(private creatorService: CreatorService,
+              private creatorDataService: CreatorDataService,
               private configurationService: ConfigurationService,
               private router: Router) {
   }
 
   ngOnInit(): void {
     this.fetchCreators();
-    this.subscription = this.creatorsService.pagedCreatorsChanged.subscribe((pagedCreators: Page<Creator>) => {
+    this.subscription = this.creatorService.pagedCreatorsChanged.subscribe((pagedCreators: Page<Creator>) => {
       this.creators = pagedCreators.content.slice();
       this.totalElements = pagedCreators.totalElements;
     });
@@ -42,7 +42,7 @@ export class CreatorListComponent implements OnInit, OnDestroy {
 
   onRefreshList(): void {
     this.fetchCreators();
-    this.router.navigate(['/admin/creators']);
+    this.router.navigate(['/admin/creatorsName']);
   }
 
   onPageChange(): void {
@@ -62,7 +62,7 @@ export class CreatorListComponent implements OnInit, OnDestroy {
   }
 
   private fetchCreators(page?: number, keyword?: string): void {
-    this.creatorsDataService.fetchCreators(page, keyword).subscribe((pagedCreators: Page<Creator>) => {
+    this.creatorDataService.fetchCreators(page, keyword).subscribe((pagedCreators: Page<Creator>) => {
       this.page = pagedCreators.pageable.pageNumber + 1;
       this.totalElements = pagedCreators.totalElements;
       this.pageSize = this.configurationService.getNumberOfElements();

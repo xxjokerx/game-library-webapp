@@ -6,6 +6,7 @@ import {Page} from '../../model/page.model';
 import {environment} from '../../../environments/environment';
 import {tap} from 'rxjs/operators';
 import {ProductLineService} from './product-line.service';
+import {ImpersonalInterface} from '../../model/interface/impersonal.interface';
 
 @Injectable({providedIn: 'root'})
 export class ProductLineDataService {
@@ -15,6 +16,14 @@ export class ProductLineDataService {
               private http: HttpClient,
               private configurationService: ConfigurationService) {
     this.apiUri = environment.apiUri;
+  }
+
+  fetchNames(): any {
+    return this.http
+      .get<ImpersonalInterface[]>(this.apiUri + '/admin/product-lines/names')
+      .pipe(
+        tap(names => this.productLineService.setNames(names))
+      );
   }
 
   fetchProductLines(page?: number, keyword?: string): any {
@@ -37,12 +46,12 @@ export class ProductLineDataService {
       );
   }
 
-  removeTheme(id: number): any {
+  removeProductLine(id: number): any {
     return this.http.delete(this.apiUri + '/admin/product-lines/' + id);
   }
 
-  editLine(id: number, newLine: ProductLine): any {
-    return this.http.put<ProductLine>(this.apiUri + '/admin/product-lines/' + id, newLine, {responseType: 'json'});
+  editLine(id: number, line: ProductLine): any {
+    return this.http.put<ProductLine>(this.apiUri + '/admin/product-lines/' + id, line, {responseType: 'json'});
   }
 
   addLine(newLine: ProductLine): any {

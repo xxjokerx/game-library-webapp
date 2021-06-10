@@ -43,18 +43,18 @@ export class ThemeListComponent implements OnInit, OnDestroy {
 
   onRefreshList(): void {
     this.fetchThemes();
-    this.router.navigate(['/admin/themes']);
+    this.router.navigate(['/admin/editor/themes']);
   }
 
   onPageChange(): void {
     this.fetchThemes(this.page);
-    this.router.navigate(['/admin/themes']);
+    this.router.navigate(['/admin/editor/themes']);
   }
 
   onFilter(): void {
     this.fetchThemes(0, this.filterForm.value.keyword);
     this.initForm();
-    this.router.navigate(['/admin/themes']);
+    this.router.navigate(['/admin/editor/themes']);
   }
 
   onDelete(): void {

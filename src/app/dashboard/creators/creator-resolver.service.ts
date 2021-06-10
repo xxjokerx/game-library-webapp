@@ -7,7 +7,7 @@ import {CreatorService} from './creator.service';
 import {CreatorDataService} from './creator-data.service';
 
 @Injectable({providedIn: 'root'})
-export class CreatorResolverService implements Resolve<Page<Creator>> {
+export class CreatorResolver implements Resolve<Page<Creator>> {
 
   constructor(private creatorService: CreatorService,
               private creatorDataService: CreatorDataService) {

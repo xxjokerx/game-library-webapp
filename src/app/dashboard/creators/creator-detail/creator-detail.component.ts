@@ -5,7 +5,7 @@ import {CreatorDataService} from '../creator-data.service';
 import {Creator} from '../../../model/creator.model';
 import {of, Subscription} from 'rxjs';
 import {concatMap} from 'rxjs/operators';
-import {DeletionHandlerService} from '../../../shared/deletion-handler.service';
+import {DeletionHandlerService} from '../../../shared/services/deletion-handler.service';
 import {ModelEnum} from '../../../model/enum/model.enum';
 import {Page} from '../../../model/page.model';
 
@@ -38,7 +38,7 @@ export class CreatorDetailComponent implements OnInit {
   }
 
   onEdit(): void {
-    this.router.navigate(['/admin/creators/', this.creator.id, 'edit']);
+    this.router.navigate(['/admin/editor/creators/', this.creator.id, 'edit']);
   }
 
   onOpenConfirm(isCreatorDeletion: boolean): void {
@@ -47,7 +47,7 @@ export class CreatorDetailComponent implements OnInit {
       chosenEnum = ModelEnum.CONTACT;
     }
 
-    this.deletionHandlerService.callModal(chosenEnum, this.creator)
+    this.deletionHandlerService.callModal(chosenEnum, this.creator, true)
       .then(value => {
         if (value === 'Ok click') {
           this.onDelete(isCreatorDeletion);

@@ -1,34 +1,91 @@
 <div [ngClass]="{'row sidebar': true , 'h-100': innerWidth >= '768' , 'h-auto': innerWidth < '768' }">
   <div
     class="col-md-2 bg-secondary"
-    *ngIf="innerWidth >= '768' || !isSideCollapsed">
+    *ngIf="!isSideCollapsed">
+    <!--innerWidth >= '768' && !isSideCollapsed -->
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLink="/admin/themes"
-        (click)="onCollapseNavbar()">Thèmes</a>
+        routerLink="/admin/editor/games/list"
+        routerLinkActive="text-dark bg-light"
+      >Jeux</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLink="/admin/creators"
-        (click)="onCollapseNavbar()">Auteurs de jeux</a>
+        routerLink="/admin/editor/themes"
+        routerLinkActive="text-dark bg-light"
+      >Thèmes</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLink="/admin/product-lines"
-        (click)="onCollapseNavbar()">Gammes</a>
+        routerLink="/admin/editor/categories"
+        routerLinkActive="text-dark bg-light"
+      >Catégories</a>
     </div>
     <div class="row">
       <a
-        class="nav-link text-light"
+        class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLink="/admin/configuration"
+        routerLink="/admin/editor/creators"
+        routerLinkActive="text-dark bg-light"
+      >Auteurs de jeux</a>
+    </div>
+    <div class="row">
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        routerLink="/admin/editor/product-lines"
+        routerLinkActive="text-dark bg-light"
+      >Gammes</a>
+    </div>
+
+    <hr
+      *ngIf="innerWidth >= '768'"
+      class="side-splitter">
+    <div class="row">
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        routerLinkActive="text-dark bg-light"
+      >Exemplaires</a>
+    </div>
+    <div class="row">
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        routerLink="/admin/editor/publishers"
+        routerLinkActive="text-dark bg-light"
+      >Éditeurs</a>
+    </div>
+    <div class="row">
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        routerLinkActive="text-dark bg-light"
+      >Revendeurs</a>
+    </div>
+    <hr
+      *ngIf="innerWidth >= '768'"
+      class="side-splitter">
+    <div class="row">
+
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        routerLink="/admin/editor/configuration"
+        routerLinkActive="text-dark bg-light"
         (click)="onCollapseNavbar()">Configuration</a>
+    </div>
+    <div class="row">
+      <a
+        class="nav-link text-light col-12"
+        style="cursor:pointer;"
+        (click)="onCollapseNavbar()">\<</a>
     </div>
     <div class="text-light">w: {{ innerWidth }}</div>
   </div>
