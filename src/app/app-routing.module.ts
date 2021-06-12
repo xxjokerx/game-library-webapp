@@ -58,6 +58,8 @@ import {NewGameParentChoiceComponent} from './dashboard/games/new-game/new-game-
 import {NewGameAddExtComponent} from './dashboard/games/new-game/new-game-add-ext/new-game-add-ext.component';
 import {NewGameAddCoreComponent} from './dashboard/games/new-game/new-game-add-core/new-game-add-core.component';
 import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/new-game-infos.component';
+import {MemberNewComponent} from './dashboard-user/member-new/member-new.component';
+import {MemberListComponent} from './dashboard-user/member-list/member-list.component';
 
 const routes: Routes = [
   {
@@ -246,10 +248,20 @@ const routes: Routes = [
         data: {roles: ['ADMIN']},
       },
       {
-        path: 'users',
+        path: 'members',
         component: DashboardUserComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ADMIN']},
+        children: [
+          {
+            path: 'new',
+            component: MemberNewComponent
+          },
+          {
+            path: 'list',
+            component: MemberListComponent
+          }
+        ]
       }
     ]
   },
