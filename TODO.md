@@ -9,5 +9,6 @@
 - [ ] enumeration : rework those like in game informations edit module
 - [ ] improve nav css
 - [ ] add spinners when resources are loading
+- [ ] membership number
 
 ## V2 (Update)
