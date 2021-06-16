@@ -74,8 +74,9 @@ import {NewGameAddCoreComponent} from './dashboard/games/new-game/new-game-add-c
 import {NewGameAddExtComponent} from './dashboard/games/new-game/new-game-add-ext/new-game-add-ext.component';
 import {NewGameCoreSummaryComponent} from './dashboard/games/new-game/new-game-core-summary/new-game-core-summary.component';
 import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/new-game-infos.component';
-import {MemberListComponent} from './dashboard-user/member-list/member-list.component';
-import {MemberNewComponent} from './dashboard-user/member-new/member-new.component';
+import {MemberListComponent} from './dashboard-user/members/member-list/member-list.component';
+import {MemberNewComponent} from './dashboard-user/members/member-new/member-new.component';
+import {MemberDetailComponent} from './dashboard-user/members/member-detail/member-detail.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -162,7 +163,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     NewGameCoreSummaryComponent,
     NewGameInfosComponent,
     MemberListComponent,
-    MemberNewComponent
+    MemberNewComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -185,5 +187,4 @@ function initializeKeycloak(keycloak: KeycloakService): any {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
 }

@@ -12,8 +12,11 @@ export class Account {
     this.username = userForm.username;
   }
 
+  id?: number;
   firstName: string;
   lastName: string;
   username: string;
+  renewalDate?: Date;
+  membershipNumber?: string;
   contact?: Contact;
 }

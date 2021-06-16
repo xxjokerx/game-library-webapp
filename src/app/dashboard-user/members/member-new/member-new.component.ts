@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {AccountService} from '../account.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Account} from '../../../model/account.model';
 
 @Component({
   selector: 'app-member-new',
@@ -13,7 +15,9 @@ export class MemberNewComponent implements OnInit, OnDestroy {
   form: FormGroup;
   nameGroupSub: Subscription;
 
-  constructor(private service: AccountService) {
+  constructor(private accountService: AccountService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.form = new FormGroup({
       'name': new FormGroup({
           'firstname': new FormControl('', [Validators.maxLength(128)]),
@@ -38,11 +42,14 @@ export class MemberNewComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
-    this.service.persistAccount(this.form.value);
+    let accountId: number;
+    this.accountService.saveAndStoreAccount(new Account(this.form.value)).subscribe(account => {
+      accountId = account.id;
+      this.router.navigate(['/admin/members', accountId]);
+    });
   }
 
   onBack(): void {
-    this.service.getAccounts();
+    this.accountService.getAccounts();
   }
 }
