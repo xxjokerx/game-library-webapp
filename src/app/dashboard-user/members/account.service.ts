@@ -29,11 +29,8 @@ export class AccountService {
     return this.http.post<Account>(this.apiUri + '/admin/accounts' + contactParam, account);
   }
 
-  getAccounts(): void {
-    this.http.get<any>(this.apiUri + '/admin/accounts').subscribe(accounts => {
-      console.log(accounts);
-      this.router.navigate(['/admin/members']);
-    });
+  fetchAll(): Observable<Account[]> {
+    return this.http.get<Account[]>(this.apiUri + '/admin/accounts');
   }
 
   fetchById(id: number): Observable<Account> {

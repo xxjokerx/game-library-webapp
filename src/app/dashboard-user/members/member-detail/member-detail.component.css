@@ -8,17 +8,16 @@ h2 {
 
 }
 
-.member-details {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .member-info {
   font-size: 125%;
   margin-top: 1rem;
 }
 
+.member-details {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 @media (max-width: 900px) {
   .member-details {

@@ -50,6 +50,6 @@ export class MemberNewComponent implements OnInit, OnDestroy {
   }
 
   onBack(): void {
-    this.accountService.getAccounts();
+    this.accountService.fetchAll();
   }
 }
