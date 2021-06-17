@@ -10,4 +10,9 @@ export class Contact implements ModelInterface {
   phoneNumber?: string;
   website?: string;
   mailAddress?: string;
+
+  constructor(country: string, mailAddress: string) {
+    this.country = country;
+    this.mailAddress = mailAddress;
+  }
 }

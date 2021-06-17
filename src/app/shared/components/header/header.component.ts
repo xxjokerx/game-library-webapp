@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/admin/loans']);
   }
 
-  onOpenUsersNavbar(): void {
-    this.router.navigate(['/admin/users']);
+  onOpenMembersNavbar(): void {
+    this.router.navigate(['/admin/members']);
   }
 }
