@@ -50,6 +50,6 @@ export class MemberNewComponent implements OnInit, OnDestroy {
   }
 
   onBack(): void {
-    this.accountService.fetchAll();
+    this.router.navigate(['/admin/members']);
   }
 }

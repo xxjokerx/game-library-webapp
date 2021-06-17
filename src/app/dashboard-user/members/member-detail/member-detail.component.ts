@@ -3,7 +3,7 @@ import {AccountService} from '../account.service';
 import {Account} from '../../../model/account.model';
 import {Observable, of, Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-detail',
@@ -27,6 +27,7 @@ export class MemberDetailComponent implements OnInit {
       this.account$ = of(this.accountService.account);
     } else {
       this.account$ = this.accountService.fetchById(this.paramId).pipe(
+        tap(a => console.log(a.contact)),
         catchError((error) => {
           // it's important that we log an error here.
           // Otherwise you won't see an error in the console.
