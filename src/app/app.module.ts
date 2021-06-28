@@ -77,6 +77,9 @@ import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/n
 import {MemberListComponent} from './dashboard-user/members/member-list/member-list.component';
 import {MemberNewComponent} from './dashboard-user/members/member-new/member-new.component';
 import {MemberDetailComponent} from './dashboard-user/members/member-detail/member-detail.component';
+import {SelectMemberComponent} from './dashboard-loan/loans/select-member/select-member.component';
+import {SelectGameComponent} from './dashboard-loan/loans/select-game/select-game.component';
+import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-loan.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -164,7 +167,10 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     NewGameInfosComponent,
     MemberListComponent,
     MemberNewComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    SelectMemberComponent,
+    SelectGameComponent,
+    ConfirmLoanComponent
   ],
   imports: [
     BrowserModule,

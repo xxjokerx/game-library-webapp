@@ -8,21 +8,19 @@
         class="nav-link text-light col-12"
         style="cursor:pointer;"
         routerLinkActive="text-dark bg-light"
-        (click)="onCollapseNavbar()">Nouveau</a>
+        routerLink="/admin/loans/select-member">Nouveau</a>
     </div>
     <div class="row">
       <a
         class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLinkActive="text-dark bg-light"
-        (click)="onCollapseNavbar()">Retour</a>
+        routerLinkActive="text-dark bg-light">Retour</a>
     </div>
     <div class="row">
       <a
         class="nav-link text-light col-12"
         style="cursor:pointer;"
-        routerLinkActive="text-dark bg-light"
-        (click)="onCollapseNavbar()">Liste</a>
+        routerLinkActive="text-dark bg-light">Liste</a>
     </div>
     <hr
       *ngIf="innerWidth >= '768'"

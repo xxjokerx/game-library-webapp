@@ -13,4 +13,6 @@ export class GameCopy {
   generalState?: GeneralStateEnum;
   isLoanable?: boolean;
   seller?: Seller;
+  gameName?: string;
+  gameId?: number;
 }

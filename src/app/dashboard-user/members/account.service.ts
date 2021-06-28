@@ -36,4 +36,8 @@ export class AccountService {
   fetchById(id: number): Observable<Account> {
     return this.http.get<Account>(this.apiUri + '/admin/accounts/' + id);
   }
+
+  fetchActives(): Observable<Account[]> {
+    return this.http.get<Account[]>(this.apiUri + '/admin/accounts/no-current-loan');
+  }
 }
