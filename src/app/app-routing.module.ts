@@ -63,6 +63,7 @@ import {MemberDetailComponent} from './dashboard-user/members/member-detail/memb
 import {SelectMemberComponent} from './dashboard-loan/loans/select-member/select-member.component';
 import {SelectGameComponent} from './dashboard-loan/loans/select-game/select-game.component';
 import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-loan.component';
+import {LoanListComponent} from './dashboard-loan/loans/loan-list/loan-list.component';
 
 const routes: Routes = [
   {
@@ -261,6 +262,10 @@ const routes: Routes = [
           {
             path: 'confirm',
             component: ConfirmLoanComponent
+          },
+          {
+            path: 'list',
+            component: LoanListComponent
           }
         ]
       },

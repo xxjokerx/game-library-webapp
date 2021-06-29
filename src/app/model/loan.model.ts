@@ -1,11 +1,11 @@
-import {Time} from '@angular/common';
 import {GameCopy} from './game-copy.model';
+import {Account} from './account.model';
 
 export class Loan {
   id: number;
-  loanStartTime?: Time;
-  loanEndTime?: Time;
+  loanStartTime?: Date;
+  loanEndTime?: Date;
   gameCopy?: GameCopy;
   account?: Account;
-  isClosed?: boolean;
+  closed?: boolean;
 }
