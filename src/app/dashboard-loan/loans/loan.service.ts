@@ -15,6 +15,7 @@ export class LoanService {
   apiUri: string;
   copy: GameCopy;
   account: Account;
+  loan: Loan;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -38,5 +39,14 @@ export class LoanService {
 
   fetchAll(): Observable<Loan[]> {
     return this.http.get<Loan[]>(this.apiUri + '/admin/loans').pipe(tap(l => console.log(l)));
+  }
+
+  closeLoan(loanId: number): Observable<Loan> {
+    return this.http.post<Loan>(this.apiUri + '/admin/loans/' + loanId + '/close', null);
+
+  }
+
+  fetchById(loanId: number): Observable<Loan> {
+    return this.http.get<Loan>(this.apiUri + '/admin/loans/' + loanId);
   }
 }

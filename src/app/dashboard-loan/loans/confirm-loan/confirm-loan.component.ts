@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoanService} from '../loan.service';
 import {Account} from '../../../model/account.model';
 import {GameCopy} from '../../../model/game-copy.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-confirm-loan',
@@ -13,7 +14,8 @@ export class ConfirmLoanComponent implements OnInit {
   account: Account;
   copy: GameCopy;
 
-  constructor(private service: LoanService) {
+  constructor(private service: LoanService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -22,6 +24,9 @@ export class ConfirmLoanComponent implements OnInit {
   }
 
   onConfirm(): void {
-    this.service.create(this.account.id, this.copy.id).subscribe(l => console.log(l));
+    this.service.create(this.account.id, this.copy.id).subscribe(loan => {
+      console.log(loan);
+      this.router.navigate(['admin/loans', loan.id]);
+    });
   }
 }

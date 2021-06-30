@@ -64,6 +64,8 @@ import {SelectMemberComponent} from './dashboard-loan/loans/select-member/select
 import {SelectGameComponent} from './dashboard-loan/loans/select-game/select-game.component';
 import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-loan.component';
 import {LoanListComponent} from './dashboard-loan/loans/loan-list/loan-list.component';
+import {LoanDetailComponent} from './dashboard-loan/loans/loan-detail/loan-detail.component';
+import {LoanResolver} from './dashboard-loan/loans/loan-resolver.service';
 
 const routes: Routes = [
   {
@@ -266,6 +268,11 @@ const routes: Routes = [
           {
             path: 'list',
             component: LoanListComponent
+          },
+          {
+            path: ':id',
+            component: LoanDetailComponent,
+            resolve: [LoanResolver]
           }
         ]
       },

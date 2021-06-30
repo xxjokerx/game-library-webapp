@@ -1,5 +1,5 @@
 <div class="loan-container">
-  <h2>Tout les emprunt</h2>
+  <h2>Liste des prêts</h2>
   <ng-container *ngIf="loans$ | async as loans; else loading">
     <ul class="list-group loan-list" *ngFor="let loan of loans">
       <li class="list-group-item">
