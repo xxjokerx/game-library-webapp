@@ -82,6 +82,7 @@ import {SelectGameComponent} from './dashboard-loan/loans/select-game/select-gam
 import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-loan.component';
 import {LoanListComponent} from './dashboard-loan/loans/loan-list/loan-list.component';
 import {LoanDetailComponent} from './dashboard-loan/loans/loan-detail/loan-detail.component';
+import {HomeComponent} from './home/home.component';
 
 function initializeKeycloak(keycloak: KeycloakService): any {
   return () =>
@@ -174,7 +175,8 @@ function initializeKeycloak(keycloak: KeycloakService): any {
     SelectGameComponent,
     ConfirmLoanComponent,
     LoanListComponent,
-    LoanDetailComponent
+    LoanDetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -66,11 +66,12 @@ import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-
 import {LoanListComponent} from './dashboard-loan/loans/loan-list/loan-list.component';
 import {LoanDetailComponent} from './dashboard-loan/loans/loan-detail/loan-detail.component';
 import {LoanResolver} from './dashboard-loan/loans/loan-resolver.service';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/admin',
+    redirectTo: '/admin/home',
     resolve: [NavResolverService],
     pathMatch: 'full',
   },
@@ -171,6 +172,11 @@ const routes: Routes = [
     path: 'admin',
     resolve: [NavResolverService],
     children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'editor',
         component: DashboardComponent,
