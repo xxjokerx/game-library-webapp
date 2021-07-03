@@ -47,7 +47,6 @@ import {SizeHandlerComponent} from './dashboard/games/game-edit/size-handler/siz
 import {StuffHandlerComponent} from './dashboard/games/game-edit/stuff-handler/stuff-handler.component';
 import {ImageHandlerComponent} from './dashboard/games/game-edit/image-handler/image-handler.component';
 import {GameEditHelperComponent} from './dashboard/games/game-edit/game-edit-helper/game-edit-helper.component';
-import {ErrorPageComponent} from './error/error-page/error-page.component';
 import {DescriptionHandlerComponent} from './dashboard/games/game-edit/description-handler/description-handler.component';
 import {WrapperEditResolver} from './shared/resolvers/wrapper-edit-resolver.service';
 import {NavResolverService} from './shared/resolvers/nav-resolver.service';
@@ -61,11 +60,18 @@ import {NewGameInfosComponent} from './dashboard/games/new-game/new-game-infos/n
 import {MemberNewComponent} from './dashboard-user/members/member-new/member-new.component';
 import {MemberListComponent} from './dashboard-user/members/member-list/member-list.component';
 import {MemberDetailComponent} from './dashboard-user/members/member-detail/member-detail.component';
+import {SelectMemberComponent} from './dashboard-loan/loans/select-member/select-member.component';
+import {SelectGameComponent} from './dashboard-loan/loans/select-game/select-game.component';
+import {ConfirmLoanComponent} from './dashboard-loan/loans/confirm-loan/confirm-loan.component';
+import {LoanListComponent} from './dashboard-loan/loans/loan-list/loan-list.component';
+import {LoanDetailComponent} from './dashboard-loan/loans/loan-detail/loan-detail.component';
+import {LoanResolver} from './dashboard-loan/loans/loan-resolver.service';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/admin',
+    redirectTo: '/admin/home',
     resolve: [NavResolverService],
     pathMatch: 'full',
   },
@@ -167,6 +173,11 @@ const routes: Routes = [
     resolve: [NavResolverService],
     children: [
       {
+        path: 'home',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'editor',
         component: DashboardComponent,
         canActivate: [AuthGuard],
@@ -247,6 +258,29 @@ const routes: Routes = [
         component: DashboardLoanComponent,
         canActivate: [AuthGuard],
         data: {roles: ['ADMIN']},
+        children: [
+          {
+            path: 'select-member',
+            component: SelectMemberComponent
+          },
+          {
+            path: ':accountId/select-game',
+            component: SelectGameComponent
+          },
+          {
+            path: 'confirm',
+            component: ConfirmLoanComponent
+          },
+          {
+            path: 'list',
+            component: LoanListComponent
+          },
+          {
+            path: ':id',
+            component: LoanDetailComponent,
+            resolve: [LoanResolver]
+          }
+        ]
       },
       {
         path: 'members',
@@ -264,23 +298,22 @@ const routes: Routes = [
           },
           {
             path: ':id',
-            // resolve: [AccountResolver],
             component: MemberDetailComponent
           }
         ]
       }
     ]
   },
-  {
-    path: 'not-found',
-    resolve: [NavResolverService],
-    component: ErrorPageComponent,
-    data: {message: 'page not found!'}
-  },
-  {
-    path: '**',
-    redirectTo: '/not-found'
-  }
+  // {
+  //   path: 'not-found',
+  //   resolve: [NavResolverService],
+  //   component: ErrorPageComponent,
+  //   data: {message: 'page not found!'}
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/not-found'
+  // }
 ];
 
 @NgModule({

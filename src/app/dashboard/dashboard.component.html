@@ -47,13 +47,7 @@
     <hr
       *ngIf="innerWidth >= '768'"
       class="side-splitter">
-    <div class="row">
-      <a
-        class="nav-link text-light col-12"
-        style="cursor:pointer;"
-        routerLinkActive="text-dark bg-light"
-      >Exemplaires</a>
-    </div>
+
     <div class="row">
       <a
         class="nav-link text-light col-12"
@@ -62,13 +56,7 @@
         routerLinkActive="text-dark bg-light"
       >Éditeurs</a>
     </div>
-    <div class="row">
-      <a
-        class="nav-link text-light col-12"
-        style="cursor:pointer;"
-        routerLinkActive="text-dark bg-light"
-      >Revendeurs</a>
-    </div>
+
     <hr
       *ngIf="innerWidth >= '768'"
       class="side-splitter">
@@ -87,7 +75,7 @@
         style="cursor:pointer;"
         (click)="onCollapseNavbar()">\<</a>
     </div>
-    <div class="text-light">w: {{ innerWidth }}</div>
+
   </div>
   <div [ngClass]="{'col-md-10': innerWidth >= '768', 'col-md-12': innerWidth < '768'}">
     <div class="y-spacer"></div>
